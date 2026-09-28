@@ -74,8 +74,10 @@
     // Automatically map internal relative .md links to .html on GitHub Pages
     document.querySelectorAll('.content-container a').forEach(a => {
       const href = a.getAttribute('href');
-      if (href && !href.startsWith('http') && !href.startsWith('#') && href.endsWith('.md')) {
-        a.setAttribute('href', href.replace(/\.md$/, '.html'));
+      if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#') && !href.startsWith('mailto:')) {
+        if (/\.md($|#)/.test(href)) {
+          a.setAttribute('href', href.replace(/\.md($|#)/, '.html$1'));
+        }
       }
     });
   </script>
