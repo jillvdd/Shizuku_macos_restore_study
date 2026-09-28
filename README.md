@@ -12,31 +12,32 @@
 
 ---
 
-## 📑 核心技术工程指南与文章互引 / Flagship Articles & Cross-Indexing
+## 🌐 在线技术文档门户 / Hosted via GitHub Pages
 
-本项目历经完整逆向推导与实机排错，总结撰写了详尽的工程技术复盘长文。三篇文档内容互相锚定、结构严密对齐，并在文首均提供语言一键互换跳转：
+本仓库已内建专为 **GitHub Pages (`github.io`)** 打造的现代化交互式文档平台（基于客户端 Hash 路由的 SPA 架构），支持在网页端无刷新平滑浏览、跨文档跳转与实时全文检索：
 
-| 语言版本 / Edition | Markdown 源文档 | 静态网页端 / Web View (GitHub Pages) | 核心定位与特色 |
-|---|---|---|---|
-| 🇨🇳 **简体中文** | [`articles/leaf-galgame-port-zh.md`](articles/leaf-galgame-port-zh.md) | [**进入中文版网页 →**](article-zh.html) | 面向现代软件工程师的务实技术文档，系统阐释二进制解密、双层虚拟机、渲染管线、音频异常与向《痕》《To Heart》复用的 9 步工单。 |
-| 🇺🇸 **English** | [`articles/leaf-galgame-port-en.md`](articles/leaf-galgame-port-en.md) | [**View English Article →**](article-en.html) | A pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, CoreAudio exception swallowing, and Apple Silicon adaptations. |
-| 🇯🇵 **日本語** | [`articles/leaf-galgame-port-jp.md`](leaf-galgame-port-jp.md) | [**技術仕様書を見る →**](article-jp.html) | LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、タイトル画面 VA 0x430ebc の第 5 不可視ポインタから導く隠し音楽室の復元など、全工程を実務的に解説した技術仕様書。 |
+- 🚀 **在线访问入口**：`https://<username>.github.io/Shizuku_macos_restore_study/`
+- 🖥 **本地预览方法**：在仓库根目录下执行任意静态服务器（例如 `python3 -m http.server 3000`），浏览器访问 `http://localhost:3000` 即可。
 
-> 💡 **文章互引说明**：
-> - 每篇 Markdown 文档顶部均配有统一语言导航条：`> 🌐 语言 / Language: [🇨🇳 简体中文](leaf-galgame-port-zh.md) ｜ [🇺🇸 English](leaf-galgame-port-en.md) ｜ [🇯🇵 日本語](leaf-galgame-port-jp.md)`；
-> - 静态网页端右上角设有常驻语言切换按钮（`[Home]` `[🇨🇳 简体中文]` `[🇺🇸 English]` `[🇯🇵 日本語]`），支持平滑跨语种对照阅读。
+### 门户核心交互特性
+1. **左侧全景树状导航（Sidebar Navigation）**：整合核心复盘长文、9 份格式规范、4 份研发日志、工具箱与视觉画廊，所有跳转完全基于网页原生路由，无需离开当前页面；
+2. **顶栏多语言一键切换（Top Navbar）**：`[🇨🇳 简中]` `[🇺🇸 EN]` `[🇯🇵 日本語]` 实时保持阅读状态，支持跨语种平滑对照；
+3. **右侧文章动态大纲（On This Page TOC）**：自动提取当前文档标题，集成视口滚动监听（Scrollspy）实现阅读位置高亮定位；
+4. **实时全文搜索（Live Search）**：本地毫秒级索引全部 20 份技术文献与汇编说明；
+5. **代码块增强**：集成 Prism.js 语法高亮，支持 Swift、C、Python、Bash 等语言着色及一键复制代码；
+6. **零外网依赖**：核心解析器与样式均本地打包在 `assets/vendor/` 中，网络受限环境下依然秒开。
 
 ---
 
-## 🌐 静态 HTML 网页门户 / GitHub Pages Ready
+## 📑 核心技术工程指南与文章互引 / Flagship Articles & Cross-Indexing
 
-本仓库根目录已内置开箱即用的轻量级响应式静态站点，无需额外构建流水线即可直接托管于 **GitHub Pages**：
+本项目历经完整逆向推导与实机排错，总结撰写了详尽的工程技术复盘长文。三篇文档内容互相锚定、结构严密对齐，文首均配有语言互引栏，在 Web 端亦可一键切换：
 
-- **[index.html](index.html)**：项目技术门户主页，包含架构可视化图解、核心格式卡片、工具链速查与产物直达；
-- **[article-zh.html](article-zh.html)**：中文工程技术指南完整排版页，带左侧悬浮目录（TOC）与代码语法高亮；
-- **[article-en.html](article-en.html)**：English Technical Guide 完整排版页；
-- **[article-jp.html](article-jp.html)**：日本語技術仕様書 完整排版页；
-- **[style.css](style.css)**：纯原生 CSS，支持系统级浅色/深色主题自适应，零外部网络 CDN 依赖。
+| 语言版本 / Edition | Markdown 源文档 | 网页端路由 / Web Route (github.io) | 核心定位与特色 |
+|---|---|---|---|
+| 🇨🇳 **简体中文** | [`articles/leaf-galgame-port-zh.md`](articles/leaf-galgame-port-zh.md) | [**`#/articles/leaf-galgame-port-zh`**](index.html#/articles/leaf-galgame-port-zh) | 面向现代软件工程师的务实技术文档，系统阐释二进制解密、双层虚拟机、渲染管线、音频异常与向《痕》《To Heart》复用的 9 步工单。 |
+| 🇺🇸 **English** | [`articles/leaf-galgame-port-en.md`](articles/leaf-galgame-port-en.md) | [**`#/articles/leaf-galgame-port-en`**](index.html#/articles/leaf-galgame-port-en) | A pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, CoreAudio exception swallowing, and Apple Silicon adaptations. |
+| 🇯🇵 **日本語** | [`articles/leaf-galgame-port-jp.md`](articles/leaf-galgame-port-jp.md) | [**`#/articles/leaf-galgame-port-jp`**](index.html#/articles/leaf-galgame-port-jp) | LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、タイトル画面 VA 0x430ebc の第 5 不可視ポインタから導く隠し音楽室の復元など、全工程を実務的に解説した技術仕様書。 |
 
 ---
 
@@ -46,11 +47,19 @@
 Shizuku_macos_restore_study/
 ├── README.md                      # 本文档：仓库索引、文章互引与导航
 ├── .gitignore                     # Git 忽略规则（排除编译缓存与系统元数据）
-├── index.html                     # 静态网页门户主页（GitHub Pages 就绪）
-├── article-zh.html                # 中文版静态排版页面
-├── article-en.html                # 英文版静态排版页面
-├── article-jp.html                # 日文版静态排版页面
-├── style.css                      # 静态网页轻量级响应式主题样式表
+├── .nojekyll                      # 禁用 GitHub Pages 默认 Jekyll 构建，保障静态资源原样发布
+├── index.html                     # 交互式文档门户主页（github.io 托管入口）
+├── article-zh.html                # 中文版路由重定向存根（平滑跳转至 index.html#/articles/...）
+├── article-en.html                # 英文版路由重定向存根
+├── article-jp.html                # 日文版路由重定向存根
+│
+├── assets/                        # 网页端核心资产（100% 本地化，零外部 CDN 依赖）
+│   ├── css/
+│   │   └── docs.css               # 响应式排版样式表（浅色/深色主题、三栏式布局）
+│   ├── js/
+│   │   ├── app.js                 # 核心 SPA 路由驱动、目录生成、滚动监听与交互逻辑
+│   │   └── docs_data.js           # 全量 Markdown 文档轻量级预编译数据库（秒级加载）
+│   └── vendor/                    # 本地化第三方库（Marked.js, Prism.js 语法高亮组件）
 │
 ├── articles/                      # 核心工程技术复盘长文（中／英／日三语对齐）
 │   ├── leaf-galgame-port-zh.md    # 中文工程技术指南
@@ -76,24 +85,7 @@ Shizuku_macos_restore_study/
 │
 ├── tools/                         # 逆向分析工具链与解包/反汇编脚本
 │   ├── shizuku_cli/               # 模块化 Python 逆向命令行工具包
-│   │   ├── leafpack.py            # LEAFPACK 归档解密与提取模块
-│   │   ├── lfg.py                 # LFG 图像解码与 16 色调色板处理模块
-│   │   ├── knj.py                 # KNJ 点阵字库（24x24 1bpp）解析模块
-│   │   ├── scn.py                 # SCN 脚本字节码反编译与行内宏提取模块
-│   │   ├── shizuku-lfg.py         # LFG 格式底层实用工具
-│   │   ├── cmd_disasm.py          # 脚本批量反汇编子命令
-│   │   ├── cmd_extract.py         # 归档解包子命令
-│   │   ├── cmd_font.py            # 字库导出与字图渲染子命令
-│   │   ├── cmd_image.py           # 图像解码子命令
-│   │   ├── cmd_inspect.py         # 文件头与段信息探针子命令
-│   │   └── cmd_text.py            # 纯文本抽取子命令
-│   └── scripts/                   # 独立功能验证脚本
-│       ├── unpack_leafpack.py     # 独立 LEAFPACK 归档解包脚本
-│       ├── shizuku-lfg-image.py   # 独立 LFG 图像查看与转码脚本
-│       ├── shizuku-knj-font.py    # 独立 KNJ 字库导出与字表校验脚本
-│       ├── shizuku-scn-disasm.py  # 独立 SCN 脚本反汇编脚本
-│       ├── verify_font_layout.py  # 字库物理排布与 SJIS 对照验证脚本
-│       └── render_leaf_test.py    # 文本字形排版渲染测试脚本
+│   └── scripts/                   # 独立功能验证脚本（unpack, font, image, disasm, pack_docs 等）
 │
 ├── disasm/                        # 全量剧情脚本反汇编基准文本
 │   └── SCN000.txt ... SCN196.txt  # 197 个 SCN 脚本的反汇编明文（作为虚拟机实现基准）
@@ -107,11 +99,6 @@ Shizuku_macos_restore_study/
 │
 ├── references/                    # 历史开源资产与参考实现
 │   ├── thirdparty/                # 早期开源 LVNS 引擎项目代码与归档
-│   │   ├── leafpak/               # Yumegawa 开源的 leafpak 工具（C 语言）
-│   │   ├── lfview/                # 早期 LFG 图像查看器（X11）
-│   │   ├── mglvns/                # MGLVNS 引擎源码（X11/Linux）
-│   │   ├── xlvns/                 # XLVNS 项目记录
-│   │   └── akkera/                # Akkera 早期逆向测试包与工具源码
 │   ├── pages/                     # 历史技术网页存档（1999-2002 年早期逆向资料）
 │   └── gbalvns/                   # Game Boy Advance 平台 LVNS 引擎实现参考
 │
@@ -157,23 +144,17 @@ Shizuku_macos_restore_study/
 
 ## 🚀 逆向工具使用示例 / Tooling Usage
 
-### 1. 批量反汇编全量脚本为可读文本
 ```bash
+# 批量反编译全量脚本为可读汇编
 python3 tools/scripts/shizuku-scn-disasm.py /path/to/SCN001.DAT -o SCN001.txt
-```
 
-### 2. 导出与验证 24×24 KNJ 点阵字库
-```bash
+# 导出并验证 24×24 KNJ 点阵字库
 python3 tools/scripts/shizuku-knj-font.py /path/to/KNJ_ALL.KNJ --atlas preview/knj_atlas.png
-```
 
-### 3. 解码 LFG 图像资产
-```bash
+# 解码 LFG 图像资产
 python3 tools/scripts/shizuku-lfg-image.py /path/to/HVS01.LFG -o preview/hvs01.png
-```
 
-### 4. 使用模块化 CLI 进行全面探查
-```bash
+# 模块化 CLI 探查与解包
 python3 -m tools.shizuku_cli inspect /path/to/MAX_DATA.PAK
 python3 -m tools.shizuku_cli extract /path/to/MAX_DATA.PAK -o output_dir/
 ```

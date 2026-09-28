@@ -1,96 +1,92 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shizuku_macos_restore_study · Leaf LVNS 逆向与 macOS 原生重构研究工程</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shizuku_macos_restore_study · Leaf LVNS 逆向与 macOS 原生重构研究工程</title>
+  <meta name="description" content="Leaf LVNS 视觉小说引擎逆向与 macOS 原生重构研究工程资料库">
+  
+  <!-- Local Vendor Prism Styles -->
+  <link rel="stylesheet" href="assets/vendor/prism-tomorrow.min.css">
+  
+  <!-- Main Documentation Stylesheet -->
+  <link rel="stylesheet" href="assets/css/docs.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="nav-container">
-            <div class="logo-area">
-                <a href="index.html">🍃 Shizuku_macos_restore_study</a>
-            </div>
-            <nav class="nav-links">
-                <a href="index.html" class="lang-btn active">🏠 Home</a>
-                <a href="article-zh.html" class="lang-btn">🇨🇳 简体中文</a>
-                <a href="article-en.html" class="lang-btn">🇺🇸 English</a>
-                <a href="article-jp.html" class="lang-btn">🇯🇵 日本語</a>
-            </nav>
-        </div>
-    </header>
+  <!-- Top Global Navigation Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <button class="menu-toggle-btn" id="menu-toggle" aria-label="Toggle Navigation">☰</button>
+      <a href="#/readme" class="brand-title">
+        <span>🍃</span>
+        <span>Shizuku Restore Study</span>
+        <span class="brand-badge">v1.0</span>
+      </a>
+    </div>
 
-    <main>
-        <section class="hero-section">
-            <h1 class="hero-title">Leaf LVNS 逆向与 macOS 原生重构研究工程</h1>
-            <p class="hero-subtitle">
-                完整记录如何将 Leaf 于 1996 年发布的经典视觉小说《雫～しずく～》（以及同架构的 LVNS 引擎家族）从 Windows 95 原始数据中解构，并使用现代 Swift + Metal 管线原生呈现为 60Hz 独立应用的技术全景资料库。
-            </p>
-        </section>
+    <div class="header-right">
+      <nav class="lang-selector">
+        <a href="#/articles/leaf-galgame-port-zh" class="lang-tab" data-lang="zh">🇨🇳 简中</a>
+        <a href="#/articles/leaf-galgame-port-en" class="lang-tab" data-lang="en">🇺🇸 EN</a>
+        <a href="#/articles/leaf-galgame-port-jp" class="lang-tab" data-lang="jp">🇯🇵 日本語</a>
+      </nav>
 
-        <section class="article-cards">
-            <div class="article-card">
-                <div>
-                    <div class="card-tag">🇨🇳 简体中文 · 深度工程复盘</div>
-                    <h2 class="card-title">中文工程技术指南</h2>
-                    <p class="card-desc">
-                        剔除全部修饰性文字的务实技术文档。深入二进制加法滚动解密、LZS3 截断守卫、24×24 点阵字库列优先解码、双层虚拟机（Event VM + Inline VM）、调色板暗化、13 种转场几何算法，以及钟楼 (448, 128) 隐藏音乐室反汇编实录。
-                    </p>
-                </div>
-                <a href="article-zh.html" class="card-btn">阅读中文全文 →</a>
-            </div>
+      <button class="icon-btn" id="theme-toggle-btn" title="切换深浅主题" aria-label="Toggle theme">🌙</button>
+      <a href="https://github.com" class="icon-btn" id="github-link" target="_blank" rel="noopener noreferrer" title="GitHub Repository">
+        <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+      </a>
+    </div>
+  </header>
 
-            <div class="article-card">
-                <div>
-                    <div class="card-tag">🇺🇸 English · Engineering Postmortem</div>
-                    <h2 class="card-title">English Technical Guide</h2>
-                    <p class="card-desc">
-                        A rigorous, pragmatic systems engineering postmortem. Covers proprietary PAK XOR cryptanalysis, positive vs inverted LZS3 decompression, 24x24 1bpp vertical font typography, CoreAudio mono 11025Hz exception handling, and App Nap throttling circumvention.
-                    </p>
-                </div>
-                <a href="article-en.html" class="card-btn">Read English Article →</a>
-            </div>
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Left Navigation Sidebar -->
+    <aside class="left-sidebar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="搜索文档或 Opcode..." autocomplete="off">
+        <div class="search-results-pane" id="search-results"></div>
+      </div>
 
-            <div class="article-card">
-                <div>
-                    <div class="card-tag">🇯🇵 日本語 · 技術仕様書</div>
-                    <h2 class="card-title">日本語技術仕様書</h2>
-                    <p class="card-desc">
-                        LVNSエンジンのバイナリ解析、2層仮想マシンの設計、描画およびCoreAudio障害追究、タイトル画面 VA 0x430ebc の第5不可視ポインタから導く隠し音楽室の復元など、全工程を実務的・網羅的に解説した技術ドキュメント。
-                    </p>
-                </div>
-                <a href="article-jp.html" class="card-btn">技術仕様書を読む →</a>
-            </div>
-        </section>
+      <nav id="sidebar-nav">
+        <!-- Rendered dynamically by app.js -->
+      </nav>
+    </aside>
 
-        <section class="feature-grid">
-            <div class="feature-box">
-                <h4>🔐 LEAFPACK 解密</h4>
-                <p>11 字节累加滚动异或密钥盲破还原，无源码逆向 403 个游戏资产。</p>
-            </div>
-            <div class="feature-box">
-                <h4>📜 双层虚拟机 (VM)</h4>
-                <p>外层 Block 事件机与内层行内演出宏（B/E, C, S, D, M, P, F, Q）精准解耦。</p>
-            </div>
-            <div class="feature-box">
-                <h4>🎨 视觉高保真渲染</h4>
-                <p>25×13 Sound Novel 网格、三 Pass 硬阴影字绘、11/16 调色板暗化与 13 种转场。</p>
-            </div>
-            <div class="feature-box">
-                <h4>🎵 音频与底层系统排错</h4>
-                <p>AVAudioConverter 重采样规避 AppKit 静默异常，ProcessInfo 锁死 60Hz 刷新。</p>
-            </div>
-        </section>
+    <!-- Center Markdown Content Area -->
+    <main class="main-content">
+      <div class="breadcrumb-bar" id="breadcrumb">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <article class="doc-body" id="doc-content">
+        <!-- Markdown rendered content injected here -->
+      </article>
     </main>
 
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p class="footer-title">Shizuku_macos_restore_study · Leaf LVNS Engine Reverse Engineering & Native macOS Restoration</p>
-            <p class="footer-author">
-                jill 推特<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> 微博<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>
-            </p>
-        </div>
-    </footer>
+    <!-- Right Dynamic Table of Contents Sidebar -->
+    <aside class="right-toc">
+      <div class="toc-title">On This Page</div>
+      <ul class="toc-list" id="toc-list">
+        <!-- Headings extracted dynamically by app.js -->
+      </ul>
+    </aside>
+  </div>
+
+  <!-- Local Vendor Scripts -->
+  <script src="assets/vendor/marked.min.js"></script>
+  <script src="assets/vendor/prism.min.js"></script>
+  <script src="assets/vendor/prism-c.min.js"></script>
+  <script src="assets/vendor/prism-swift.min.js"></script>
+  <script src="assets/vendor/prism-python.min.js"></script>
+  <script src="assets/vendor/prism-bash.min.js"></script>
+
+  <!-- Pre-packed Document Database (Zero-latency instant offline loading) -->
+  <script src="assets/js/docs_data.js"></script>
+
+  <!-- Core Single Page Application Engine -->
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
