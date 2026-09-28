@@ -1,0 +1,36 @@
+== SCN044.DAT (368B) ==
+  ev@0x10 lz=44B → decoded=41B
+  msg@0x40 lz=300B → decoded=348B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x28) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 3d400104  IF_EQ (flag,val,rel_offset)
+  0013: 28  MARK2 ()
+  0014: 048a01  JUMP (scn,blk)
+  0017: 07  SEL_BACK ()
+  0018: 05  SELECT prompt=2 n=2
+        opt[0]: msg=3 blk_off=0x0400
+        opt[1]: msg=4 blk_off=0x0428
+  0021: 8a?? (skip 1)
+  0022: 012804  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0025: 2e?? (skip 1)
+  0026: 01  SUB <truncated; have 2/2>
+  ...trailing 2B: 0100
+
+--- block 2 (event bytes 0x28..0x29) ---
+  0028: ff  UNREACHABLE
+
+--- block 3 (out of range, off=0x29, ev_raw=41B) ---
+== messages (6) ==
+  msg[  0]: ｡｡､ｵ､ﾆ｡｢､ｽ?､ｽ??ﾏﾀ?ｽﾐ､ｵ､ﾊ､ｱ?､ﾐ､ﾊ?､ﾊ､､｡｣<WAIT_KEY><CR>｡｡､ｳ､ﾎﾄｴｺｺ､ﾋ??､ﾁ???ﾏ｢?､ﾆｹﾔ､ｯ､ﾎ､ｫ｡｢､ｽ､ｦ､ﾇ､ﾊ<CR>､､､ﾎ､ｫ｡｣<PAGE><$>
+  msg[  1]: ｡｡??､ﾎｵ､ｻ､ﾁ､ﾏ､ﾉ､ｦ??ﾋﾜﾊｪ､ﾀ｡｣<WAIT_KEY><CR>｡｡ﾃｯ???ﾂﾀﾅﾄ､ｵ?､ﾎ､ｳ､ﾈ?ﾁﾛ､ﾃ､ﾆ???､ﾏ｡｢､ｭ､ﾃ､ﾈ<CR>ﾃｯ???ｿｿ?､ﾋ､ｳ､ﾎ??､ﾋ??ﾁﾈ?､ﾇ､ｯ??､ﾀ?､ｦ｡｣<PAGE><$>
+  msg[  2]: ､ｵ､ﾆ｡｢､ﾉ､ｦ､ｷ?､ｦ､ｫ｡ｩ<CR><$>
+  msg[  3]: <OFFSET><0x36><SPEED><0x30>｣ｱ｡｢??､ﾁ??､ﾋﾄｴｺｺ?ﾆｱｹﾔ､ｷ､ﾆ??､ｪ､ｦ<CR><$>
+  msg[  4]: <OFFSET><0x36><SPEED><0x30>｣ｲ｡｢??､ﾋ､ﾏｰｭ､､､ｬﾃﾇ?､ｦ<CR><$>
+  msg[  5]: 
+

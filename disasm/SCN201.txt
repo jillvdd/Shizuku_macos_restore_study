@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/abc/Documents/shizuku_macos_experience/research/tools/shizuku-scn-disasm.py", line 313, in <module>
+    main()
+  File "/Users/abc/Documents/shizuku_macos_experience/research/tools/shizuku-scn-disasm.py", line 308, in main
+    print(disassemble_scn(p, sizfont, verbose=verbose))
+  File "/Users/abc/Documents/shizuku_macos_experience/research/tools/shizuku-scn-disasm.py", line 282, in disassemble_scn
+    out.extend(disassemble_event_block(ev_raw, bstart, bend))
+  File "/Users/abc/Documents/shizuku_macos_experience/research/tools/shizuku-scn-disasm.py", line 226, in disassemble_event_block
+    hi = options_data[k * 3 + 2]
+IndexError: index out of range

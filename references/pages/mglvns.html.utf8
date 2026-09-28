@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="EUC-JP"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html ; charset=EUC-JP"> 
+<meta name="Author" content="TF">
+<link rel="stylesheet" type="text/css" href="../tomoko.css">
+<link rel="index" href="../index.html" />
+<link rel="toc" href="../index.html" />
+<link rel="top" href="../index.html" />
+<link rel="up" href="../math.html" />
+<link rel="prev" href="../math.html" />
+<link rel="next" href="../lfview.html" />
+<title>Leaf Visual Novel System for MGL2</title>
+</head>
+
+<body>
+
+<h1>mglvns (Leaf Visual Novel System for MGL2)</h1>
+
+<table border="0" width="100%">
+<tr valign="top">
+<td class="toc" width="25%">
+<div class="toc">もくじ</div>
+<dl class="toc">
+  <dt><a href="../index.html">トップ</a></dt>
+  <dt><a href="../history.html">歴史</a> (更新履歴)</dt>
+  <dt><a href="../reading.html">国語</a></dt>
+  <dt><a href="../math.html">数学</a></dt>
+       <dd>
+	    <ul class="toc">
+	      <li><strong class="toc">mglvns</strong></li>
+	      <li><a href="../lfview.html">lfview</a></li>
+	      <li><a href="../leafpak.html">leafpak</a></li>
+	      <li><a href="../gimp-plugin.html">plugins for GIMP</a></li>
+	      <li><a href="../xmascot.html">LF97 patch for XMascot</a></li>
+	      <li><a href="../serio.html">Serio SSS</a></li>
+	    </ul>
+       </dd>
+  <dt><a href="../rest.html">休憩</a></dt>
+  <dt><a href="../art.html">美術</a></dt>
+  <dt><a href="../physics.html">物理</a></dt>
+  <dt><a href="../english.html">英語</a></dt>
+  <dt><a href="../diary/">日記</a></dt>
+  <dt><a href="../link.html">塾</a> (リンク)</dt>
+  <dt><a href="../studio_air.html">ゲーセン</a> (Studio Air)</dt>
+</dl>
+</td>
+<td width="10"></td>
+<td>
+<h2>はじめに</h2>
+<p>
+mglvns は <a href="http://www.at.sakura.ne.jp/~suz/MGL2/index.html">MGL2</a> 環境で LVNS を遊ぶためのアプリケーションです．
+</p>
+
+<p>
+mglvns の開発は <a href="http://leafbsd.denpa.org/">XLVNS</a> をベースにしており，XLVNS の一部としてもマージされています．
+</p>
+
+<p>
+現在は「雫」，「痕」，「To Heart」が一通り動くようになりましたが，細かい問題がないわけではありません．
+プレイして不具合を見つけた場合は報告をいただけるとありがたいです．
+<!--
+修正パッチならば，さらに嬉しいです．
+-->
+</p>
+
+<h2>動作環境</h2>
+
+<p>
+mglvns は UNIX 系 OS 上の MGL2 環境で動作します．
+</p>
+
+<p>
+開発・テスト環境は
+</p>
+<ul>
+  <li>Debian GNU/Linux 2.2 (potato) + mgl2-alpha-020</li>
+  <li>NetBSD/hpcmips current (20010422) + mgl2-alpha-020 (MobileGearII for DoCoMo)</li>
+</ul>
+<p>
+です．
+</p>
+
+<p>
+必要なディスク容量(変換後のデータ)は「雫」が約 5MB, 「痕」が約 9MB, 「To Heart」が 20MB です．
+</p>
+
+<h2>画面スナップショット</h2>
+
+<center>
+<img alt="a screen image of mglvns" src="mglvns.jpg">
+</center>
+
+<h2>ファイル配布</h2>
+
+<ul>
+  <li><a href="mglvns-1.0.tar.gz">mglvns-1.0.tar.gz</a> (201,729 bytes)</li>
+</ul>
+
+<h2>TODO</h2>
+
+<ul>
+  <!--
+  <li>シナリオ回想時に画面が少し乱れる (画面右の矢印の表示位置が悪い)</li>
+       -->
+  <li>背景エフェクト時にイベントの受けつけが悪くなる</li>
+       <!--
+  <li>画像の縮小アルゴリズムに工夫がない</li>
+       くわがたさんがディザ処理を実装．
+       -->
+  <li>非力なマシンでも文章をさくさく読めるようにする</li>
+  <li>痕: ランダム横線エフェクトが遅い</li>
+  <li>痕: 事件後に響子さんと会う直前のところでテキストが消えずに重なる</li>
+       <!--
+  <li>To Heart: 文章をバックスクロールさせると落ちる(^_^;</li>
+       ごうさんが本家 xlvns に実装．
+       -->
+</ul>
+
+<h2>謝辞</h2>
+
+<dl>
+  <dt><a href="http://www.denpa.org/~go/">渡邊剛さん</a></dt>
+  <dd>XLVNS の作者さま．
+       mglvns の基本部分は，XLVNS をほとんどそのまま流用させていただいています．
+       また mglvns の XLVNS マージにあたっては，cvs リポジトリの書き込み権限を発行していただきました．</dd>
+
+  <dt><a href="http://www.kokone.to/~kgt/">桑形浩司さん</a></dt>
+  <dd>鎮花祭 for MGL の作者さま．
+       鎮花祭 for MGL を MGL アプリの参考コードとして参照させていただきました．
+       mglvns の開発にもご協力いただいています(ChangeLog.mglvns を参照)．</dd>
+       
+  <dt><a href="http://www.asahi-net.or.jp/~aw9k-nnk/">のなかきみひろさん</a></dt>
+  <dd>MobileGear + NetBSD hpcmips に興味を持っていた私に MobileGearII for DoCoMo を貸してくださいました．
+       このことが，mglvns 開発の直接のきっかけとなりました．</dd>
+
+  <dt><a href="http://leaf.aquaplus.co.jp/">LVNS オリジナルスタッフのみなさま</a></dt>
+  <dd>LVNS のような面白い作品がなければ何も始まりませんでした．
+       そのことに深く感謝しつつ，さらに面白い作品が出てくることを期待します．</dd>
+</dl>
+</td>
+</tr>
+</table>
+<hr>
+<address>TF &lt;tf&#64;denpa.org&gt;</address>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="EUC-JP"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html ; charset=EUC-JP"> 
+<meta name="Author" content="TF">
+<link rel="stylesheet" type="text/css" href="tomoko.css">
+<link rel="index" href="index.html" />
+<link rel="toc" href="index.html" />
+<link rel="top" href="index.html" />
+<link rel="up" href="math.html" />
+<link rel="prev" href="mglvns/" />
+<link rel="next" href="leafpak.html" />
+<title>lfview, Leaf Image Loader for X11</title>
+</head>
+
+<body>
+
+<h1>lfview (X11用リーフ画像ローダ)</h1>
+
+<table border="0" width="100%">
+<tr valign="top">
+<td class="toc" width="25%">
+<div class="toc">もくじ</div>
+<dl class="toc">
+  <dt><a href="index.html">トップ</a></dt>
+  <dt><a href="history.html">歴史</a> (更新履歴)</dt>
+  <dt><a href="reading.html">国語</a></dt>
+  <dt><a href="math.html">数学</a></dt>
+       <dd>
+	    <ul class="toc">
+	      <li><a href="mglvns/">mglvns</a></li>
+	      <li><strong class="toc">lfview</strong></li>
+	      <li><a href="leafpak.html">leafpak</a></li>
+	      <li><a href="gimp-plugin.html">plugins for GIMP</a></li>
+	      <li><a href="xmascot.html">LF97 patch for XMascot</a></li>
+	      <li><a href="serio.html">Serio SSS</a></li>
+	    </ul>
+       </dd>
+  <dt><a href="rest.html">休憩</a></dt>
+  <dt><a href="art.html">美術</a></dt>
+  <dt><a href="physics.html">物理</a></dt>
+  <dt><a href="english.html">英語</a></dt>
+  <dt><a href="diary/">日記</a></dt>
+  <dt><a href="link.html">塾</a> (リンク)</dt>
+  <dt><a href="studio_air.html">ゲーセン</a> (Studio Air)</dt>
+</dl>
+</td>
+<td width="10"></td>
+<td>
+<h2>What's this?</h2>
+<p>
+Leaf のゲーム「雫」「痕」「To Heart(PC 版/PS 版)」「さおりんといっしょ！！」「初音のないしょ！！」「White Album」「こみっくパーティ」に含まれる画像を表示するビューアです．
+</p>
+<p>
+このプログラムの特徴は，アーカイブ形式から直接画像を読み出すことができ，巨大なアーカイブを予め展開しておく必要がない点です．
+Windows のディスク領域を参照できる Linux / FreeBSD 等の OS では Windows 側に各ゲームをインストールしてあれば画像を簡単に見ることができます．
+もちろん，ゲームの CD-ROM をドライブに入れてそこから読み込むこともできます(ただし「White Album」以降はゲームのアーカイブ(*.pak)がそのままの形で CD に入っていないので，CD から直接読み出すことができません)．
+</p>
+
+<h2>動作環境</h2>
+<p>
+このプログラムは UNIX + X11 一般の環境で動作します．
+ただし，バージョン1.1では画像展開部分を共有ライブラリに追い出しているので，OS によっては動かないかもしれません
+(Linux, FreeBSD, OpenBSD, NEWS OS では動作報告をいただいています)．
+</p>
+
+<h2>対応フォーマット</h2>
+
+<p>
+</p>
+
+<dl>
+  <dt><strong>Windows 版 To Heart</strong></dt>
+  <dd>
+       <ul>
+	 <li>「雫」: LFG 形式画像
+	 <li>「痕」: LFG 形式画像
+	 <li> 「To Heart」: LF2 形式画像
+	 <li> 「さおりんといっしょ!!」: maxxdata.pak に含まれる LFG 形式画像,
+	      *.pak に含まれる *.grp 形式画像
+	 <li> 「初音のないしょ!」: vnhatdat.pak に含まれる LF2 形式画像,
+	      *.pak に含まれる *.grp 形式画像
+	 <li> 「White Album」: *.grp, *.gad 形式画像
+	 <li> 「こみっくパーティー」: *.grp 形式画像
+	 <li> 「White Album(オートデモ)」: *.grp, *.gad 形式画像
+	 <li> 「こみっくパーティー(OP デモ)」 opening.pak に含まれる *.grp 形式画像
+	 <li> 「猪名川でいこう!!」     [一部対応]こみパクイズとおまけシナリオに含まれる *.grp, *.lf3 画像
+       </ul>
+       </dd>
+  <dt><strong>Playstation 版 To Heart</strong></dt>
+  <dd>
+       <ul>
+	 <li>*.pak に含まれる画像
+	      (Playstation 版ではアーカイブから画像を分離できません)
+       </ul>
+       </dd>
+</dl>
+
+<p>
+残念ながら98版の「雫」「痕」はアーカイブのフォーマットが異なるそうなので表示できません．
+</p>
+<p>
+「To Heart オートデモ(って言うんでしたっけ?)」への対応は不明です．
+プログラムの作り自体は(きっと ^^;)汎用になっているので，フォーマット自体が本編と同じであれば一応使えるんじゃないかと思っています．
+これをお持ちの方は，ぜひ試してみて結果を教えてください．
+それから僕は「To Heart オートデモ」の実物を見たことがないので，持っている方は誰か見せてください… (^^;;
+</p>
+
+<h2>ファイル取得</h2>
+<p>
+詳しいインストール手順は付属ドキュメントに書いていますので，そちらを見てください．
+</p>
+
+<dl>
+  <dt>バージョン 1.1a</dt>
+  <dd>[<a href="lfview-1.1a.tgz">ソース</a>(65,367 bytes)]
+<!--
+  <dt>バージョン 1.1</dt>
+  <dd>[<a href="lfview-1.1.tgz">ソース</a>(63,970 bytes)]
+  <dd>[<a href="lfview11beta3.tgz">ソース</a>(40,183 bytes)]
+  <dd>[<a href="lfview11beta2.tgz">ソース</a>(28,628 bytes)]
+  <dt>バージョン 1.0a</dt>
+  <dd>[<a href="lfview-10a-src.tgz">ソース</a>(20,365 bytes)]
+  <dt>バージョン 1.0</dt>
+  <dd>[<a href="lfview-10-src.tgz">ソース</a>(14,660 bytes)]
+       <br>
+       [<a href="lfview-10-linux.tgz">Linux 用バイナリ</a>(16,595 bytes)]
+       <br>
+       [<a href="lfview-10-freebsd.tgz">FreeBSD 用バイナリ</a>(16,262 bytes)]
+       (FreeBSD 環境は持っていないので，FreeBSD 版はあさだたくやさんにコンパイルして頂きました．
+       どうもありがとうございます．)
+-->
+</dl>
+
+<p>
+また，坪田さんが lfview のランチャーである <a href="http://www.imasy.or.jp/%7Etsubota/archive/tklfpck/index.html">tklfpck</a> を作成されました．
+これを使うと，PAK アーカイブ内の画像一覧から画像を選択表示できるようになります．
+非常に便利ですので，こちらもぜひご利用ください．
+なお，利用するには，lfview 以外に Tcl/Tk と <a href="leafpak.html">leafpak</a>が必要です．
+</p>
+
+<!--
+<h2>Known Problem</h2>
+<ul>
+  <li>アーカイブ内の画像リストを見る方法が無かった．
+       とりあえず，壁紙チェンジャー付属のリストを参照してください．
+       これは画像全てのリストになっています．</li>
+  <li>8bpp環境などでパレットが取得できない場合にコアダンプするらしい(FreeBSD)．
+       これも手抜きの結果です〜．
+       (バージョン1.0bで修正)</li>
+</ul>
+-->
+
+<!--
+<h2>To Do</h2>
+<p>
+時間ができたらやるかも．
+</p>
+
+<ul>
+  <li>背景とキャラクタの重ね合わせ表示．</li>
+  <li>シナリオのデータも読み出す．</li>
+</ul>
+
+XLVNS ができたので，この辺りは不要になりました \(^_^)/
+-->
+
+<h2>配布について</h2>
+<p>
+このビューアの配布については，フリーなら可という条件で<a href="http://www.leaf.co.jp/">リーフさん</a>より許可をいただいておりますが，画像の利用に当たってはくれぐれも著作権の侵害をしないように注意してください．
+</p>
+
+<h2>履歴</h2>
+<dl>
+  <dt>1/9/2001</dt>
+  <dd>表示位置指定機能追加(<a href="http://www7.big.or.jp/~hina/zidney/">ZIDNEY さん</a>のパッチを頂きました)
+  <dt>8/12/2000</dt>
+  <dd>PS 版 To Heart 対応(Melody-Yoshi さんに感謝!)
+  <dt>6/5/1999</dt>
+  <dd>バージョン1.1β3．
+       こみっくパーティーに対応．
+       バグ修正いろいろ．
+  <dt>9/15/1998</dt>
+  <dd>バージョン1.1β2．
+       White Album の *.gad に対応．
+       バグ修正いろいろ．
+  <dt>9/9/1998</dt>
+  <dd>バージョン1.1β．
+       「White Album」に対応．
+       日記ページで公開したまま放ったらかしにしてました(^_^;
+  <dt> 3/13/1998</dt>
+  <dd>「初音のないしょ」の画像に(だいたい ^_^;)対応．
+       公式な機能ではないと言うことで，バージョン 1.0a とこっそり差し替え．
+  <dt> 3/ 9/1998</dt>
+  <dd>バージョン1.0a．
+       24/32 bpp で色がおかしくなる不具合への対処(黒沢さん)．
+  <dt>10/13/1997</dt>
+  <dd>バージョン1.0作成．
+       FreeBSD 用バイナリはあさだたくやさんにコンパイルしていただきました．
+       どうもありがとうございます．
+</dl>
+
+<!--
+<dl>
+  <dt> 3/ 9/1998</dt>
+  <dd>24/32 bpp で色がおかしくなる不具合への対処(黒沢さん)．
+  <dt>12/27/1997</dt>
+  <dd>再配布禁止を無しにした．
+  <dt>10/29/1997</dt>
+  <dd>Version 1.0 を Leaf ML で限定(？)公開．
+       再配布禁止．
+  <dt>10/13/1997</dt>
+  <dd>作成．
+</dl>
+-->
+
+<h2>関連リンク</h2>
+<dl>
+  <dt><a href="http://www.tennodai.com/~sakura/?gba/gba.html">Tennodai Bunko - Game Boy Advance -</a></dt>
+  <dd>大賀きゆきさんの Game Boy Advance のページ．
+       GBA 用の「雫」「痕」画像ビューワ(lfview ベース)があります．
+       GBA 用の「痕」も開発中だそうです．
+       すごいです :-)</dd>
+</dl>
+
+</td>
+</tr>
+</table>
+<hr>
+<address>TF &lt;tf&#64;denpa.org&gt;</address>
+</body>
+</html>

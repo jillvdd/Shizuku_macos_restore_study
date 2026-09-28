@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <meta name="robots" content="NOINDEX,NOFOLLOW" />
+ <title>Runtime error - GBA開発Wiki</title>
+
+ <link rel="SHORTCUT ICON" href="" />
+ <link rel="stylesheet" type="text/css" href="skin/pukiwiki.css" />
+ <link rel="alternate" type="application/rss+xml" title="RSS" href="index.php?cmd=rss" /> <script type="text/javascript" src="skin/main.js" defer></script>
+ <script type="text/javascript" src="skin/search2.js" defer></script>
+
+</head>
+<body>
+<div id="pukiwiki-site-properties" style="display:none;">
+<input type="hidden" class="site-props" value="{&quot;is_utf8&quot;:true,&quot;json_enabled&quot;:true,&quot;show_passage&quot;:true,&quot;base_uri_pathname&quot;:&quot;/gbadev/index.php&quot;,&quot;base_uri_absolute&quot;:&quot;https://akkera102.sakura.ne.jp/gbadev/index.php&quot;}" />
+<input type="hidden" class="plugin-name" value="edit" />
+<input type="hidden" class="page-name" value="NO.100 sizuku_gba2" />
+<input type="hidden" class="page-in-edit" value="false" />
+<input type="hidden" class="ticketlink-def" value="[]" />
+
+
+
+<input type="hidden" class="topicpath-links" value="[]" />
+</div><div id="header">
+ <a href="index.php"><img id="logo" src="image/pukiwiki.png" width="80" height="80" alt="[PukiWiki]" title="[PukiWiki]" /></a>
+
+ <h1 class="title">Runtime error</h1>
+
+    <a href="https://akkera102.sakura.ne.jp/gbadev/index.php?NO.100+sizuku_gba2"><span class="small">https://akkera102.sakura.ne.jp/gbadev/index.php?NO.100+sizuku_gba2</span></a>
+ 
+</div>
+
+<div id="navigator">
+ [ <a href="index.php" >トップ</a> ] &nbsp;
+
+ [
+  <a href="index.php?cmd=diff&amp;page=NO.100+sizuku_gba2" >差分</a> 	| <a href="index.php?cmd=backup&amp;page=NO.100+sizuku_gba2" >履歴</a>   | <a href="index.php?NO.100+sizuku_gba2" >リロード</a> ] &nbsp;
+
+ [
+    <a href="index.php?cmd=list" >一覧</a>  | <a href="index.php?cmd=search" >検索</a> | <a href="index.php?RecentChanges" >最終更新</a> | <a href="index.php?Help" >ヘルプ</a>   ]
+<select id="PluginColorSchemeUI"><option value="0">Auto</option><option value="1">Light</option><option value="2">Dark</option></select>
+<script>
+__PluginColorScheme__ = function() {
+	const	self = this;
+	const	ui = document.getElementById('PluginColorSchemeUI');
+	var		mode = parseInt(localStorage.getItem('pluginColorScheme.mode')) || 0;
+
+	self.change(mode);
+	ui.options[mode].selected = true;
+	ui.addEventListener('change', function(e) { self.change(parseInt(e.srcElement.value)); });
+};
+
+__PluginColorScheme__.prototype.change = function(mode) {
+	const	doc = document.getElementsByTagName('body')[0];
+	const	id = '__DarkModePluginStyle__';
+	const	style = 'body{background-color:#000;filter:invert(100%) hue-rotate(180deg) brightness(85%)}#contents img, #contents video, object, embed, iframe{filter:invert(100%) hue-rotate(180deg)}';
+
+	localStorage.setItem('pluginColorScheme.mode', mode);
+
+	var	v = document.getElementById(id);
+	if (v) {
+		if (v.remove) v.remove();
+		else v.parentNode.removeChild(v);	// IE対策
+	}
+
+	v = (mode == 0)? '@media screen and (prefers-color-scheme: dark), screen and (light-level: dim){' + style + '}' : ((mode == 2)? style : '');
+	if (v) doc.insertAdjacentHTML('beforeend', '<style id="' + id + '">' + v + '</style>');
+};
+
+new __PluginColorScheme__();
+</script></div>
+
+<hr class="full_hr" />
+<div id="contents">
+ <div id="body"><h3>Runtime error</h3>
+<strong>Error message : PKWK_READONLY prohibits editing</strong></div>
+</div>
+
+
+
+<hr class="full_hr" />
+<!-- Toolbar -->
+<div id="toolbar">
+ <a href="index.php"><img src="image/top.png" width="20" height="20" alt="トップ" title="トップ" /></a>
+ &nbsp;
+  <a href="index.php?cmd=diff&amp;page=NO.100+sizuku_gba2"><img src="image/diff.png" width="20" height="20" alt="差分" title="差分" /></a>	<a href="index.php?cmd=backup&amp;page=NO.100+sizuku_gba2"><img src="image/backup.png" width="20" height="20" alt="履歴" title="履歴" /></a> <a href="index.php?NO.100+sizuku_gba2"><img src="image/reload.png" width="20" height="20" alt="リロード" title="リロード" /></a> &nbsp;
+ <a href="index.php?cmd=list"><img src="image/list.png" width="20" height="20" alt="一覧" title="一覧" /></a> <a href="index.php?cmd=search"><img src="image/search.png" width="20" height="20" alt="検索" title="検索" /></a> <a href="index.php?RecentChanges"><img src="image/recentchanges.png" width="20" height="20" alt="最終更新" title="最終更新" /></a> &nbsp; <a href="index.php?Help"><img src="image/help.png" width="20" height="20" alt="ヘルプ" title="ヘルプ" /></a> &nbsp; <a href="index.php?cmd=rss&amp;ver=1.0"><img src="image/rss.png" width="36" height="14" alt="最終更新のRSS" title="最終更新のRSS" /></a></div>
+
+
+
+<div id="footer">
+ Site admin: <a href="http://akkera102.sakura.ne.jp/gbadev/">akkera102</a>
+ <p>
+ <strong>PukiWiki 1.5.4</strong> &copy; 2001-2022 <a href="https://pukiwiki.osdn.jp/">PukiWiki Development Team</a>.
+ Powered by PHP 8.2.32. HTML convert time: 0.003 sec.
+ </p>
+</div>
+</body>
+</html>

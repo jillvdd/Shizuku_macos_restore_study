@@ -1,0 +1,36 @@
+== SCN124.DAT (400B) ==
+  ev@0x10 lz=28B → decoded=56B
+  msg@0x30 lz=348B → decoded=466B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x13) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 047b01  JUMP (scn,blk)
+  0012: 00  END
+
+--- block 2 (event bytes 0x13..0x14) ---
+  0013: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x14..0x38) ---
+  0014: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0017: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  001a: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  001d: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0020: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0023: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0026: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0029: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  002c: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  002f: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0032: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0035: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+
+== messages (3) ==
+  msg[  0]: <CHR:723939>｡｡ﾋﾍ､ｿ､ﾁ､ﾏ｡｢､ｽ､ﾎﾊﾂ､ﾓ､ﾎ?､ﾎﾁｰ?､ﾒ､ﾈﾄﾌ?ｸｫ､ﾆ??｡｢<CR>?､ｫ?ﾌﾀ､ｫ?､ｬ??､ﾆ､､､ﾊ､､､ｫ?ｳﾎ､ｫ?､ｿ｡｣<WAIT_KEY><CR>｡｡､ﾀ､ｬ?ﾁｳ､ﾊ､ｬ?｡｢､ﾒ､ﾈﾌﾜ､ﾇﾈｽ?､ﾛ､ﾉ｡｢､｢､ｫ?､ｵ､ﾞ､ﾋ<CR>????､ｷ､ﾆ､､??ｲｰ､ﾊ､ﾉ､ﾊ､ｫ､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡??､ｷ､ﾃ､ｫ?､ｷ､ﾆ､､?､ｷ｡｢ｲﾃ､ｨ､ﾆ?ｲｰ､ﾎ???ｰﾅ､ｯ<CR>､ｷ､ﾆ､､?､ﾐ｡｢ﾌﾀ､ｫ?､ﾊ､ﾉ??､ﾊ､､｡｣<PAGE><CHR:723130><$>
+  msg[  1]: ｡ﾖ?､ﾃ､ﾑ?｡｢ｲｻ?｡｣<WAIT_KEY>ｲｻ?ﾊｹ､､､ﾆ､ﾟ?､ｦ?｡ﾗ<WAIT_KEY><CR>｡｡ﾋﾍ､ﾏﾁﾇﾄｾ､ﾋ｡｢ｺｻｿ･､ﾁ??､ﾎ･｢･､･ﾇ･｣･｢､ﾋｽｾ､ｦ､ｳ､ﾈ､ﾋ<CR>､ｷ､ｿ｡｣<PAGE><$>
+  msg[  2]: <0x11>､ﾁ､ﾏ｡｢､ｽ､ﾎﾊﾂ､ﾓ､ﾎﾈ､ﾁ､ﾏ｡｢､ｽ､ﾎﾊﾂ､ﾓ､ﾎﾈ､ﾁ､ﾏ｡｢､ｽ､ﾎﾊﾂ､ﾓ､ﾎﾈ､ﾁ､ﾏ｡｢､ｽ､ﾎﾊﾂ､ﾓ､ﾎﾈ､ﾁ､ﾏ｡｢､ｽ､ﾎﾊﾂ､ﾓ､ﾎｱｴ<L7fff?>
+

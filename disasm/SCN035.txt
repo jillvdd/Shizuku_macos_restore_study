@@ -1,0 +1,30 @@
+== SCN035.DAT (400B) ==
+  ev@0x10 lz=44B → decoded=71B
+  msg@0x40 lz=332B → decoded=367B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x1d) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 474301  FLAG_SET (flag,val)
+  0012: 3d400003  IF_EQ (flag,val,rel_offset)
+  0016: 042601  JUMP (scn,blk)
+  0019: 042701  JUMP (scn,blk)
+  001c: 00  END
+
+--- block 2 (event bytes 0x1d..0x1e) ---
+  001d: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x1e..0x47) ---
+  001e: 013d40  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0021: 00  END
+  ...trailing 37B: 0304260104270100ff013d400003013d40000304260104270100ff013d400003ffffffffff
+
+== messages (3) ==
+  msg[  0]: ｡｡､ｽ､ｦ｡｢､ｽ?､ﾏﾅﾛ?｡ﾄ､ﾉ､ｦ??ｿｷ?､ｵ?､ﾎﾏﾃ､ｫ?､ｹ?<CR>､ﾈ??､ｿ､ﾁ｡ﾄ､ｬ｡｢ﾂﾎ?ｴﾛﾉﾕ?､ﾇ?､ｯｸｫ､ｫ､ｱ??､ﾆ､､?<CR>､ﾈ､､､ｦ､ｳ､ﾈ､ﾀ｡｣<WAIT_KEY><CR>｡｡ｳﾘｹｻ??ｰﾇｱﾀ､ﾋﾄｴｺｺ､ｹ???｡｢ｵｿ?､ｷ､､･ﾝ･､?･ﾈ?<CR>ｹﾊ､ﾃ､ﾆ?､ｿ､ﾃ､ｿ､ﾛ､ｦ､ｬ｡｢ｲｿ､ｫ?ﾈｯｸｫ､ｹ?ｳﾎﾎｨ､ﾏ､ﾏ?､ｫ<CR>､ﾋ?､､､ﾀ?､ｦ｡｣<PAGE><$>
+  msg[  1]: ｡｡ﾂﾎ?ｴﾛ｡｣･ﾐ?｡ｼ･ﾜ｡ｼ???ﾃ｣､ｬｸｫ､ﾆ､､?､ﾎ､ﾀ､ｫ?｡｢<CR>??ﾂﾎ?ｴﾛ､ﾀ｡｣<WAIT_KEY><CR>｡｡､ｽ､ﾎ?ﾊﾕ､ﾎ｡｢ｵｿ?､ｷ､､???ｽﾅﾅﾀﾅｪ､ﾋﾄｴ､ﾙ､ﾆ､ﾟ?､ｳ<CR>､ﾈ､ﾋ､ｷ?､ｦ｡｣<PAGE><$>
+  msg[  2]: <L7fff?>
+

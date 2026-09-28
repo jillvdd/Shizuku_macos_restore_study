@@ -1,0 +1,38 @@
+== SCN190.DAT (624B) ==
+  ev@0x10 lz=44B → decoded=103B
+  msg@0x40 lz=556B → decoded=699B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x1b) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 5402  MSG (msg_no)
+  0011: 5403  MSG (msg_no)
+  0013: 5404  MSG (msg_no)
+  0015: 5405  MSG (msg_no)
+  0017: 04c201  JUMP (scn,blk)
+  001a: 00  END
+
+--- block 2 (event bytes 0x1b..0x1c) ---
+  001b: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x1c..0x67) ---
+  001c: 5403  MSG (msg_no)
+  001e: 5404  MSG (msg_no)
+  0020: 5405  MSG (msg_no)
+  0022: 04c201  JUMP (scn,blk)
+  0025: 00  END
+  ...trailing 65B: ff5403540454050454035404540504c20100ff5403540454050454035404540504c20100ff5403540454050454035404540504c20100ff54035404540504ffffff
+
+== messages (7) ==
+  msg[  0]: ｡ﾖ､ﾞ､ｺ､ﾏﾍﾍｻﾒ?ｸｫ??､ﾀ｡ｪ<WAIT_KEY>｡｡?ﾎ･???､ﾄ､ﾄ｡｢ｳﾆｸﾄ､ﾇ<CR>ﾍｷ?､ｻ?｡ｪ｡ﾗ<WAIT_KEY><CR>｡ﾖ?･ｸ?｡ｼ｡ｪ｡ﾗ<WAIT_KEY><CR>｡｡｣ｳｿﾍ､ｬｸ?ﾂｷ､ｨ､ﾆｸﾀ､ﾃ､ｿ｡｣<PAGE><CHR_ALL:4c3637><$>
+  msg[  1]: <DARKEN><DARKEN>｡｡･ｺ･ﾐ｡｢･ﾉ･ｫ｡｢･ﾐ･ｭ｡｢･ｲ･ｷ｡ｪ<WAIT_KEY><CR><FLASH>｡｡･ﾓ･ﾓ｡ｼ･ﾃ｡ｪ<WAIT_KEY><CR><FLASH><DARKEN>｡｡･ｭ?･､?･ｭ?･､?｡ｪ<WAIT_KEY><CR>｡｡ﾍﾍ｡ｹ､ﾊｹｶ?､ｬｷｫ?ｽﾐ､ｵ?､ｿ｡｣<WAIT_KEY><CR>｡｡｡ﾄ､ﾀ､ｬ｡ｪ<PAGE><$>
+  msg[  2]: ｡ﾖ･ﾏ･ﾏ･ﾏ･ﾏ･ﾏ･ﾏ｡ﾄ｡｣<WAIT_KEY>､ｳ､ﾎ･ﾇ･ｹ･ｶ｡ｼ･ﾉﾍﾍ､ﾋ､ｽ?､ﾊ･ﾁ?･ｱ<CR>､ﾊｹｶ?､ｬ?､ｯ?､ﾎ､ｫ｡ｼ｡ｪ<WAIT_KEY>｡｡ﾁｴ?､ﾞ､ﾈ?､ﾆ｡｢ｾﾃ､ｷ?､ﾖ､ｬ<CR>､､､､･ﾃ｡ｪ<WAIT_KEY>｡｡､ﾏ､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢･ﾃ｡ｪ｡ﾗ<PAGE><$>
+  msg[  3]: ｡｡･ﾇ･ｹ･ｶ｡ｼ･ﾉ､ｬｹｶ?ﾂﾎﾀｪ､ﾋﾆ､ﾃ､ｿ｡｣<WAIT_KEY><CR><DARKEN><DARKEN><DARKEN>｡｡?ﾃﾏ､ｬｿﾌ､ｨ?｡｣<WAIT_KEY><CR><FLASH>｡｡､ｹ､ｵ､ﾞ､ｸ､､･ｨ･ﾍ?･ｮ｡ｼ､ｬｽｸ､ﾞ､ﾃ､ﾆ､､､ｯ｡｣<WAIT_KEY><CR>｡｡､ﾉ､ｦ??ﾈｾﾃｼ､ﾊｹｶ??､ｪ､ｳ､ﾊ､ﾃ､ﾆ､ｷ､ﾞ､ﾃ､ｿ､ｳ､ﾈ､ﾇ｡｢<CR>ﾅﾛ?ﾋﾜｵ､､ﾋ､ｵ､ｻ､ﾆ､ｷ､ﾞ､ﾃ､ｿ?､ｦ､ﾀ｡｣<PAGE><$>
+  msg[  4]: ｡ﾖ･ﾕ･｡･､?｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｪ｡ﾗ<PAGE><M:66>:4d<0x77><$>
+  msg[  5]: <FLASH>｡｡､ｽ､ｷ､ﾆﾋﾍ､ﾏ､ｳ､ﾎﾁｪ?､ｬｴﾖ?､､､ﾀ､ﾃ､ｿ､ｳ､ﾈ､ﾋｵ､ﾉﾕ､ｯ｡｣<WAIT_KEY><CR>｡｡､ｳ､ﾎ?｡｢ﾋﾍ､ｿ､ﾁ?ﾂﾔ､ﾄ?､ﾎ､ﾏ｡ﾄ｡｣<PAGE><$>
+  msg[  6]: <L7fff?><L7fff?><L7fff?>
+

@@ -1,0 +1,11 @@
+#file type asm
+-fts
+
+#All data type u8
+-U8
+
+#tile format
+-gt
+
+#4 bit bitmap
+-gB4

@@ -1,0 +1,1111 @@
+<html>
+<head>
+<title>ゲームボーイアドバンス 実験室</title>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+</head>
+
+<body bgcolor="#000000" text="#FFFFFF" link="#0000FF" vlink="#0000FF" alink="#0000FF">
+<font size="+2"><b>ゲームボーイアドバンス 実験室</b></font><br>
+<br>
+<font size="-4">インターネットの隅っこに隠れつつ、こっそりGBAのゲーム開発をしています。<br>
+基本的に日曜日（深夜）更新です。<a href="http://d.hatena.ne.jp/akkera102/"> </a></font><br>
+<br>
+<font size="5"><b>更新履歴</b></font><br>
+<hr>
+<font size="-1">2007/08/28 NO.82 更新<br>
+2007/08/17 NO.81 更新<br>
+2007/08/03 NO.80 更新<br>
+</font><br>
+<hr>
+<a href="http://akkera102.sakura.ne.jp/gbadev/">新しいホームページを作りました。</a><br>
+お手数ですが、ブックマークの変更をお願いいたします。m(__)m<br>
+<hr>
+・NO.82 calculator (yacc)<br>
+<br>
+<img src="82_yacclex.jpg" width="248" height="206"><br>
+<a href="82_yacclex.zip">82_yacclex.zip</a><br>
+<br>
+yaccを使ってやってみました。<br>
+そんだけのものです・・・（＾＾；<br>
+<br>
+※<a href="http://www.netlaputa.ne.jp/‾T-Satoh/yacc/yacc.html">yaccで遊ぼう</a>を参考にしています。<br>
+<br>
+2007/08/28
+<hr>
+・NO.81 sudoku2<br>
+<br>
+<img src="81_sudoku2.jpg" width="248" height="206"><br>
+<a href="81_sudoku2.zip">81_sudoku2.zip</a><br>
+<br>
+何を思ったかNO.48を作り直してみました。<br>
+ゲームの内容は前とほぼ同じです。<br>
+<br>
+2007/08/14
+<hr>
+・NO.80 tiny BASIC interpreter<br>
+<br>
+<img src="80_tiny_basic.jpg" width="248" height="206"><br>
+<a href="80_tiny_basic.zip">80_tiny_basic.zip</a><br>
+<br>
+懐かしの言語をGBA上で再現してみました。<br>
+GBFSからファイルを読み込んで、実行する方式にしています。<br>
+実装している命令語は「FOR, NEXT, PRINT, GOSUB, RETURN, END」だけです。<br>
+<br>
+※<a href="http://www.programmersheaven.com/download/16060/download.aspx">www.programmersheaven.com</a>のソースコードを参考にしています。<br>
+<br>
+2007/08/03 命令語の後の終端チェックをしていなかったので修正。<br>
+2007/08/03<br>
+<hr>
+・NO.79 sizuku advance<br>
+<br>
+<img src="79_sizuku_gba.jpg" width="248" height="206"> <img src="79_sizuku_gba2.jpg" width="248" height="206"><br>
+<i><font size="-1">(c) Leaf/AQUAPLUS 「雫」より<br></font></i>
+<a href="79_sizuku_gba.zip">79_sizuku_gba.zip</a><br>
+<br>
+エフェクト処理がフェードイン、アウトのみの劣化移植版です。<br>
+シナリオテキストをベタで読むよりは良いかな程度ということで勘弁願います（＾＾；。<br>
+<br>
+このソフトを動かすにはWin95/98版「雫」が必要です。<br>
+<br>
+追記（2009/05/18）：<a href="http://akkera102.sakura.ne.jp/gbadev/index.php?NO.100%20sizuku_gba2">作り直しました。</a><br>
+<br>
+2007/07/20 セーブ、ロードに対応。１つ前の選択肢に戻るは未実装のままです。<br>
+2007/07/16 とりあえずのお披露目。<br>
+<hr>
+・NO.78 sizuku scenario test<br>
+<br>
+<img src="78_sizuku_scn_test.jpg" width="248" height="206"><br>
+<a href="78_sizuku_scn_test.zip">78_sizuku_scn_test.zip</a><br>
+<br>
+ちょうど３週間かけてようやくここまできました。<br>
+あとは絵をうまく付けて、しおり機能、オープニング、エンディングを<br>
+作れば一応の形にはなりそうです。<br>
+<br>
+このソフトを動かすにはWin95/98版「雫」が必要です。<br>
+<br>
+2007/07/09<br>
+<hr>
+・NO.77 sizuku sound test (8ad codec)<br>
+<br>
+<img src="77_sizuku_snd_test.jpg" width="248" height="206"><br>
+<a href="77_sizuku_snd_test.zip">77_sizuku_snd_test.zip</a><br>
+<br>
+変換作業は「wav(44100hz 2ch)->sox(13379hz 1ch)->8ad codec」<br>
+という流れで行っています。wavファイルならなんでもいいと思うので<br>
+「雫」以外のファイルでも使えます。<br>
+<br>
+※8ad codecについては<a href="http://www.pineight.com/gba/#8ad">pin eight様のページ</a>を参考にしています。<br>
+<br>
+2007/07/07<br>
+<hr>
+・NO.76 sizuku viewer<br>
+<br>
+<img src="76_sizuku_viewer.jpg" width="248" height="206"><br>
+<i><font size="-1">(c) Leaf/AQUAPLUS 「雫」より<br></font></i>
+<a href="76_sizuku_viewer.zip">76_sizuku_viewer.zip</a><br>
+<br>
+このソフトを動かすにはWin95/98版「雫」が必要です。<br>
+インストールの手順がややこしいことになっていますので<br>
+難しいと思う方はご遠慮ください。<br>
+<br>
+<i><font size="-1">
+このサイトでは一部、<a href="http://leaf.aquaplus.co.jp/">Leaf/AQUAPLUS製品</a>の画像素材を加工・引用しています。<br>
+また、これらの素材を他へ転載することを禁じます。<br></font></i>
+<a href="http://leaf.aquaplus.co.jp/" target="_blank"><img src="http://leaf.aquaplus.co.jp/bn200.gif" width="88" height="31" border="0"></a><br>
+<br>
+2007/06/22<br>
+<hr>
+・NO.75 avgp chapter4<br>
+<br>
+<img src="75_avgp_chap4.jpg" width="248" height="206"><br>
+<a href="75_avgp_chap4.zip">75_avgp_chap4.zip</a><br>
+<br>
+遊ぶには「アドベンチャーゲームプログラミング」のスクリプトファイルと画像ファイルが必要です。<br>
+本を持っていない方は、申し訳ないですが遊べないようになっています。<br>
+<br>
+2007/06/13<br>
+<hr>
+・NO.74 avgp chapter3.2 test(GBFS)<br>
+・NO.73 avgp chapter3.2 test<br>
+<br>
+<img src="74_gbfs_test.jpg" width="248" height="206"><br>
+<a href="74_gbfs_test.zip">74_gbfs_test.zip</a><br>
+<a href="73_avgp_chap32.zip">73_avgp_chap32.zip</a><br>
+<br>
+アドベンチャーゲームプログラミングの３章をみようみマネで作ってみました。<br>
+No.74の方はgbfsを使用しています。<br>
+<br>
+※<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797320273">アドベンチャーゲームプログラミング</a>を参考にしています。<br>
+※GBFSについては<a href="http://www.helloworld.jp/‾duke/nintendo_ds/nds_develop6.html">Homebrew任天堂DS開発</a>を参考にしています。<br>
+<br>
+2007/06/09<br>
+2007/06/08<br>
+<hr>
+・NO.72 brainhoge<br>
+<br>
+<img src="72_brainhoge.jpg" width="248" height="206"><br>
+<a href="72_brainhoge.zip">72_brainhoge.zip</a><br>
+<br>
+このプログラムはインタプリタで、命令語は8つのみでできています。<br>
+キャプチャ画面は文字列の「hoge」を出力するソースですが・・・とてもそうに思えない（＾＾；<br>
+<br>
+・注意事項<br>
+　','命令は未実装です。<br>
+　'['と']'命令を対応をいないとすぐに壊れます（復旧不能。<br>
+<br>
+※<a href="http://www.kmonos.net/alang/etc/brainfuck.php">k.inaba様のページ</a>を参考にしています。<br>
+<br>
+2007/05/27<br>
+<hr>
+・NO.71 5takuGBA--<br>
+<br>
+<img src="71_5taku.jpg" width="248" height="206"><br>
+<a href="71_5taku.zip">71_5taku.zip</a><br>
+<br>
+とあるサイトに触発されて、DS版があるのにGBAがないのは<br>
+残念でならないので作りました。<br>
+でもGBA版は正解率とか、ジャンル選択とか何もないです。<br>
+<br>
+起動には問題データ（*.5TQ）ファイルが別途必要です。Vectorなどで入手してください。<br>
+<br>
+※<a href="http://www.vector.co.jp/soft/dl/win95/game/se091376.html">ごたく開発キット</a>を参考にしています。<br>
+<br>
+2007/05/12<br>
+<hr>
+・NO.70 CASL2/COMET2 simulator（未完成）<br>
+<br>
+<img src="70_casl2commet2.jpg" width="248" height="206"> <img src="70_casl2commet2_log.jpg" width="255" height="270"><br>
+<a href="70_casl2commet2.zip">70_casl2commet2.zip</a><br>
+<br>
+CASL2/COMET2は、基本情報処理試験の午後問題に使われているアセンブラ言語と仮想ハードウェアです。<br>
+デバッカができていないので、VBAのログ画面で勘弁願います（＾＾；<br>
+<br>
+今のところできたこと<br>
+・CASL2　・・・　IN,OUT,RPUSH,RPOPが未実装。エラー処理も対応しないと。<br>
+・COMMET2　・・・　すべての命令を実装済み。ただテストはまったくしていないので動作が怪しいかも<br>
+・エディタ　・・・　入力操作がいまいちなので修正予定。SRAMでセーブ、ロードできるようにします<br>
+・デバッカ　・・・　まだ未着手です。<br>
+<br>
+追記：色々言いたいこと（字句解析部がない、一部関数が長い、ウィンドウ画面のためにMode3から<br>
+Mode0にすべき、エディタらしいデータ構造にすべき、とか）が出てきてしまって<br>
+作り直し決定になりました。すみませんが、しばらくお待ちください（半年先ぐらいかも。<br>
+<br>
+※<a href="http://www.jitec.jp/">情報処理技術者試験センターのH19試験案内書 26〜28項</a>を参考にしています。<br>
+<br>
+2007/05/19<br>
+2007/05/11<br>
+<hr>
+・NO.69 ライブラリの大掃除<br>
+<br>
+<img src="69_lib.jpg" width="248" height="206"><br>
+<a href="69_lib.zip">69_lib.zip</a><br>
+<br>
+今まで道具箱代わりに使っていましたlib.cファイルを大掃除しました。<br>
+1年近くほったらかにしてたものだから、Mode3のフォント表示用の処理が<br>
+３つもあったりわけわからんです（汗。<br>
+<br>
+改めて「bdf→bmp→bin(1ドット=1バイト)→sファイル」という流れでフォントデータを作って<br>
+内部の処理をきれいにしました。それと、printf関数にはMINIXのソースコードを流用しています。<br>
+<br>
+漢字表示をしたい方は暇つぶしがてら、ご覧ください。<br>
+<br>
+2007/05/05<br>
+<hr>
+・NO.68 tiny shooting4<br>
+・NO.67 tiny shooting3<br>
+<br>
+<img src="68_game_shooting4.jpg" width="248" height="206"><br>
+<a href="68_game_shooting4.zip">68_game_shooting4.zip</a><br>
+<a href="67_game_shooting3.zip">67_game_shooting3.zip</a><br>
+<br>
+No.66を少し加工して、スプライトダブラをさせてみました。<br>
+8ラインに120個。同時表示数は512個まででです。<br>
+スプライトダブラを行わせる為に、コードの置く位置（GBAのメモリ）やVCOUNTとか気を使って作成しています。<br>
+<br>
+追記：弾の移動リストを手動で作ってみました。これでようやく弾幕っぽくなったかなあ（＾＾；<br>
+<br>
+<br>
+※<a href="http://gba.pqrs.org/‾tekezo/gba/doc/sprite-multiplexer/index.html"> GBA で学ぶ古典的プログラミング (スプライトダブラ)</a>を参考にしています。<br>
+<br>
+2007/05/03<br>
+2007/04/25<br>
+<hr>
+・NO.66 tiny shooting2<br>
+・NO.65 tiny shooting<br>
+<br>
+<img src="66_game_shooting2.jpg" width="248" height="206"><br>
+<a href="66_game_shooting2.zip">66_game_shooting2.zip</a><br>
+<a href="65_game_shooting.zip">65_game_shooting.zip</a><br>
+<br>
+まだまだサンプルっぽいことしかできていませんが公開します。<br>
+No65はfloat型の変数で、No66は固定少数点で作りました。<br>
+65の方が若干、遅いですがmath.hのsin,cos関数を使っていることもあり細かく移動しています。<br>
+66は、自作のsin,cosテーブルを用意して、角度を求める計算も0〜255範囲のみにしています。<br>
+<br>
+No.49に比べて、シンプルな作りになるように心がけました。<br>
+DevkitPro r20で製作してます。<br>
+<br>
+※<a href="http://www.amazon.co.jp/gp/product/4797337214">シューティングゲーム プログラミング</a>を参考にしています。<br>
+　読み物としてもサンプルのプログラムもわかりやすく、かなりお勧めです。<br>
+※固定少数点については<a href="http://www2s.biglobe.ne.jp/‾nuts/labo/daal/daal07.html">NUTS様のページ</a>を参考にしています。<br>
+<br>
+2007/04/10<br>
+2007/04/08<br>
+<hr>
+・NO.64　衝突の判定 test<br>
+・NO.63　図形の回転 test<br>
+<br>
+<img src="63_game_trigfunc.jpg" width="248" height="206"><br>
+<a href="63_game_trigfunc.zip">63_game_trigfunc.zip</a><br>
+<br>
+<img src="64_game_restfunc.jpg" width="248" height="206"><br>
+<a href="64_game_restfunc.zip">64_game_restfunc.zip</a><br>
+<br>
+最近更新していない反省も含めて<br>
+（あんまり面白くないのですが）簡単なものをアップしてみました。<br>
+<br>
+No.63は、図形の回転に行列を使用しています。<br>
+行列を使うと「移動、回転、拡大縮小」が簡単にできるらしいです。<br>
+No.64は、ボールの角度に合わせて、壁に跳ね返るものを作りました。<br>
+<br>
+※<a href="http://www.amazon.co.jp/gp/product/4899771800">14歳からはじめる リアルに動く!ゲーム物理プログラミング教室</a>を<br>
+　参考にしています（4章のp117、7章のp185）。<br>
+<br>
+2007/04/03<br>
+<hr>
+・NO.62　Cosmic Air Way<br>
+<br>
+<img src="62_game_airway.jpg" width="248" height="206"><br>
+<a href="62_game_airway.zip">62_game_airway.zip</a><br>
+<br>
+ひさしぶりにコーディングできる時間がありましたので<br>
+作ってみました。やっぱりプログラミングは面白いです。<br>
+時間も忘れて作っていました（＾＿＾<br>
+<br>
+※<a href="http://www8.plala.or.jp/randomism/piece/airway/">P/ECE版 Cosmic Air Way</a>をこっそり参考にしています。<br>
+<br>
+2007/03/31 <br>
+<hr>
+・NO.61　いの　べーしょん　2007 （未完成）<br>
+<br>
+<img src="61_game_inovation.jpg" width="248" height="206"><br>
+<a href="61_game_inovation.zip">61_game_inovation.zip</a><br>
+<br>
+Windows用のアクションゲーム「いの　べーしょん　2007」をGBAに<br>
+移植してみました。ソースコードや素材データも公開されていて<br>
+とても勉強になります。<br>
+<br>
+・・・・まだ未完成です、すみません（大汗。<br>
+<br>
+追記：今のところ保留中でいます。<br>
+<br>
+○　タイトル<br>
+○　オープニング（BGスクロール）<br>
+○　マップ読み込み<br>
+○　マップ表示<br>
+×　マップアニメーション<br>
+×　自機表示+アニメーション<br>
+×　自機移動<br>
+○　自機当たり判定<br>
+×　アイテム取得時のメッセージ<br>
+○　エンディング（BGスクロール）<br>
+<br>
+※このソフトだけ「<a href="http://www5.atwiki.jp/yaruhara/pages/56.html">やわらかライセンス</a>」です。 
+<br>
+　詳しくは同封の「readme_j.txt」をご覧ください。<br>
+<br>
+2007/01/21<br>
+<hr>
+・NO.60　wonbe GBA--<br>
+  <br>
+<img src="60_app_wonbe.jpg" width="248" height="206"><br>
+  <a href="60_app_wonbe.zip">60_app_wonbe.zip</a><br>
+  <br>
+  WonderWitch用の簡易BASIC言語「ワンべぇ」をGBAで<br>
+動作させてみました。<br>
+<br>
+ダイレクト・モード（直接入力）は、ソースコードをGBA上で<br>
+書き変える機能が必要なので未対応。<br>
+  インタラクティブ・モード（ファイル起動）はソースファイルを<br>
+起動前にSRAM領域に保存して、動作させる方式にしています。<br>
+<br>
+動作確認のサンプルソース：<br>
+test.wb, testif.wb, testfor.wb, testgosub.wb, shoot.wb<br>
+<br>
+追記：<br>
+　当初の目的（サンプルソースのshoot.wbを動作させる）が完了しましたので<br>
+　開発はしばらく中止します。<br>
+<br>
+※ソースについては<a href="http://www.piedey.co.jp/wonbe/">WonderWitch用ワンべぇVer0.06</a>を参考にしています。<br>
+※ソースの説明については<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20060921/248692/?ST=develop&P=1">itpro</a>を参考にしています。<br>
+  ※このソフトだけGPLです。 詳しくは同封の「wonbe.txt」をご覧ください。<br>
+<br>
+2006/12/23 配列変数の不具合の修正<br>
+2006/12/19 命令語の追加（locate, cls, waitvb）<br>
+2006/12/18 命令語の追加（gosub, return, end）<br>
+2006/12/16 ファイル読み込み処理 終端記号の修正<br>
+2006/12/14 命令語の追加（if, for, next, goto, rem, scan, wait）<br>
+2006/12/12 命令語の追加（print）<br>
+<hr>
+・NO.59　?<br>
+<br>
+<img src="59_game_exelinya.jpg" width="248" height="206"><br>
+<br>
+できるかどうか、わからないまま見切り発車ということで<br>
+タイトルは不明にしています。<br>
+<br>
+HSPのソースをそのままC言語に移植作業をする予定です。<br>
+エフェクト表示をどうしようか悩み中。<br>
+<br>
+追記：今のところ保留中でいます。<br>
+<br>
+2006/09/25<br>
+<hr>
+・NO.58　xx-Tower<br>
+<br>
+<img src="58_game_tower.jpg" width="248" height="206"><br>
+<a href="58_game_tower.zip">58_game_tower.zip</a><br>
+<br>
+某シェアウェアゲームのパクりです。<br>
+いつものように途中で力尽きてしまい、<br>
+一部の機能が未実装ですが、公開します。<br>
+<br>
+○　移動<br>
+○　落下処理<br>
+○　接触判定<br>
+○　スクロール処理<br>
+×　踏み台のランダム生成<br>
+×　スコア表示<br>
+<br>
+※<a href="http://www.vector.co.jp/games/soft/win95/game/se041992.html">参考URL</a><br>
+<br>
+2006/09/18<br>
+2006/09/10<br>
+<hr>
+・NO.57　puyo<br>
+<br>
+<img src="57_game_puyo.jpg" width="248" height="206"><br>
+<a href="57_game_puyo.zip">57_game_puyo.zip</a><br>
+<br>
+石の種類は３種類です。 <br>
+同じ色を４つ並べた場合、石が消えます。<br>
+<br>
+○　移動<br>
+○　接触判定<br>
+○　接触した場合、次の石をセット<br>
+○　ゲームオーバ判定<br>
+○　連数消し<br>
+×　連鎖中の描画止め<br>
+×　回転<br>
+×　ランダム機能<br>
+×　スコア表示<br>
+<br>
+2006/09/06<br>
+2006/09/04<br>
+<hr>
+・NO.56　5moku<br>
+<br>
+<img src="56_game_5moku.jpg" width="248" height="206"><br>
+<a href="56_game_5moku.zip">56_game_5moku.zip</a><br>
+<br>
+コンピュータの思考周りは自分やプレイヤーに関係なく、<br>
+今の盤面で連番を伸ばせる最善と思われる１手を選択してきます。<br>
+<br>
+2006/08/27<br>
+2006/08/24<br>
+<hr>
+・NO.55　Snake<br>
+<br>
+<img src="55_game_snake.jpg" width="248" height="206"><br>
+<a href="55_game_snake.zip">55_game_snake.zip</a><br>
+<br>
+赤色の餌を食べて、蛇の尻尾を長くしていくゲームです。<br>
+端の壁にあたったり、頭を自分の尻尾に当ててしまうと<br>
+ゲームオーバーになります。<br>
+<br>
+※<a href="http://www.amazon.co.jp/gp/product/4881350242">プログラム「遊」工房</a>を参考にしています。<br>
+<br>
+2006/08/06<br>
+<hr>
+・NO.54　TD4 Emulator<br>
+<br>
+<img src="54_app_td4.jpg" width="248" height="206"><br>
+<a href="54_app_td4.zip">54_app_td4.zip</a><br>
+<br>
+書籍「CPUの創りかた」に触発されて、<br>
+CPUやメモリの仕組みをソース上で表すと<br>
+どういう風になるのかやってみました。<br>
+<br>
+・ちょっとした注意点<br>
+1.Clockの初期値は1Hzではなくて10Hzです<br>
+2.Romの初期値はサンプルプログラム２のラーメンタイマーです<br>
+3.未実装オペコードが２つあります（IN A、IN B）<br>
+4.一度動かすと、入力に戻りません（＾＾；<br>
+<br>
+※<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839909865">CPUの創りかた</a>を参考にしています。<br>
+　一度目を通しておくといいかもしれない良本だと思います。<br>
+<br>
+2006/08/03<br>
+<hr>
+・NO.53　dynamo<br>
+<br>
+<img src="53_game_dynamo.jpg" width="248" height="206"><br>
+<a href="53_game_dynamo.zip">53_game_dynamo.zip</a><br>
+<br>
+ボタンの光る順番を覚えていく記憶力ゲームです。<br>
+ハイスコアを出した場合、SRAMに保存をします。<br>
+<br>
+NO52でできなかった乱数機能は<br>
+SRAMにsrand関数用の変数(u32)を１つ用意して対応しました。<br>
+<br>
+※<a href="http://www.amazon.co.jp/gp/product/4881350242">プログラム「遊」工房</a>を参考にしています。<br>
+<br>
+2006/08/01<br>
+<s>2006/07/30</s><br>
+<hr>
+・NO.52　7narabe<br>
+<br>
+<img src="52_game_7narabe.jpg" width="248" height="206"><br>
+<a href="52_game_7narabe.zip">52_game_7narabe.zip</a><br>
+<br>
+甘く見ていたら痛い目合いました。<br>
+ソースに落とし込むのがとっても難しい・・・。<br>
+作成途中ですが今回は（も？）ここまでにします。<br>
+<br>
+○　カードのシャッフル<br>
+○　手札のソート<br>
+○　プレイヤーの手札選択処理<br>
+○　手札、パス回数、カード枚数の表示<br>
+○　7カードの抽出<br>
+○　最初の手番判定<br>
+○　カードが置けるか置けないかの判定<br>
+○　コンピュータの考え事（？<br>
+△　クリア判定（順位とかも）　<br>
+×　クリア後の処理<br>
+×　カードの乱数機能　←毎回同じカードが出てゲームとして遊べません<br>
+<br>
+2006/07/25<br>
+<s>2006/07/23</s><br>
+<hr>
+・NO.51　Tiny Interpreter<br>
+<br>
+<img src="51_app_interpreter.jpg" width="248" height="206"><br>
+<a href="51_app_interpreter.zip">51_app_interpreter.zip</a><br>
+<br>
+NO.50の機能に加えて<br>
+・変数の記憶<br>
+・論理式（=, &gt;, &lt;, ==, &gt;=, &lt;=, !）<br>
+・条件式(if文, while文)<br>
+<br>
+に対応しました。作品集の中で<br>
+ソース行数の最長記録（1153行）を更新です！<br>
+<br>
+※<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839919232">いまどきのプログラム言語の作り方(p104-165)</a>を参考にしています。<br>
+<br>
+※<a href="http://ruffnex.oc.to/kenji/src/kbasic/">簡易スクリプト言語「KBASIC」</a>を参考にしています。<br>
+<br>
+2006/07/17<br>
+2006/07/16<br>
+2006/07/11<br>
+2006/07/09<br>
+<hr>
+・NO.50　CUI calculator<br>
+<br>
+<img src="50_app_calculator.jpg" width="248" height="206"><br>
+<a href="50_app_calculator.zip">50_app_calculator.zip</a><br>
+<a href="50_app_calculator_old2.zip">50_app_calculator_old2.zip</a><br>
+<br>
+GBAで字句解析、構文解析処理をやってみました。<br>
+本来、GBA上でやる意味は無いですけれどね（＾＾；<br>
+<br>
+・四則演算のみ演算可能。<br>
+・縦画面の端までいくとスクロールします。<br>
+・<s>括弧とかマイナス数値は使えないです。</s>（追記：対応しました）<br>
+・エラー処理は全然していないのでバグると思います。<br>
+・キー入力のチャタリング防止機能つき。<br>
+<br>
+※<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839919232">いまどきのプログラム言語の作り方(p40-101)</a>を参考にしています。<br>
+<br>
+2006/07/01<br>
+2006/06/26<br>
+2006/06/25<br>
+<s>2006/06/21<br>
+2006/06/18</s> 
+<hr>
+・NO.49　skybruiser（縦スクロール型シューティング）<br>
+  <br>
+  <img src="49_skybruiser.jpg" width="248" height="206"><br>
+<a href="49_game_skybruiser.zip">49_game_skybruiser.zip</a><br>
+<br>
+今回は目標の６割ぐらいしかできていませんけれど<br>
+これもしょうがないと思ってここまでにします。<br>
+色々と課題の残る結果になってしまいました。<br>
+<br>
+　○　素材（地形、キャラクタ）<br>
+　○　マップデータ、敵配置データ<br>
+　○　Mapスクロール<br>
+　○　自機移動<br>
+　○　タスク管理<br>
+　×　当たり判定<br>
+　△　敵機スクリプト<br>
+　△　弾管理（double型で計算しているので遅い）<br>
+　×　自機弾<br>
+<br>
+※<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4756101011/">Quick C2.0ゲームプログラミング</a>の素材データの使用、<br>
+　プログラムの設計方法を参考にしています。<br>
+<br>
+※<a href="http://www.amazon.co.jp/exec/obidos/ASIN/479801169X/">逆引きゲームプログラミング</a>のスクリプトの実装方法を参考にしています。<br>
+<br>
+2006/06/14<br>
+2006/06/04<br>
+2006/05/28<br>
+2006/05/21<br>
+  2006/05/14
+<hr>
+・NO.48　suudoku <br>
+<br>
+<img src="48_game_suudoku.jpg" width="248" height="206"><br>
+<a href="48_game_suudoku.zip">48_game_suudoku.zip</a><br>
+<br>
+ひさしぶりにプログラムを書いたので時間が掛かってしまいました。<br>
+毎日（毎週？）の鍛錬は忘れないようにしたいですね・・・。<br>
+<br>
+追記：NO.81に新しいものを作りました。<br>
+<br>
+問題集は<a href="http://www.pro.or.jp/%7Efuji/puzzlestudy/sudoku.html">パズルプログラミング勉強会</a>にて公開されているものを<br>
+使わせて頂きました。<br>
+<br>
+2006/05/05<br>
+<hr>
+・NO.47　マリオ風横スクロールゲーム<br>
+<br>
+<img src="47_game_mario.jpg" width="248" height="206"><br>
+<br>
+ムズカシイので保留中です。すみません。（2006/04/30）<br>
+<br>
+2006/01/22<br>
+<s>2006/01/15</s><br>
+<hr>
+・NO.46　Samegame<br>
+<br>
+<img src="46_game_samegame.jpg" width="248" height="206"><br>
+<a href="46_game_samegame.zip">46_game_samegame.zip</a><br>
+<br>
+隣接しているブロックをまとめて消して高得点を競うゲームです。<br>
+ステージはランダムで作成されますので高得点を狙えそうにない場合は<br>
+Ｂボタンを押して面を選んでみてください。<br>
+<br>
+2006/01/12<br>
+<s>2006/01/09</s><br>
+<hr>
+・NO.45　Conway's Game of Life<br>
+<br>
+<img src="45_game_conway.jpg" width="248" height="206"><br>
+<a href="45_game_conway.zip">45_game_conway.zip</a><br>
+<br>
+このゲームは一言でいうとパターンシミュレータです。<br>
+盤面の初期配置によって創造的なパターンを色々作ってくれます。<br>
+<br>
+操作方法<br>
+カーソル　移動<br>
+Ａボタン　セルの設置<br>
+Ｂボタン　セルの初期化<br>
+ＳＴＡＲＴボタン　セルの生成を開始<br>
+<br>
+※<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4535783837/">ライフゲイムの宇宙</a>を参考にしています。 
+<br>
+　読み物としてもとても面白いです。<br>
+<br>
+2005/12/31<br>
+<hr>
+・NO.44　Tetris<br>
+<br>
+<img src="44_game_tetris2.jpg" width="248" height="206"><br>
+<a href="44_game_tetris.zip">44_game_tetris.zip</a>（Level1〜5）<br>
+<a href="44_game_tetris2.zip">44_game_tetris2.zip</a>（Level6〜7）<br>
+<a href="44_game_tetris_omake.zip">44_game_tetris_omake.zip</a>（2年前のソース）<br>
+<br>
+パズルゲームといえばやっぱりテトリス！<br>
+ゲームの基本ルールのみしか実装していませんが一応動きます。<br>
+<br>
+部屋を大掃除中、2年前に書いたソースが出てきたので置いときます。<br>
+毎回ブロックをファイルから読んでいたり、結構笑えるかも・・・。<br>
+<br>
+※<a href="http://gamdev.org/w/?%5B%5B%C3%CA%B3%AC%C5%AA%B3%D8%BD%AC%A1%AA%5D%5D">GamDevPukiWiki</a>を参考にしています。<br>
+<br>
+2005/12/24<br>
+2005/12/19<br>
+<s>2005/12/11</s> <br>
+<hr>
+・NO.43　Reversi<br>
+<br>
+<img src="43_game_reversi.jpg" width="248" height="206"><br>
+<a href="43a_game_reversi.zip">43a_game_reversi.zip</a>（得点テーブル）<br>
+<a href="43b_game_reversi.zip">43b_game_reversi.zip</a>（ミニマックス法）<br>
+<a href="43c_game_reversi.zip">43c_game_reversi.zip</a>（アルファベータ法） <br>
+<br>
+このゲームは奥が深くて面白いです。<br>
+再帰関数を使っているのでソースを読んでいると眩暈が(-_-;<br>
+<br>
+※<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4875934289">リバーシのアルゴリズム</a>を参考にしています。<br>
+※αβ、ミニマックス法は<a href="http://javagame.main.jp/index.html#othello">mori様のページ</a>を参考にしています。<br>
+<br>
+2005/12/03<br>
+2005/12/01<br>
+2005/11/27<br>
+<s>2005/11/20</s><br>
+<hr>
+・NO.42　msweeper<br>
+<br>
+<img src="42_game_msweeper.jpg" width="248" height="206"><br>
+<a href="42_game_msweeper.zip">42_game_msweeper.zip</a><br>
+<br>
+起動時直後の真っ白い画面にて<br>
+乱数発生用の関数（srand関数）を使用しているので<br>
+2,3秒経ってからAボタンを押してください。<br>
+<br>
+2005/11/13<br>
+<s>2005/11/06</s><br>
+<hr>
+・NO.41　poy<br>
+<br>
+<img src="41_game_poy.jpg" width="248" height="206"><br>
+<a href="41_game_poy.zip">41_game_poy.zip</a><br>
+<br>
+黄色い顔みたいなものを棒で打ちつけて、<br>
+左上にあるピンク色の円に乗せるゲームです。<br>
+打ちつける時の強さや角度の調整が勝敗を分けるポイントです。<br>
+<br>
+某フリーソフトのアイディアをそのまんまパクりました。ｍ（＿＿）ｍ<br>
+<br>
+2005/10/30<br>
+<s>2005/10/23</s><br>
+<hr>
+・NO.40　mod sound test2<br>
+<br>
+<img src="40_app_mod2.jpg" width="248" height="206"><br>
+<a href="40_app_mod2.zip">40_app_mod2.zip</a><br>
+<br>
+No.38の反省を踏まえて、今回のmod演奏には<br>
+外部ライブラリにお任せしました。３，４ほどの関数を<br>
+呼び出すだけですのでラクに演奏することができます。<br>
+<br>
+画面は1Sync(約1/60sec)でのCPU使用率を表しています。<br>
+<br>
+※外部ライブラリには<a href="http://hitmen.c02.at/">AFM v1.1</a>を使用しました。<br>
+<br>
+2005/10/16<br>
+<hr>
+・NO.39　kaleidoscope(万華鏡)<br>
+<br>
+<img src="39_game_kaleidoscope.jpg" width="248" height="206"><br>
+<a href="39_game_kaleidoscope.zip">39_game_kaleidoscope.zip</a><br>
+<br>
+オリジナル画像を左右対称と上下対称になるように<br>
+for文を使ってコピーしています。<br>
+<br>
+2005/10/09<br>
+<hr>
+・NO.38　Mod Sound test<br>
+<br>
+<img src="38b_app_mod.jpg" width="248" height="206"><br>
+<a href="38a_app_mod.zip">38a_app_mod.zip</a>（コンバータ用）<br>
+<a href="38b_app_mod.zip">38b_app_mod.zip</a>（サウンドテスト用）<br>
+<br>
+チュートリアルの内容に沿ってとりあえず作りましたーみたいな<br>
+内容です。<br>
+<br>
+メモ：IRQ割り込みを使うにはCFLAGSの-mthumbを外すこと。<br>
+<br>
+※<a href="http://deku.gbadev.org/">GBA sound mixer tutorial</a>のDay5を参考にしています。<br>
+※modのファイルフォーマットについては<a href="http://www.wotsit.org/">Wotsit's Format</a>の<br>
+　MODFIL10.TXTを参考にしています。<br>
+<br>
+2005/10/02 <br>
+<s>2005/09/26<br>
+2005/09/19<br>
+2005/09/12</s><br>
+<hr>
+・NO.37　shooting test6 誘導弾、加速弾、回転弾<br>
+・NO.36　shooting test5 分裂弾 <br>
+・NO.35　shooting test4 円形弾<br>
+<br>
+<img src="36_game_shoot_test5.jpg" width="248" height="206"><br>
+<a href="37_game_shoot_test6.zip">37_game_shoot_test6.zip</a><br>
+<br>
+処理に負荷がかからないように変数テーブルを使うようにしました。<br>
+ところが型をdoubleにしてしまったので遅くなったのか早くなったのか<br>
+よくわからない状態に（−−；<br>
+<br>
+2005/09/04<br>
+2005/08/28<br>
+2005/08/24 <br>
+<hr>
+・NO.34　shooting test3 n-way弾<br>
+・NO.33　shooting test2 方向弾<br>
+・NO.32　shooting test1 狙い打ち弾<br>
+<br>
+<img src="32_game_shoot_test1.jpg" width="248" height="206"><br>
+<br>
+シューティングゲームアルゴリズムマニアックスという<br>
+本の影響を受けつつ、いろいろ試行錯誤して作っています。<br>
+<br>
+2005/08/23<br>
+2005/08/22<br>
+2005/08/21<br>
+<hr>
+・NO.31　pac（全4面）<br>
+<br>
+<img src="31_game_pac.jpg" width="248" height="206"><br>
+<a href="31_game_pac.zip">31_game_pac.zip</a><br>
+<br>
+別名pacmanモドキ。<br>
+当たり判定を作っていないので<br>
+ゲームになってないけどまあいっか〜。<br>
+<br>
+2005/08/15<br>
+<hr>
+・NO.30　GBA Tiny Editer<br>
+<br>
+<img src="30_app_edit.jpg" width="248" height="206"><br>
+<a href="30_app_edit.zip">30_app_edit.zip</a><br>
+<br>
+BGマップを使って下側の文字列表からテキスト領域に<br>
+コピーしているだけのものです。無駄にSRAMセーブ、ロード対応。<br>
+<br>
+2005/08/08<br>
+<s>2005/08/07<br>
+</s>
+<hr>
+・NO.29　cave<br>
+<br>
+<img src="29_game_cave.jpg" width="248" height="206"> <br>
+<a href="29_game_cave.zip">29_game_cave.zip</a><br>
+<br>
+壁に当たらないように移動していくゲームです。<br>
+Aボタンを適当に押しつつ画面左上から右側のほうに移動します。<br>
+<br>
+2005/07/31<br>
+<hr>
+・NO.28　MAG viewer<br>
+<br>
+<img src="28_app_magviewer.jpg" width="248" height="206"> <br>
+<a href="28_app_magviewer.zip">28_app_magviewer.zip</a><br>
+<br>
+MAKIchan Graphic loader is not 鮪だ！というわけで<br>
+昔の画像展開プログラムにチャレンジしてみました。<br>
+<br>
+※MAGファイルの展開には<a href="magbible.doc">magbible.doc</a>を参考にしています。<br>
+<br>
+2005/07/25<br>
+<s>2005/07/24</s><br>
+<hr>
+・NO.27　sokoban（全30面）<br>
+<br>
+<img src="27_game_sokoban2.jpg" width="248" height="206"><br>
+<a href="27_game_sokoban2.zip">27_game_sokoban2.zip</a><br>
+<br>
+BGのキャラクタサイズ（8*8）に合わて作ってしまったので<br>
+むちゃくちゃ画面小さいです。かなり見ずらい。<br>
+<br>
+操作方法<br>
+十字キー　移動<br>
+Ａキー　　次のステージへ<br>
+Ｂキー　　やり直し<br>
+<br>
+※ステージデータは<a href="http://users.bentonrea.com/%7Esasquatch/sokoban/">David W. Skinner様のページ</a>より頂きました。<br>
+<br>
+2005/07/17<br>
+<hr>
+・NO.26　１面だけのsokoban<br>
+<br>
+<img src="26_game_sokoban.jpg" width="248" height="206"><br>
+<a href="26_game_sokoban.zip">26_game_sokoban.zip</a><br>
+<br>
+1面だけというのは、今回のポイント^^;<br>
+倉庫番のマップ集を掲載されているページを見つけので<br>
+次回ステージを加えてみようと思います。<br>
+<br>
+でもその前に見た目を何とかしなくちゃ。<br>
+<br>
+2005/07/10<br>
+<hr>
+・NO.25　Depth--<br>
+  <br>
+  <img src="25_game_depth.jpg" width="248" height="206"><br>
+  <a href="25_game_depth.zip">25_game_depth.zip</a><br>
+  <br>
+  <br>
+某潜水艦ゲームの１面のパクりです。<br>
+タスク管理もどきっぽいものが動きます。<br>
+<br>
+未完成機能<br>
+・自機と敵弾の当たり判定<br>
+・自機がやられた後の残機処理<br>
+  <br>
+2005/07/03<s><br>
+2005/06/26<br>
+2005/06/19</s><br>
+<hr>
+・NO.24　花火<br>
+<br>
+<img src="24_game_hanabi.jpg" width="248" height="206"> <br>
+<a href="24_game_hanabi.zip">24_game_hanabi.zip</a><br>
+<br>
+sin,cosの計算を多用しているのでかなり重い。<br>
+でも、気にしないで次いきます。<br>
+<br>
+メモ：math.hを#includeしたい場合はリンカに-lmをつけること。<br>
+<br>
+※<a href="http://www.amazon.co.jp/exec/obidos/ASIN/4320027108">C便利プログラム集</a>を参考にさせていただきました。 
+<br>
+<br>
+2005/06/12<br>
+<hr>
+・NO.23　シミュレーションゲームの移動判定＋<br>
+  <br>
+  <img src="23_game_sim2.jpg" width="248" height="206"> <br>
+  <a href="23_game_sim2.zip">23_game_sim2.zip</a><br>
+  <br>
+  No19の続き。<br>
+  <br>
+BGの水平、垂直スクロール（BGxHOFS、BGxVOFS）と<br>
+モンスタ移動をするようにしました。単純に突っ込んでくるだけのものです。<br>
+<br>
+2005/06/05 
+<hr>
+・NO.22　あみだクジ<br>
+<br>
+<img src="22_game_amida.jpg" width="248" height="206"> <br>
+<a href="22_game_amida.zip">22_game_amida.zip</a><br>
+<br>
+あみだの上を走るコマ（？）の移動に関数ポインタを用いて<br>
+タイマー割り込みが入ったら動くようにしています。<br>
+<br>
+2005/05/29<br>
+<hr>
+・NO.21　迷宮生成<br>
+<br>
+<img src="21_game_maze.jpg" width="248" height="206"> <br>
+<a href="21_game_maze.zip">21_game_maze.zip</a><br>
+<br>
+左上がスタート地点で、一番右下のゴールを目指します。<br>
+<br>
+今回はMode3でのスプライト処理に苦労しました。<br>
+#define OAMdata (u16*)0x6014000 にして<br>
+スプライト番号が512番目から開始するなんて知るかよ（＞＿＜<br>
+<br>
+※アルゴリズムは<a href="http://www5d.biglobe.ne.jp/%7Estssk/maze/make.html">Ishida様のページ</a>を参考にさせていただきました。<br>
+<br>
+2005/05/22<br>
+<hr>
+・NO.20　15パズル<br>
+<br>
+<img src="20_game_puzzle15.jpg" width="248" height="206"> <br>
+<a href="20_game_puzzle15.zip">20_game_puzzle15.zip</a><br>
+<br>
+16個のブロックを1次元配列にしたのは失敗だったかも。<br>
+2次元配列なら移動判定の関数がもっとシンプルになったかもしれません。<br>
+<br>
+※画像はfreefoto.com様のデータを使用しています。<br>
+<br>
+2005/05/15<br>
+<hr>
+・NO.19　シミュレーションゲームの移動判定<br>
+<br>
+<img src="19_game_sim.jpg" width="248" height="206"><br>
+<a href="19_game_sim.zip">19_game_sim.zip</a><br>
+<br>
+再起関数でキャラクタの移動範囲を決定して<br>
+移動範囲の表示はBGを2枚組み合わせて使う<br>
+ブレンドという効果を利用しています。<br>
+<br>
+<s>次回はBGの水平、垂直スクロール、モンスタの移動を<br>
+作ってみたいと思います。</s><br>
+<s>ちょっと苦戦中（＾＾；</s><br>
+NO.23に新しいのを作りました。<br>
+<br>
+2005/05/08<br>
+<hr>
+・NO.18　神経衰弱<br>
+<br>
+<img src="18_game_Sinkei2.jpg" width="248" height="206"><br>
+<a href="18_game_sinkei2.zip">18_game_sinkei2.zip</a><br>
+<br>
+ようやく対戦相手のコンピュータを作りました。<br>
+しかしこの人（？）はかなりやり手です。表になったカードは<br>
+すべて覚えているので、メモを取りながらじゃないと勝てません（＾＾；<br>
+<br>
+2005/05/04 
+<hr>
+・NO.17　ひとり神経衰弱<br>
+  <br>
+<img src="17_game_Sinkei.jpg" width="248" height="206"> <br>
+  <br>
+ひとりで神経衰弱・・・かなり寂しいゲームです。<br>
+これだけで作るのにかなりヘトヘトなので<br>
+コンピュータと対戦させるプログラムは次回作ります。<br>
+<br>
+  2005/05/01
+<hr>
+・NO.16　ポーカーゲーム<br>
+<br>
+<img src="16_game_poker.jpg" width="248" height="206"> <br>
+<a href="16_game_poker.zip">16_game_poker.zip</a><br>
+<br>
+標準的な（？）ポーカーゲーム。カードの判定は８種類。<br>
+「ツーペア」「スリーカード」「ストレート」「フラッシュ」<br>
+「フルハウス」「フォーカード」「ストレートフラッシュ」<br>
+「ロイヤルストレートフラッシュ」<br>
+<br>
+※HSPゲームクックブックのアルゴリズムを参考にしています。<br>
+<br>
+2005/04/24<br>
+<hr>
+・NO.15　MODE3でBMPFONT, SJIS, LZ77画像を表示<br>
+<br>
+<img src="15_lib_clean.jpg" width="248" height="206"><br>
+<a href="15_lib_clean.zip">15_lib_clean.zip</a><br>
+<br>
+ようやく漢字表示対応。でも1Byte文字には未対応（泣。<br>
+<br>
+追記：漢字表示をさせたいのでしたらNo69を参考にしてください。<br>
+<br>
+※BMPFontはMoonlight様のフォントデータを使用しています。<br>
+※画像データは雨水様の東方アイコンを使用しています。<br>
+<br>
+2005/04/16<br>
+<hr>
+・NO.14　ブロック崩し<br>
+<br>
+<img src="14_game_block.jpg" width="248" height="206"> <br>
+<a href="14_game_block.zip">14_game_block.zip</a><br>
+<br>
+ゲーム作りに不慣れなせいか、ソースがデンジャラスです。<br>
+死亡判定してないし、おかしなところたくさんあります。<br>
+でも、まぁ・・・あんまり細部までこだわると疲れるので<br>
+考えないようにしよう。<br>
+<br>
+バグ<br>
+・ブロックの角に、ボールが45度で入るとx軸方向にしか反転しない。<br>
+・同じくラケットも角に45度から入るとおかしい。<br>
+<br>
+2005/04/10<br>
+<hr>
+・NO.1〜13　欠番<br>
+<br>
+ゲームを作るためのライブラリ作りっす。<br>
+具体的には<br>
+mode1〜mode3,<br>
+timer, key, tile, sprit,<br>
+8bitwavesound,<br>
+iwram, sram<br>
+など。<br>
+<br>
+2005/03/15〜2005/04/11<br>
+<hr>
+<font size="5"><b>開発環境</b></font><br>
+<br>
+<s>・devkitadvance<br>
+DarkFader氏のＨＰで公開されていたバージョン。<br>
+詳しくはよくわかりません（＾＾；</s><br>
+(NO1〜29)<br>
+<br>
+・devkitARM_r20<br>
+DevkitPro Updaterを使用してインストールしました。<br>
+NDS環境にも対応とのことですがGBA開発だけに使っています。<br>
+(NO.65〜xx r20)<br>
+(NO.30〜64 r15)<br>
+<br>
+<s>・GnuWing 20030801 + cygwin<br>
+VisualBoyAdvanceSDLと連帯して動くデバッカです</s>。<br>
+(NO38〜40)<br>
+<br>
+・Insight-6.5.0<br>
+VisualBoyAdvanceSDLと連帯して動くデバッカです。<br>
+<s>デフォルトのままだと起動のたびに設定をしなくてはいけないので<br>
+以下のような変更をしています。<br>
+<br>
+「targetselection.itb」<br>
+324行　ホスト名「localhost」<br>
+345行　ポート番号「55555」<br>
+809行　ポート番号「55555」<br>
+338行　デフォルトターゲット「set target remotetcp」<br>
+<br>
+「prefs.tcl」<br>
+352行　タブサイズ「4」<br>
+<br>
+DevkitProのホームページから入手可能です。</s><br>
+(NO65〜xx 6.5.0)<br>
+(NO55〜64 6.5.50-win32)<br>
+(NO41〜54 5.2.1)<br>
+<br>
+<s>・GBACrusher　0.11<br>
+GBAファイルに色々なファイルを結合してくれるツール。<br>
+offsetとsizeをヘッダファイルに出力してくれます。<br>
+ただしoffsetがズレるバグあり</s>。<br>
+<br>
+・bin2s<br>
+画像データなどを*.sファイルにしてくれます。<br>
+GBACrusherの場合に比べて<br>
+オフセット位置を意識する必要がなくなりました。<br>
+(NO65〜xx bin2s)<br>
+(NO01〜64 bin2o 1.04)<br>
+<br>
+<s>・wingit　0.7b 20070317<br>
+画像ファイル(BMP)をGBA用に変換します。<br>
+LZ77に対応しているので便利です。<br></s>
+<br>
+・git(grit)　v0.7b, 20070317<br>
+画像ファイル(BMP)をSファイルに変換します。<br>
+LZ77に対応しているので便利です。<br>
+GUI版からCUIに切り替えました。<br>
+<br>
+<s>・mirach　0.3a<br>
+タイルマップデータを作ってくれます。</s><br>
+<br>
+・MapEd 0.98<br>
+タイルマップエディタです。mirachに比べて<br>
+BGレイヤを何枚も重ねて表示できたり<br>
+マップデータをバイナリ出力してくれます。<br>
+<br>
+・OPTPiX webDesigner　3.2.0<br>
+画像編集ソフト。昔から使ってます。<br>
+<br>
+<s>・DPixed　2.71<br>
+ドットを書くツールです。昔から使っています。</s><br>
+<br>
+GraphicsGale FreeEdition 1.86<br>
+使いかってもよくて、ものすごい大きな画像も開けるので<br>
+DPixedから乗り換えました。<br>
+<br>
+<s>・GBA Tool Advance　0.6a<br>
+GBAファイルのヘッダ部分を修正（実機用）</s>。<br>
+<br>
+・gbafix 1.03<br>
+GBA Tool AdvanceのCUIバージョン。<br>
+コンパイル完了後に実行されるようバッチを作ったので<br>
+余計なGUI操作が不要になりました。<br>
+<hr>
+<font size="5"><b>リファレンスマニュアル</b></font><br>
+<br>
+・<a href="http://nocash.emubase.de/gbatek.htm">GBATEK Gameboy Advance Technical 
+Info</a><br>
+この資料は外せない１つです。<br>
+メモリマップや、とある番地のビットの意味を調べたりするのに<br>
+重宝しています。<br>
+<br>
+・<a href="http://belogic.com/gba/">The Audio Advance</a><br>
+サウンド周りについてはこちら。<br>
+サンプルソース付でわかりやすいです。<br>
+<br>
+・<a href="http://www.gbadev.org/">gameboy advancee development</a><br>
+・<a href="http://www.devrs.com/gba/">GameBoy Advance Dev'rs</a><br>
+GBA開発のニュースサイトです。わからないことがあったら真っ先に調べるところです。<br>
+<br>
+<hr>
+このサイトはリンクフリーです。<br>
+<a href="mailto:akkera102@gmail.com">連絡先</a> <a href="http://d.hatena.ne.jp/akkera102/">blog</a><br>
+<!-- Htmlはツール使って書いているので、汚なくなっちゃうんだよね・・・。 //-->
+</body>
+</html>

@@ -1,0 +1,16 @@
+#include "../config.tmpl"
+XCOMM CFLAGS+= $(CDEBUGFLAGS) -DDEBUG
+CFLAGS+= -Wall $(CDEBUGFLAGS) -DDEBUG
+
+OBJS =  plugin_lf.o lf2dec.o lfgdec.o \
+	hat_grpdec.o wa_grpdec.o cp_grpdec.o \
+	wa_gaddec.o \
+	psth_img.c \
+	leaf_util.o
+
+SRCS = $(OBJS:.o=.c)
+
+LOCAL_LIBRARIES =
+
+SharedLibraryTarget(lfv_leaf,1,$(OBJS),.,.)
+ InstallSharedLibrary(lfv_leaf,1,$(PLUGINDIR))

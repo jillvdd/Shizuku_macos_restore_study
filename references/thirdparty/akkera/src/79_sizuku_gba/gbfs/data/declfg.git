@@ -1,0 +1,19 @@
+#not include
+-p!
+-m!
+-fh!
+
+#Gfx format
+-gb
+
+#Gfx
+-gz!
+
+#Gfx bit depth
+-gB16
+
+#file type asm
+-ftb
+
+#All data type u16
+-U16

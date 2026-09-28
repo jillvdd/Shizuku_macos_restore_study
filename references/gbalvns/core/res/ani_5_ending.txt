@@ -1,0 +1,64 @@
+# エンディング
+
+
+# ---------------------------------------------------------------------------
+blackin 0
+image "MAX_S02.img"
+blackout 5
+
+print "脚本" 3
+print "ＬＡＱＩＥＥＲ" 5
+wait 200
+
+blackin 5
+printcls
+
+
+# -----------------------------------
+image "MAX_S03.img"
+blackout 5
+
+print "キャラクター" 3
+print "キャラクターなんとか機" 5
+wait 200
+
+blackin 5
+printcls
+
+
+# -----------------------------------
+image "MAX_S01.img"
+blackout 5
+
+print "背景グラフィック" 3
+print "きまぐれアフター" 5
+wait 200
+
+blackin 5
+printcls
+
+
+# -----------------------------------
+image "MAX_S02.img"
+blackout 5
+
+print "プログラム" 3
+print "ＬＡＱＩＥＥＲ" 5
+wait 200
+
+blackin 5
+printcls
+
+
+# -----------------------------------
+image "MAX_S03.img"
+blackout 5
+
+print "音楽" 3
+print "魔王魂" 5
+wait 200
+
+blackin 5
+printcls
+
+end

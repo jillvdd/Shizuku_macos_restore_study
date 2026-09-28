@@ -1,0 +1,84 @@
+== SCN148.DAT (1120B) ==
+  ev@0x10 lz=60B → decoded=133B
+  msg@0x50 lz=1036B → decoded=1445B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x2a) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 5402  MSG (msg_no)
+  0011: 5403  MSG (msg_no)
+  0013: 5404  MSG (msg_no)
+  0015: 5405  MSG (msg_no)
+  0017: 5406  MSG (msg_no)
+  0019: 07  SEL_BACK ()
+  001a: 05  SELECT prompt=7 n=2
+        opt[0]: msg=8 blk_off=0x0900
+        opt[1]: msg=4 blk_off=0x0428
+  0023: 96?? (skip 1)
+  0024: 012804  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0027: 95?? (skip 1)
+  0028: 01  SUB <truncated; have 2/2>
+  ...trailing 2B: 0100
+
+--- block 2 (event bytes 0x2a..0x2b) ---
+  002a: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x2b..0x85) ---
+  002b: 5403  MSG (msg_no)
+  002d: 5404  MSG (msg_no)
+  002f: 5405  MSG (msg_no)
+  0031: 5406  MSG (msg_no)
+  0033: 07  SEL_BACK ()
+  0034: 05  SELECT prompt=7 n=2
+        opt[0]: msg=8 blk_off=0x0900
+        opt[1]: msg=4 blk_off=0x0428
+  003d: 5403  MSG (msg_no)
+  003f: 5404  MSG (msg_no)
+  0041: 5405  MSG (msg_no)
+  0043: 5406  MSG (msg_no)
+  0045: 07  SEL_BACK ()
+  0046: 05  SELECT prompt=7 n=2
+        opt[0]: msg=8 blk_off=0x0900
+        opt[1]: msg=4 blk_off=0x0428
+  004f: 5403  MSG (msg_no)
+  0051: 5404  MSG (msg_no)
+  0053: 5405  MSG (msg_no)
+  0055: 5406  MSG (msg_no)
+  0057: 07  SEL_BACK ()
+  0058: 05  SELECT prompt=7 n=2
+        opt[0]: msg=8 blk_off=0x0900
+        opt[1]: msg=4 blk_off=0x0428
+  0061: 5403  MSG (msg_no)
+  0063: 5404  MSG (msg_no)
+  0065: 5405  MSG (msg_no)
+  0067: 5406  MSG (msg_no)
+  0069: 07  SEL_BACK ()
+  006a: 05  SELECT prompt=7 n=2
+        opt[0]: msg=8 blk_off=0x0900
+        opt[1]: msg=4 blk_off=0x0428
+  0073: 5403  MSG (msg_no)
+  0075: 5404  MSG (msg_no)
+  0077: 5405  MSG (msg_no)
+  0079: 5406  MSG (msg_no)
+  007b: 07  SEL_BACK ()
+  007c: 05  SELECT prompt=7 n=2
+        opt[0]: msg=8 blk_off=0x0900
+        opt[1]: msg=4 blk_off=0x0428
+
+== messages (11) ==
+  msg[  0]: <BG:343430333033>｡ﾖﾀｸﾅﾌ?ｼｼ､ﾈｶｵｼｼｰﾊｳｰ､ﾇ｡｢ﾂｾ､ﾋﾂﾀﾅﾄ､ｵ?､ｬｹﾔ､ｭ､ｽ､ｦ､ﾊ<CR>??､ﾋｿｴ?､ｿ?､ﾏ｡ｩ｡ﾗ<WAIT_KEY><CR><CHR:633230>｡ﾖ｡ﾄ､ｨ｡｢ﾂｾ､ﾋ｡ﾄ<WAIT_KEY>､ﾇ､ｹ､ｫ｡ｩ｡ﾗ<WAIT_KEY><CR>｡ﾖ?､ｯ?ｿﾍ､ﾇｹﾔ､ﾃ､ｿ??､ﾈ､ｫ｡ﾄ｡ﾗ<WAIT_KEY><CR><CHR:633234>｡｡??､ﾁ??､ﾏ､ｦ､ﾄｸ､､､ﾆ｡｢ｾｯ､ｷｹﾍ､ｨｹ?｡｣<WAIT_KEY><CR>｡｡､ｽ､ｷ､ﾆ｡｢ﾃｻ､ｯ､ﾒ､ﾈ､ｳ､ﾈ｡｢<WAIT_KEY><CR><CHR:633230>｡ﾖ｡ﾄｲｰ?､ﾇ､ｹ｡ﾗ<WAIT_KEY><CR>｡｡､ﾈｸﾀ､ﾃ､ｿ｡｣<PAGE><$>
+  msg[  1]: ｡ﾖｲｰ?｡ｩ｡ﾗ<WAIT_KEY><CR><CHR:633232>｡ﾖ｡ﾄ､ﾏ､､｡｣<WAIT_KEY>｡ﾄ､ｪ?ｵﾙ､ﾟ､ﾋ｡｢?ｿﾍ､ﾇ?､ｯｲｰ?､ﾋ?､ｬ､ﾃ､ﾆ<CR>??､ﾋ､ｪﾊﾛ??ｿｩ､ﾙ､ｿ?､ﾇ､ｹ｡ﾗ<WAIT_KEY><CR>｡ﾖ､ｸ?､｢｡｢､ｽ､ｳ??ｱ､ﾏｸｫ､ﾆ､ｪ､ｳ､ｦ｡ﾗ<WAIT_KEY><CR>｡ﾖ､ﾏ､､｡ﾗ<PAGE><BG:343830333033><$>
+  msg[  2]: ｡｡ﾋﾍ､ｿ､ﾁ､ﾏｲｰ?､ﾘ､ﾈﾂｳ､ｯｳｬﾃﾊ､ﾞ､ﾇｰﾜﾆｰ､ｷ､ｿ｡｣<PAGE><$>
+  msg[  3]: ｡｡ｶｵｼｼ､ﾎ?､ｫ?､ｺ､ﾃ､ﾈ｡｢??､ﾁ??､ﾏ､ｦ､ﾄｸ､ｭｲﾃｸｺ､ﾇ<CR>ｲｿ､ｫ?ｹﾍ､ｨｹ?､ﾇ､ｷ､ﾞ､ﾃ､ﾆ､､?｡｣<WAIT_KEY><CR>｡｡｡ﾄ?､ﾏ?｡｢･ｷ?･ﾃ･ｯ､ｬ?､ｭ､ｫ､ﾃ､ｿ?､ﾀ?､ｦ､ｫ｡ｩ<WAIT_KEY><CR>｡｡､｢?､ﾎ､ﾞ､ﾞ?ﾏﾃ､ｵ､ｺ｡｢?､ｦｾｯ､ｷ､ｫ､､､ﾄ､ﾞ?､ﾇﾏﾃ､ｷ､ｿ<CR>､ﾛ､ｦ､ｬﾎﾉ､ｫ､ﾃ､ｿ､ﾎ､ｫ?ﾃﾎ?､ﾊ､､｡｣<WAIT_KEY><CR>｡｡ﾋﾍ､ﾏ??､ﾎ??､ﾁ????､ｭﾎ･､ｵ､ﾊ､､?､ｦ､ﾋ｡｢?､ﾟ<CR>???､ｻ､ﾆ?､ﾃ､ｯ?､ﾈｳｬﾃﾊ?ｾｺ､ﾃ､ﾆ､､､ｯ｡｣<PAGE><$>
+  msg[  4]: ｡｡??､ﾁ??､ﾏｻﾗ､､ｹ､ﾟ､ｬ?､ｷ､ｯ｡｢ﾇｺ?､ﾇ､､?､ｦ､ﾁ､ﾋ<CR>ｹﾍ､ｨ､ｬ､ﾉ?､ﾉ?ｿｼ?､ﾋ､ﾊ､ﾃ､ﾆ､､､ｯ･ｿ･､･ﾗ､ﾀ｡｣<WAIT_KEY><CR>｡｡､､?､､?ﾏﾃ?ｿｶ､ﾃ､ﾆ｡｢ｵ､?ﾊｶ?､ｻ､ｿ､ﾛ､ｦ､ｬ､､､､､ｫ?<CR>ﾃﾎ?､ﾊ､､｡｣<WAIT_KEY><CR>｡｡ｰﾅ､､ｳﾘｹｻ､ﾇ｡｢ﾄｹ､､ﾄﾀﾌﾛ､ｬﾂｳ､ｯ､ﾎ?ﾉﾔｵ､ﾌ｣､ﾋｻﾗ､ｨ､ｿ｡｣<WAIT_KEY><CR>｡｡?ｳｬ､ﾈｻｰｳｬ?ｷﾒ､ｰｳｬﾃﾊ､ﾎﾅﾓ?､ﾇ｡｢ﾋﾍ､ﾏﾉﾔｰﾕ､ﾋﾎｩ､ﾁｻﾟ<CR>､ﾞ?｡｢??､ﾁ??､ﾋﾀｼ?ｳﾝ､ｱ､ｿ｡｣<PAGE><$>
+  msg[  5]: ｡ﾖ??､ﾁ??｡ﾄ｡ﾗ<WAIT_KEY><CR>｡｡??､ﾁ??､ｬ､ﾕ､ﾃ､ﾈ???､ｲ?｡｣<WAIT_KEY><CR>｡ﾖ｡ﾄ､ﾏ｡ﾄ<WAIT_KEY>､ﾏ､､｡ﾄ｡ﾗ<PAGE><M:66>:4d<0x77><BG:303031303131><$>
+  msg[  6]: ｡｡､ｽ､ﾎｽﾖｴﾖ､ﾀ､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡??､ﾁ??､ｬｳｬﾃﾊ､ｫ?ﾂｭ?ﾆｧ､ﾟｳｰ､ｷ｡｢･ｫ･ｯ?､ﾈ??<CR>?､､､ｿ｡｣<WAIT_KEY><CR>｡ﾖ､｢､ﾃ｡ｪ｡ﾗ<WAIT_KEY><CR>｡｡ﾂﾎﾀｪ??､ｷ｡｢??､ﾘﾅｾ､ﾓ､ｽ､ｦ､ﾋ､ﾊ?｡｣<WAIT_KEY><CR>｡ﾖ?､ﾊ､､､ﾃ｡ｪ｡ﾗ<PAGE><BG:343831313130><$>
+  msg[  7]: ｡｡ﾋﾍ､ﾏ?ﾓﾍ､ﾋ｡｢??､ﾁ??､ﾎｿﾈﾂﾎ??､ﾞ､ｨ?､ｦ､ﾈ??<CR>ｿｭ､ﾐ､ｷ､ｿ｡｣<CR><$>
+  msg[  8]: <OFFSET><0x36><SPEED><0x30>｣ｱ｡｢ｿｭ､ﾐ､ｷ､ｿ??ﾄﾏ?<CR><$>
+  msg[  9]: <OFFSET><0x36><SPEED><0x30>｣ｲ｡｢??､ﾈ?ﾄﾏ?<CR><$>
+  msg[ 10]: <0x04><0x39><0x05><BG_CHR:056905423434303330><0x33>｡ﾖﾀｸ<0x04><0x39><0x05><BG_CHR:056905423434303330><0x33>｡ﾖﾀｸ<0x04><0x39><0x05><BG_CHR:056905423434303330><0x33>｡ﾖﾀｸ<L7fff?><L7fff?><L7fff?>
+

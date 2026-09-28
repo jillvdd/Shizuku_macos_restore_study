@@ -1,0 +1,100 @@
+== SCN091.DAT (2208B) ==
+  ev@0x10 lz=76B → decoded=132B
+  msg@0x60 lz=2108B → decoded=3544B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x3b) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 5402  MSG (msg_no)
+  0011: 5403  MSG (msg_no)
+  0013: 5404  MSG (msg_no)
+  0015: 5405  MSG (msg_no)
+  0017: 5406  MSG (msg_no)
+  0019: 5407  MSG (msg_no)
+  001b: 5408  MSG (msg_no)
+  001d: 5409  MSG (msg_no)
+  001f: 540a  MSG (msg_no)
+  0021: 540b  MSG (msg_no)
+  0023: 540c  MSG (msg_no)
+  0025: 540d  MSG (msg_no)
+  0027: 540e  MSG (msg_no)
+  0029: 540f  MSG (msg_no)
+  002b: 5410  MSG (msg_no)
+  002d: 5411  MSG (msg_no)
+  002f: 5412  MSG (msg_no)
+  0031: 5413  MSG (msg_no)
+  0033: 5414  MSG (msg_no)
+  0035: 5415  MSG (msg_no)
+  0037: 045e01  JUMP (scn,blk)
+  003a: 00  END
+
+--- block 2 (event bytes 0x3b..0x3c) ---
+  003b: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x3c..0x84) ---
+  003c: 5403  MSG (msg_no)
+  003e: 5404  MSG (msg_no)
+  0040: 5405  MSG (msg_no)
+  0042: 5406  MSG (msg_no)
+  0044: 5407  MSG (msg_no)
+  0046: 5408  MSG (msg_no)
+  0048: 5409  MSG (msg_no)
+  004a: 540a  MSG (msg_no)
+  004c: 540b  MSG (msg_no)
+  004e: 5403  MSG (msg_no)
+  0050: 5404  MSG (msg_no)
+  0052: 5405  MSG (msg_no)
+  0054: 5406  MSG (msg_no)
+  0056: 5407  MSG (msg_no)
+  0058: 5408  MSG (msg_no)
+  005a: 5409  MSG (msg_no)
+  005c: 540a  MSG (msg_no)
+  005e: 540b  MSG (msg_no)
+  0060: 5403  MSG (msg_no)
+  0062: 5404  MSG (msg_no)
+  0064: 5405  MSG (msg_no)
+  0066: 5406  MSG (msg_no)
+  0068: 5407  MSG (msg_no)
+  006a: 5408  MSG (msg_no)
+  006c: 5409  MSG (msg_no)
+  006e: 540a  MSG (msg_no)
+  0070: 540b  MSG (msg_no)
+  0072: 5403  MSG (msg_no)
+  0074: 5404  MSG (msg_no)
+  0076: 5405  MSG (msg_no)
+  0078: 5406  MSG (msg_no)
+  007a: 5407  MSG (msg_no)
+  007c: 5408  MSG (msg_no)
+  007e: 5409  MSG (msg_no)
+  0080: 540a  MSG (msg_no)
+  0082: 540b  MSG (msg_no)
+
+== messages (23) ==
+  msg[  0]: ｡｡??､ｵ?､ﾎｿﾈﾂﾎ､ｬ｡｢･ｬ･ｿ･ｬ･ｿ､ﾈｿﾌ､ｨ､ﾀ､ｷ､ｿ｡｣<WAIT_KEY><CR>｡｡??､ｵ?､ﾎﾀｺｿﾀ､ｬ｡｢ｲｻ?ﾎｩ､ﾆ､ﾆ??､ｷ､ﾆ､､､ｯ｡｣<WAIT_KEY><CR>｡｡｡ﾄ､ﾈ､､､ﾃ､ﾆ?｡｢??､ｬ?ｲｻ､ﾈｶｦ､ﾋ???､ﾁ??､ｦ､ﾊ<CR>ﾁﾔ?､ﾊ?､ﾎ､ﾇ､ﾏ､ﾊ､､｡｣<WAIT_KEY><CR>｡｡｡ﾄｺﾙ､､?､ｬ｡｢､ﾗ､ﾄ?､ﾈﾀﾚ??｡｣<WAIT_KEY><CR>｡｡､ｽ､ﾎ?ﾅﾙ､ﾎ｡｢?ｵ､､ﾊ､､?､ﾎ､ﾇ､ｷ､ｫ､ﾊ､ｫ､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡ｿﾍｴﾖ､ﾎﾀｺｿﾀ､ﾏ｡｢ﾁ｡ｺﾙ､ﾊ･ｬ?･ｹｺﾙｹｩ､ﾎ?､ｦ､ﾊ?､ﾎ､ﾀ｡｣<WAIT_KEY><CR>｡｡､ﾛ?､ﾎ､ﾁ?､ﾃ､ﾈ｡｢､ﾊ､ﾋ､ｫ?､ﾖ､ﾄ､ｱ､ｿ､ﾀ､ｱ､ﾇ｡｢ｴﾊﾃｱ､ﾋ<CR>??､ﾆ､ｷ､ﾞ､ｦ､ﾎ､ﾀ｡｣<PAGE><$>
+  msg[  1]: ｡ﾖ｡ﾄ??､ｳ｡ﾄ<WAIT_KEY>､ﾜ､ｯ?｡ﾄ<WAIT_KEY>??｡ﾄ､ｷ､ﾆ｡ﾄ｡ﾗ<WAIT_KEY><CR>｡｡?､ｬｺﾇ?､ﾋｸ､ﾋｽﾐ､ｷ､ｿｸﾀﾍﾕ､ｬ､ｽ?､ﾀ､ﾃ､ｿ｡｣<WAIT_KEY><CR><VIS:303531303130>｡｡??､ｵ?､ﾏ､ｺ?､ｺ?､ﾈ???､ﾁ｡｢､ﾚ､ｿ?､ﾈ､ｽ､ﾎ?､ﾋ<CR>ｺﾂ?ｹ?､ﾈ｡｢､ｰ､ﾃ､ｿ?､ﾈ?ﾈｾｿﾈ?ﾊﾉ､ﾋ?､ｿ?ｳﾝ､ｱ､ｿ｡｣<WAIT_KEY><CR>｡｡?､ｯｳｫ､ｫ?､ｿﾌﾜ､ﾏ｡｢ﾁｴ､ﾆ､ﾎﾀｸｵ､?ｼｺ､､｡｢??､ﾀ?､ﾎ<CR>?､ｦ､ﾋ､ﾉ??､ﾈ?､ﾃ､ﾆ､､､ｿ｡｣<PAGE><$>
+  msg[  2]: ｡｡ﾆｷ､ｬ｡｢ｾｯ､ｷ､ｺ､ﾄｿｧ?ｼｺ､ﾃ､ﾆ､､､ｯ｡｣<WAIT_KEY><CR>｡｡?､ｬ､ﾆ?､ﾏ｡｢ﾌｲ??､ｦ､ﾋｰﾂ?､ｫ､ﾋ｡｢ｶｸｵ､､ﾎ､ﾊ､ｫ､ﾘ､ﾈ<CR>､ﾈ､ｱｹ?､ﾇ､､､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡､ｽ､ﾎﾉｽ?､ﾏ｡｢､ﾞ?､ﾇ､｢､ﾉ､ｱ､ﾊ､､ﾌｵｹ､､ﾊｻﾒｶ｡､ﾎ?､ｦ､ﾋ<CR>?ｾﾐ､ﾟﾂｳ､ｱ､ﾆ､､､ｿ｡｣<PAGE><M:66>:4d<0x77><BG:313430363036><$>
+  msg[  3]: ｡ﾖ｡ﾄｽｪ?､ﾃ､ｿ｡ﾗ<WAIT_KEY><CR>｡｡ﾋﾍ､ﾏ?､ﾎﾀﾚ?､ｿ??ｿﾍｷﾁ､ﾎ?､ｦ､ﾋｾｲ､ﾋ???､ﾁ､ｿ｡｣<WAIT_KEY><CR>｡｡ﾁｴ､ﾆ､ｬｽｪ?､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡ﾅﾚﾃﾅ?､ﾇｵﾞﾂｮ､ﾋﾋﾄ?､｢､ｬ､ﾃ､ｿﾋﾍ､ﾎﾅﾅﾇﾈ､ﾏ｡｢ｰｵﾅﾝﾅｪ､ﾊ<CR>ﾎﾏ､ﾇ??､ｵ?､ﾎﾅﾅﾇﾈ?ｲ｡､ｷﾊﾖ､ｷ｡｢､､､ﾃ､ｭ､ﾋ??ﾇﾋﾌﾇ､ﾘ<CR>､ﾈﾄﾉ､､?､ﾃ､ｿ｡｣<PAGE><$>
+  msg[  4]: ｡｡??､ｵ?､ﾏ?ﾈｾｿﾈ?ﾊﾉ､ﾋ?､ｿ?ｳﾝ､ｱ､ﾆ｡｢??､ﾎ?ﾅﾀ<CR>?ｸｫ､ﾄ?､ｿ､ﾞ､ﾞ｡｢ﾌｵｼﾙｵ､､ﾊ?ｾﾐ､ﾟ??､ｫ､ﾙ､ﾆ､､､ｿ｡｣<WAIT_KEY><CR>｡｡ﾀｺｿﾀ､ｬ｡｢ｿﾍｳﾊ､ｬ｡｢ｴｰﾁｴ､ﾋﾇﾋ?､ｵ?､ﾆ､､､ｿ｡｣<WAIT_KEY><CR>｡｡?､ｦ｡｢ﾇﾑｿﾍﾆｱﾁｳ､ﾀ｡｣<WAIT_KEY><CR>｡｡?ﾅﾙ､ﾈ?､ﾈ､ﾋ??､ｳ､ﾈ､ﾏ､ﾊ､､､ﾀ?､ｦ｡｣<PAGE><$>
+  msg[  5]: ｡｡､ｳ､ｦ､ﾊ､ﾃ､ﾆ?ﾁｳ､ﾀ｡｢､ﾈｻﾗ､ｦ｡｣<WAIT_KEY>､｢?､ﾊ?､､､ｳ､ﾈ?ｲｿｿﾍ<CR>?､ﾎｿﾍｴﾖ､ﾋﾂﾐ､ｷ､ﾆｹﾔ､ﾃ､ｿ､ﾎ､ﾀ｡｣<WAIT_KEY><CR>｡｡?､ﾏﾌﾇ､ﾓ?､ﾙ､ｭ､ﾀ､ﾃ､ｿ｡｣<PAGE><$>
+  msg[  6]: ｡｡､､?｡｢?､ﾎﾀｺｿﾀ､ﾏ?､ﾈ?､ﾈ??ﾀ｣ﾁｰ､ﾀ､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡ｼｫ?､ﾎ?､ﾋ､ｵ､､､ﾊ､ﾞ?｡｢ﾌﾇ､ﾓ､ﾎﾆｻ?､ﾞ､ﾃ､ｹ､ｰ､ﾋﾆﾍ､ｭ<CR>ｿﾊ?､ﾇ､､､ｿ､ﾎ､ﾀ｡｣<WAIT_KEY><CR>｡｡､､､ﾄｲﾌ､ﾆ?､ﾈ?､ｷ?､ﾊ､､ｰｭﾌｴ｡｣<WAIT_KEY><CR>｡｡､ｽ､ｷ､ﾆｺ｣､ﾎﾋﾍ?｡｢?､ﾈﾆｱ､ｸﾆｻ???､ｦ､ﾈ､ｷ､ﾆ､､､ｿ｡｣<PAGE><$>
+  msg[  7]: ｡｡ｿｷ?､ｵ???､ｷ｡｢<WAIT_KEY>??､ﾁ???ﾈﾈ､ｷ｡｢<WAIT_KEY>ﾎﾜﾍｻﾒ､ｵ??<CR>ﾈﾈ､ｷ｡ﾄ｡｢<WAIT_KEY>ｶﾀ､ﾋｱﾇ､ﾃ､ｿｼｫﾊｬ､ﾎ?､ｦ､ﾊ??､ｵ??｡ﾄ<WAIT_KEY>ｰﾇ､ﾘ､ﾈ<CR>?､ﾃ､ﾆ､ｷ､ﾞ､ﾃ､ｿ｡ﾄ｡｣<PAGE><$>
+  msg[  8]: ｡｡｡ﾄﾃｯ､ｫ｡ﾄ<WAIT_KEY>?､ｯ､ｳ､ﾎﾌｴ､ｫ?｡｢ｳﾐ?､ｵ､ｻ､ﾆ?｡｣<PAGE><$>
+  msg[  9]: ｡｡ｲｿｵ､､ﾊ､ｯﾋﾍ､ﾏ｡｢､ﾜ???､ﾈ?ｲｰ､ﾎ??ｸｫ?､ｷ､ｿ｡｣<WAIT_KEY><CR>｡｡??､ﾁ??､ﾈｿｷ?､ｵ?､ﾎｻﾑ､ｬ?ｳｦ､ﾋﾆ?｡｣<PAGE><$>
+  msg[ 10]: ｡｡｡ﾄ?ﾂﾎ､ﾉ､ｦ､ｷ､ｿ､ｳ､ﾈ､ﾀ?､ｦ｡ｩ<PAGE><$>
+  msg[ 11]: ｡｡?ｿﾍ､ﾏ?ｲｰ､ﾎ?､ﾃ､ｳ､ﾋｿｲﾅｾ､ｬ､ﾃ､ｿ､ﾞ､ﾞ｡｢ｿﾈﾂﾎ?･ﾔ･ｯ<CR>･ﾔ･ｯ､ﾈ瞻ﾚｻ､ｵ､ｻ､ﾆ､､?｡｣<WAIT_KEY><CR>｡｡??､ｿ､ﾁ､ﾀ､ｱ､ﾇ､ﾏ､ﾊ､､｡｣?､ﾛ､ﾉ､ﾞ､ﾇﾌｲ､ﾃ､ﾆ､､､ｿ､ﾏ､ｺ<CR>､ﾎ?ﾀｸﾅﾌ､ｿ､ﾁ?｡｢ﾆｱ､ｸ?､ｦ､ﾋ｡｢ｿﾈﾂﾎ?･ﾒ･ｯ･ﾒ･ｯ､ｵ､ｻ､ﾆ<CR>､､､ｿ｡｣<WAIT_KEY><CR>｡｡､ｿ､ﾀﾂﾀﾅﾄ､ｵ?､ﾀ､ｱ､ｬ｡｢ｲｿ､ﾈ?､ﾊ､､?､ｦ､ﾀ､ﾃ､ｿ｡｣<PAGE><M:32>:31<$>
+  msg[ 12]: ｡｡､ｽ?､ﾊ??､ｿ､ﾁ､ｬｲｿ､ﾀ､ｫ､ﾈ､ﾆ??ｷﾎ､ﾋｻﾗ､ｨ､ｿﾋﾍ､ﾏ｡｢<CR>･ｯ･ｹ･ｯ･ｹ､ﾈｾﾐ､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡ﾖ｡ﾄ､ﾟ?､ﾊ｡｢､ﾉ､ｦ､ｷ､ｿ?､ﾀ?｡ｩ｡｡<WAIT_KEY>｡ﾄ､ﾕ､ﾕ､ﾕ｡ﾄﾊﾑ､ﾀ､ﾊ｡ﾗ<PAGE><$>
+  msg[ 13]: ｡ﾖ､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢<WAIT_KEY>､｢｡ﾄ｡ﾗ<WAIT_KEY><CR>｡｡??､ﾁ??､ﾎｸ?､ﾈ､ｫ?｡｢､ﾀ?､ｷ､ﾊ､ｯﾂﾃｱﾕ､ｬﾅｩ､ﾃ､ﾆ<CR>､､､ｿ｡｣<WAIT_KEY><CR>｡ﾖ｡ﾄ?､ｦ｡｢､､??｡ﾄ｡｢<WAIT_KEY>､､?､ﾊ､ﾎ｡｢<WAIT_KEY>､､?｡｢<WAIT_KEY>､､?｡｢<WAIT_KEY>､､?｡｢<WAIT_KEY><CR>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?｡ﾄ｡ﾗ<WAIT_KEY><CR>｡｡ｿｷ?､ｵ?､ﾏ??､ｿ｣ﾃ｣ﾄ､ﾎ?､ｦ､ﾋ｡｢｡ﾖ?｡ﾗ?ｷｫ?ﾊﾖ､ｷ<CR>､ﾊ､ｬ?｡｢･ﾒ･ｯ･ﾒ･ｯｿﾈﾂﾎ?ｿﾌ?､ｻ､ﾆｼｺｶﾘ､ｷ､ｿ｡｣<PAGE><$>
+  msg[ 14]: <P:6c>:31<0x32>｡ﾖ?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?｡ﾄ?･｢･ﾃ｡ｪ<WAIT_KEY>｡｡ﾅﾅﾇﾈ?<WAIT_KEY>ｻﾟ?｡ﾄ｡ﾗ<FLASH><WAIT_KEY><CR>｡｡､､?､､?､ﾈ｡｢､ｦ?､ｵ､ｯ?､ｮ､ｿ､ﾆ､ﾆ､､､ｿｿｷ?､ｵ?､ﾏ｡｢<CR>､ｽ､ｦｶｫ?､ﾀﾅﾓﾃｼ｡｢､ﾑ､ﾃ､ｿ?､ﾈ?ｿﾍ､ｷ､ｯ､ﾊ?｡｢､ｽ､ﾎ､ﾞ､ﾞ<CR>ﾀﾅ､ｫ､ﾋ､ﾊ､ﾃ､ｿ｡｣<PAGE><$>
+  msg[ 15]: <FLASH><FLASH>｡｡｡ﾄ､｢､｢｡｢､ｽ､ｦ､ｫ｡｣<WAIT_KEY><CR>｡｡ﾅﾅﾇﾈ?ｻﾟ??､ﾎ?ﾋｺ?､ﾆ､､､ｿ｡｣<WAIT_KEY><CR>｡｡､ｺ､ﾃ､ﾈｽﾐ､ﾃ?､ｷ､ﾀ､ﾃ､ｿ?､ﾀ｡｣<PAGE><$>
+  msg[ 16]: <P:30>:31<0x30><0x30><FLASH><P:77>:50<SPEED>｡｡ﾋﾍ､ﾎﾅﾅﾇﾈ､ﾏﾋｽ?､ｷ､ｿ､ﾞ､ﾞ｡｢､ﾉ?､ﾉ?､ﾉ?､ﾉ??､ｭ､ｯ<CR>ｶｯ､ｯ､ﾊ､ﾃ､ﾆ､､､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡､ﾞ?､ﾇ?､ｭｹﾓ??ﾅﾅﾇﾈ､ﾎ??､ﾎ?､ｦ､ﾋ｡｣<PAGE><$>
+  msg[ 17]: ｡｡｡ﾄ､ﾕ､ｦ?｡｢､ｳ?､ﾊ､ﾋﾀｨ､ｫ､ﾃ､ｿ?､ﾀ｡｣<PAGE><$>
+  msg[ 18]: <P:30>:31<0x30><0x30><FLASH><P:77>:50<SPEED><P:66>:80　ﾋﾍ､ﾏ｡｢ﾌﾌ?､､?､ｦ､ﾋﾋﾄ??､ｬ､ﾃ､ﾆ､､､ｯｼｫﾊｬ､ﾎﾅﾅﾇﾈ､ﾎ<CR>ﾎﾏ､ﾋ｡｢､ｹ､ﾃ､ｫ?ｴｶｿｴ､ｷ､ﾆ､､､ｿ｡｣<PAGE><$>
+  msg[ 19]: ｡ﾖ｡ﾄ､ｿ<WAIT_KEY>､ｿ<WAIT_KEY>､ｿ<WAIT_KEY>､ｿ<WAIT_KEY>､ｿ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｱ<WAIT_KEY>､ｱ<WAIT_KEY>､ｱ<WAIT_KEY>､ｱ<WAIT_KEY>､ｱ<WAIT_KEY>､ﾆ<WAIT_KEY>､ﾆ<WAIT_KEY>､ﾆ<WAIT_KEY>､ﾆ<WAIT_KEY>､ﾆ<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY><CR>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>､ｦ<WAIT_KEY>､ｦ<WAIT_KEY>､ｦ<WAIT_KEY>､ｦ<WAIT_KEY>､ｦ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｱ<WAIT_KEY>､ｱ<WAIT_KEY>､ｱ<WAIT_KEY>､ｱ<WAIT_KEY>､ｱ<WAIT_KEY>､ｵ<WAIT_KEY>､ｵ<WAIT_KEY>､ｵ<WAIT_KEY>､ｵ<WAIT_KEY>､ｵ<WAIT_KEY>?<WAIT_KEY><CR>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>?<WAIT_KEY>､ｿ<WAIT_KEY>､ｿ<WAIT_KEY>､ｿ<WAIT_KEY>､ｿ<WAIT_KEY>､ｿ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ<WAIT_KEY>､ｹ｡ﾄ｡ﾗ<PAGE><$>
+  msg[ 20]: ｡｡･ｬ･ｯ･ｬ･ｯ､ﾈｿﾈﾂﾎ?ｿﾌ?､ｻ???､ﾁ??､ｬ｡｢?･ﾀ??<CR>?､ｪ､ｷ､ﾃ､ｳ?????ﾎｮ､ｷ､ﾊ､ｬ?｡｢ｲｿ???ﾌｯ､ﾊｸﾀ?<CR>?ﾈｯ､ｷ､ﾆ､､?｡｣<PAGE><$>
+  msg[ 21]: ｡｡､ｽ??､ﾜ???､ﾈﾄｯ??ﾋﾍ､ﾏ｡｢｡ﾖ?､､､ﾊ､｡｡ﾗ､ﾈｻﾗ､､<CR>､ﾊ､ｬ??｡｢､ｳ､ﾎﾅﾅﾇﾈ､ﾎﾎﾏ､ｬ｡｢ｲﾌ､ｿ､ｷ､ﾆ､ﾉ､ｳ､ﾞ､ﾇ?､ｭ､ｯ<CR>､ﾊ??､ﾀ?､ｦ､ﾈｹﾍ､ｨ､ﾆ､､､ｿ｡ﾄ｡ﾄ｡ﾄ｡ﾄ｡｣<PAGE><M:66>:4d<0x77><BG:303030303131><$>
+  msg[ 22]: <0x06>ﾆｮ<L3106?><0x0b><0x07><0x29><0x07><0x0d><0x08>?<L5c09?>?<L5806?>ﾆｮ<L3106?><0x0b><0x07><0x29><0x07><0x0d><0x08>?<L5c09?>?<L5806?>ﾆｮ<L3106?><0x0b><0x07><0x29><0x07><0x0d><0x08>?<L5c09?>?<L5806?>ﾆｮ<L3106?><0x0b><0x07><0x29><0x07><0x0d><0x08>?<L5c09?>?
+

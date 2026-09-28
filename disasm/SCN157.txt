@@ -1,0 +1,76 @@
+== SCN157.DAT (320B) ==
+  ev@0x10 lz=28B → decoded=72B
+  msg@0x30 lz=268B → decoded=281B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x11) ---
+  000b: 5400  MSG (msg_no)
+  000d: 049e01  JUMP (scn,blk)
+  0010: 00  END
+
+--- block 2 (event bytes 0x11..0x12) ---
+  0011: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x12..0x48) ---
+  0012: ff  UNREACHABLE
+  0013: ff  UNREACHABLE
+  0014: ff  UNREACHABLE
+  0015: ff  UNREACHABLE
+  0016: ff  UNREACHABLE
+  0017: ff  UNREACHABLE
+  0018: ff  UNREACHABLE
+  0019: ff  UNREACHABLE
+  001a: ff  UNREACHABLE
+  001b: ff  UNREACHABLE
+  001c: ff  UNREACHABLE
+  001d: ff  UNREACHABLE
+  001e: ff  UNREACHABLE
+  001f: ff  UNREACHABLE
+  0020: ff  UNREACHABLE
+  0021: ff  UNREACHABLE
+  0022: ff  UNREACHABLE
+  0023: ff  UNREACHABLE
+  0024: ff  UNREACHABLE
+  0025: ff  UNREACHABLE
+  0026: ff  UNREACHABLE
+  0027: ff  UNREACHABLE
+  0028: ff  UNREACHABLE
+  0029: ff  UNREACHABLE
+  002a: ff  UNREACHABLE
+  002b: ff  UNREACHABLE
+  002c: ff  UNREACHABLE
+  002d: ff  UNREACHABLE
+  002e: ff  UNREACHABLE
+  002f: ff  UNREACHABLE
+  0030: ff  UNREACHABLE
+  0031: ff  UNREACHABLE
+  0032: ff  UNREACHABLE
+  0033: ff  UNREACHABLE
+  0034: ff  UNREACHABLE
+  0035: ff  UNREACHABLE
+  0036: ff  UNREACHABLE
+  0037: ff  UNREACHABLE
+  0038: ff  UNREACHABLE
+  0039: ff  UNREACHABLE
+  003a: ff  UNREACHABLE
+  003b: ff  UNREACHABLE
+  003c: ff  UNREACHABLE
+  003d: ff  UNREACHABLE
+  003e: ff  UNREACHABLE
+  003f: ff  UNREACHABLE
+  0040: ff  UNREACHABLE
+  0041: ff  UNREACHABLE
+  0042: ff  UNREACHABLE
+  0043: ff  UNREACHABLE
+  0044: ff  UNREACHABLE
+  0045: ff  UNREACHABLE
+  0046: ff  UNREACHABLE
+  0047: ff  UNREACHABLE
+
+== messages (2) ==
+  msg[  0]: ｡ﾖ､ﾈ､ﾋ､ｫ､ｯ｡｢ﾂﾀﾅﾄ､ｵ???､ｯｸｫ､ﾄ､ｱ?､ｦ｡｣､ｽ?､ｬ?ﾈﾖ<CR>ｺﾇ?､ﾀ?｡｣ｳﾘｹｻ､ﾋ､､､ﾊ､､､ﾎ､ｬ?､ｫ､ﾃ､ｿ?｡｢?､ｦ?ﾅﾙ｡｢<CR>ﾉﾂｱ｡､ﾎﾉﾕ?､ﾈ､ｫ?ﾁﾜ､ｽ､ｦ?｡｣｡ﾄﾋﾍ??ﾅﾁ､ｦ､ｫ?｡ﾗ<WAIT_KEY><CR><CHR:633241>｡ﾖ｡ﾄ?｡｢ﾍｴ?､ｵ?｡ﾄ｡ﾗ<WAIT_KEY><CR>｡｡??､ﾁ??､ﾏ｡｢?､ﾎｹﾃ､ﾇ､ｰ､､､ﾃ､ﾈﾎﾞ?ｿ｡､､､ﾊ､ｬ?｡｢<CR>｡ﾖ､｢｡｢､｢?､ｬ､ﾈ､ｦ､ｴ､ｶ､､､ﾞ､ｹ｡ﾄ｡ﾗ<WAIT_KEY><CR>｡｡､ｽ､ｦｸﾀ､ﾃ､ﾆ?ｾﾐ?､ﾀ｡｣<PAGE><$>
+  msg[  1]: 
+

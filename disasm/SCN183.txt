@@ -1,0 +1,43 @@
+== SCN183.DAT (656B) ==
+  ev@0x10 lz=44B → decoded=39B
+  msg@0x40 lz=588B → decoded=778B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x1f) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 5402  MSG (msg_no)
+  0011: 5403  MSG (msg_no)
+  0013: 5404  MSG (msg_no)
+  0015: 5405  MSG (msg_no)
+  0017: 5406  MSG (msg_no)
+  0019: 5407  MSG (msg_no)
+  001b: 04c201  JUMP (scn,blk)
+  001e: 00  END
+
+--- block 2 (event bytes 0x1f..0x20) ---
+  001f: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x20..0x27) ---
+  0020: ff  UNREACHABLE
+  0021: ff  UNREACHABLE
+  0022: ff  UNREACHABLE
+  0023: ff  UNREACHABLE
+  0024: ff  UNREACHABLE
+  0025: ff  UNREACHABLE
+  0026: ff  UNREACHABLE
+
+== messages (9) ==
+  msg[  0]: <CHR:633144><M:66>:4d<0x77><M:32>:30<P:6c>:31<0x32>｡ﾖ?･ｸ?｡ｼ｡ｪ｡ﾗ<WAIT_KEY><CR>｡｡??､ﾏ､ﾉ､ｳ､ﾋｱ｣､ｷ､ﾆ､､､ｿ､ﾎ､ｫ｡｢?ﾃﾏ､ﾋﾀﾖ､､ﾋ･､､ﾌﾜ､ﾎ<CR>･ﾜ｡ｼ????ｽﾐ､ｹ､ﾈ｡｢､ｽ??ｰｮ､ﾃ､ﾆｵ､?ﾏ｣?ｻﾏ?､ｿ｡｣<WAIT_KEY><CR>｡ﾖ､ﾏ､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢｡ﾄ｡ﾗ<WAIT_KEY><CR><P:30>:31<0x30><0x30><FLASH><P:77>:50<SPEED><P:66>:80　､ｵ､ｪ??､ﾎｵ､､ｬ､ﾉ?､ﾉ?､ﾈ?ｾｺ､ｷ､､､ｯ｡｣<WAIT_KEY><CR>｡｡･ｹ･ｫ･ｦ･ｿ｡ｼ､ﾎ?ﾃﾍ､ﾏ｡｢?ﾆｮﾎﾏ｣ｱ｣ｸ｣ｰ｣ｰ｣ｰ｣ｰ?ﾄｶ､ｨ､ﾆ<CR>､､､ｿ｡｣<PAGE><$>
+  msg[  1]: ｡ﾖ､ｦ､ｪ??､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢､｢｡ｪ｡ﾗ<PAGE><CHR_ALL:4c3631><$>
+  msg[  2]: ｡｡･ｴ･ｪ･ﾃ､ﾈ､ｹ､ｵ､ﾞ､ｸ､､???ｴｬ､ｭｵｯ､ｳ､ｷ｡｢､ｵ､ｪ??､ﾏ<CR>??ﾅｾ｡ｦ･ﾏ･､･ｸ??･ﾗ｡ｦ･ｨ･ﾓﾈｿ?｡ｦﾊｬｿﾈ????､ﾄ｡｣<PAGE><$>
+  msg[  3]: ｡｡･ｴ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｪ<PAGE><$>
+  msg[  4]: ｡｡､ｽ??｡｢､ﾊ?､ﾈ?ﾋﾜﾂｭﾂﾇﾋ｡､ﾇｷﾞ､ｨﾂﾇ､ﾄ･ｸ?｡ｼ､ｯ?｡｣<WAIT_KEY><CR>｡｡ｾ｡?､ﾎｹﾔﾊ､ﾏ｡ｪ｡ｩ<PAGE><$>
+  msg[  5]: <FLASH>｡｡･ｫ･ｭ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ｡ｼ?｡ｪ<PAGE><$>
+  msg[  6]: ｡ﾖ｡ｪ｡ﾗ<WAIT_KEY><CR>｡ﾖ､ﾊ､ﾋ､ﾃ｡ｪ｡ﾗ<WAIT_KEY><CR>｡ﾖﾂﾇ､ｿ?､ｿ､ﾃ｡ｪ｡ﾗ<WAIT_KEY><CR>｡｡､ｽ?､ﾏ､ﾊ?､ﾈ｡｢?ｳｰ?ｱﾛ､ｹ?･ﾛ｡ｼ???､ﾀ､ﾃ､ｿ｡｣<PAGE><M:66>:4d<0x77><$>
+  msg[  7]: ｡｡､ｵ､ｪ??､ｬ?､ｱ､ｿ｡ｪ｡ｩ<WAIT_KEY><CR>｡｡､ｽ?､ﾏﾋﾍ､ｿ､ﾁﾁｴ?､ﾎﾇﾔﾋﾌ?ｰﾕﾌ｣､ｷ､ﾆ､､､ｿ｡｣<WAIT_KEY><CR>｡｡｡ﾄ､ﾈ､､､ｦ､ｳ､ﾈ､ﾏ｡｢､ﾞ､ｵ､ｫ｡ﾄ｡｣<PAGE><$>
+  msg[  8]: 
+

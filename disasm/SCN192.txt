@@ -1,0 +1,29 @@
+== SCN192.DAT (352B) ==
+  ev@0x10 lz=28B → decoded=40B
+  msg@0x30 lz=300B → decoded=323B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x15) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 5402  MSG (msg_no)
+  0011: 04c201  JUMP (scn,blk)
+  0014: 00  END
+
+--- block 2 (event bytes 0x15..0x16) ---
+  0015: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x16..0x28) ---
+  0016: 04c201  JUMP (scn,blk)
+  0019: 00  END
+  ...trailing 14B: ff04c20100ff04c20100ff04c201
+
+== messages (4) ==
+  msg[  0]: ｡ﾖ､ｽ?､ﾏ｡ﾄ<WAIT_KEY>ﾍｦｵ､､ﾀ｡ｼ｡ｼ｡ｼ｡ｼ･ﾃ｡ｪ｡ﾗ<PAGE><CHR_ALL:4c3638><$>
+  msg[  1]: ｡ﾖ｡ﾄ､ﾕ?｡｢ｾﾐｻﾟ｡ｪ<WAIT_KEY>｡｡ｵｮﾍﾍ?､ﾎﾍｦｵ､､ﾊ､ﾉ｡｢､ｳ?､ﾊﾀﾖ??<CR>ﾇﾘ?､ﾃ､ｿ?ｼﾒ､ﾋｿﾈ?ﾃﾖ､ｯﾍｾ､ﾎﾍｦｵ､､ﾋ?､ﾙ?､ﾐ｡｢･ｫ･ｹ､ﾋ<CR>?ﾋ､ｿ､ﾌ?｡ｪ｡ﾗ<PAGE><M:66>:4d<0x77><$>
+  msg[  2]: ｡｡ｼ｡ｸｵｹﾄ?､ﾎｸﾀ､ｦ､ﾈ､ｪ?､ﾀ､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡ﾋﾍ､ｿ､ﾁ､ｬ､､､ｫ､ﾋﾍｦｵ､?ﾂｫ､ﾋ､ｷ､ﾆ?｡｢ｼ｡ｸｵｹﾄ??ﾅﾝ､ｹ<CR>､ﾀ､ｱ､ﾎ･ﾑ?｡ｼ､ﾏﾆﾀ??､ﾊ､ｫ､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡｡ﾄ､ﾈ｡｢､､､ｦ､ｳ､ﾈ､ﾏ｡｢､ｳ､ﾎ?､ﾋﾂﾔ､ﾄ?､ﾎ､ﾏ｡ﾄ｡｣<PAGE><$>
+  msg[  3]: 
+

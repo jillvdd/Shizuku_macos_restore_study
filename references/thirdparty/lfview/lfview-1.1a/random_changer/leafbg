@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# leafbg: Set Leaf images on the root window.
+#         img.sizuku, img.kizuato, img.toheart are image lists.
+#
+LEAFDIR=/dosc/leaf
+ARCHIVE_SIZUKU=$LEAFDIR/sizuku/max_data.pak
+ARCHIVE_KIZUATO=$LEAFDIR/kizuato/max2data.pak
+ARCHIVE_TOHEART=$LEAFDIR/lvns3/lvns3dat.pak
+
+LIST_DIR=/home/fujiwara/bin
+LIST_SIZUKU=$LIST_DIR/img.sizuku
+LIST_KIZUATO=$LIST_DIR/img.kizuato
+LIST_TOHEART=$LIST_DIR/img.toheart
+
+random_view()
+{
+  IMG_NUM=`wc $1 | sed -e 's/^ *//' | cut -f 1 -d " "`
+  IMG_ID=$[$RANDOM % $IMG_NUM]
+  IMG=`sed -n -e "$IMG_ID"p $1`
+  lfview -root -a $2 $IMG
+}
+
+case "$1" in
+  sizuku)
+    random_view $LIST_SIZUKU $ARCHIVE_SIZUKU
+    ;;
+
+  kizuato)
+    random_view $LIST_KIZUATO $ARCHIVE_KIZUATO
+    ;;
+
+  toheart)
+    random_view $LIST_TOHEART $ARCHIVE_TOHEART
+    ;;
+
+  random)
+    case $[$RANDOM % 3] in
+      0)
+        random_view $LIST_SIZUKU $ARCHIVE_SIZUKU
+        ;;
+      1)
+        random_view $LIST_KIZUATO $ARCHIVE_KIZUATO
+        ;;
+      2)
+        random_view $LIST_TOHEART $ARCHIVE_TOHEART
+        ;;
+    esac
+    ;;
+  *)
+    echo Usage: leafbg "sizuku|kizuato|toheart|random"
+esac
+
+# EOF

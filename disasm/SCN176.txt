@@ -1,0 +1,46 @@
+== SCN176.DAT (176B) ==
+  ev@0x10 lz=44B → decoded=87B
+  msg@0x40 lz=108B → decoded=151B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x1c) ---
+  000b: 07  SEL_BACK ()
+  000c: 05  SELECT prompt=0 n=2
+        opt[0]: msg=1 blk_off=0x0200
+        opt[1]: msg=4 blk_off=0x0428
+  0015: af?? (skip 1)
+  0016: 012804  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0019: b0?? (skip 1)
+  001a: 01  SUB <truncated; have 2/2>
+  ...trailing 2B: 0100
+
+--- block 2 (event bytes 0x1c..0x1d) ---
+  001c: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x1d..0x57) ---
+  001d: 02?? (skip 1)
+  001e: 042804  JUMP (scn,blk)
+  0021: af?? (skip 1)
+  0022: 012804  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0025: b0?? (skip 1)
+  0026: 0100ff  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0029: 02?? (skip 1)
+  002a: 042804  JUMP (scn,blk)
+  002d: af?? (skip 1)
+  002e: 010204  SUB (01=msg,02=msg+fade,03=anim_wait)
+  0031: 28  MARK2 ()
+  0032: 04af01  JUMP (scn,blk)
+  0035: 28  MARK2 ()
+  0036: 04b001  JUMP (scn,blk)
+  0039: 00  END
+  ...trailing 29B: ff02042804af0102042804af012804b00100ff02042804af01ffffffff
+
+== messages (4) ==
+  msg[  0]: <CHR3b:6c3231633134723031>｡ﾖ､ｽ?､ﾊ｡ﾄ､ﾒ､ﾉ､､｡ﾄ｡ﾗ<WAIT_KEY><CR>｡｡｣ｳｿﾍﾌｼ､ｬｸﾀ､ﾃ､ｿ｡｣<CR><CHR_ALL:6c3531><$>
+  msg[  1]: <OFFSET><0x36><SPEED><0x30>｣ｱ｡｢､ﾏ､､<CR><$>
+  msg[  2]: <OFFSET><0x36><SPEED><0x30>｣ｲ｡｢､､､､､ｨ<CR><$>
+  msg[  3]: <CR><0x30><0x31>｡ﾖ､ｽ?､ﾊ｡ﾄ､ﾒ､ﾉ･ｳ<0x30><0x31>｡ﾖ､ｽ?､ﾊ｡ﾄ､ﾒ､ﾉ･ｳ<0x30><0x31>｡ﾖ､ｽ?､ﾊ｡ﾄ､ﾒ､ﾉｱﾆ
+

@@ -1,0 +1,32 @@
+XCOMM Plug-in Directory
+XCOMM Search order
+XCOMM    1. $HOME/.lfview/BASE_PLUGIN
+XCOMM    2. PLUGINDIR/BASE_PLUGIN
+XCOMM
+PLUGINDIR=$(LIBDIR)/lfview
+BASE_PLUGIN=liblfv_leaf.so
+
+XCOMM debug flag for GCC
+XCOMM CDEBUGFLAGS= -g -Wall
+
+XCOMM Linux (Slackware 3.x)
+XCOMM
+DLFLAGS=DlLibrary
+
+XCOMM NEC EWS4800 (UNIX_SV 4.2MP 1.release.0801.04:42 R4000 r4000)
+XCOMM (Thanks to Nonaka Kimihiro)
+XCOMM 
+XCOMM CC=/usr/abiccs/bin/cc
+XCOMM CDEBUGFLAGS= -g
+XCOMM G_SO=so
+XCOMM DLFLAGS=-Bdynamic -ldl
+
+XCOMM FreeBSD
+XCOMM (Thanks to NOGAYA Shigeki & Nonaka Kimihiro)
+XCOMM
+XCOMM BASE_PLUGIN=liblfv_leaf.so.1.0
+
+XCOMM for NetBSD 1.3
+XCOMM (Thanks to Nonaka Kimihiro)
+XCOMM 
+XCOMM DLFLAGS=

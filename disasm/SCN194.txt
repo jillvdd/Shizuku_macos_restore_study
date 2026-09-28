@@ -1,0 +1,64 @@
+== SCN194.DAT (640B) ==
+  ev@0x10 lz=60B → decoded=119B
+  msg@0x50 lz=556B → decoded=760B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x2e) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 5402  MSG (msg_no)
+  0011: 5403  MSG (msg_no)
+  0013: 7e0c  END_CHK (chk_no)
+  0015: 7c  ENDING ()
+  0016: 7d12  END_BGM ()
+  0018: 3e000103  IF_NE (flag,val,rel_offset)
+  001c: 04c301  JUMP (scn,blk)
+  001f: 3e000203  IF_NE (flag,val,rel_offset)
+  0023: 04c302  JUMP (scn,blk)
+  0026: 3e000303  IF_NE (flag,val,rel_offset)
+  002a: 04c303  JUMP (scn,blk)
+  002d: 00  END
+
+--- block 2 (event bytes 0x2e..0x2f) ---
+  002e: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x2f..0x77) ---
+  002f: 5403  MSG (msg_no)
+  0031: 7e0c  END_CHK (chk_no)
+  0033: 7c  ENDING ()
+  0034: 7d12  END_BGM ()
+  0036: 3e000103  IF_NE (flag,val,rel_offset)
+  003a: 04c301  JUMP (scn,blk)
+  003d: 3e000203  IF_NE (flag,val,rel_offset)
+  0041: 5403  MSG (msg_no)
+  0043: 7e0c  END_CHK (chk_no)
+  0045: 7c  ENDING ()
+  0046: 7d12  END_BGM ()
+  0048: 3e000103  IF_NE (flag,val,rel_offset)
+  004c: 04c301  JUMP (scn,blk)
+  004f: 3e000203  IF_NE (flag,val,rel_offset)
+  0053: 5403  MSG (msg_no)
+  0055: 7e0c  END_CHK (chk_no)
+  0057: 7c  ENDING ()
+  0058: 7d12  END_BGM ()
+  005a: 3e000103  IF_NE (flag,val,rel_offset)
+  005e: 04c301  JUMP (scn,blk)
+  0061: 3e000203  IF_NE (flag,val,rel_offset)
+  0065: 5403  MSG (msg_no)
+  0067: 7e0c  END_CHK (chk_no)
+  0069: 7c  ENDING ()
+  006a: 7d12  END_BGM ()
+  006c: 3e000103  IF_NE (flag,val,rel_offset)
+  0070: 04c301  JUMP (scn,blk)
+  0073: 3e000203  IF_NE (flag,val,rel_offset)
+
+== messages (5) ==
+  msg[  0]: <M:66>:4d<0x77><M:32>:31｡｡ﾍｽﾁﾛﾄﾌ?｡｢､ｳ?､ﾏ･ｨ?･ﾇ･｣?･ｰ､ﾇ､｢?｡｣<WAIT_KEY><CR>｡｡ﾋﾍ､ｿ､ﾁ､ﾏｰﾛｼ｡ｸｵｿﾍ､ﾈ､ﾎ?､､､ﾋﾇﾋ?､ｿ､ﾎ､ﾀ｡｣<PAGE><$>
+  msg[  1]: ｡｡ﾅﾛ??､ﾊ?､ﾆ､ﾏ､､､ｱ､ﾊ､､｡｣<WAIT_KEY><CR>｡｡ｼ｡､ﾎｽﾖｴﾖ､ﾋ､ﾏ｡｢ｰﾛｼ｡ｸｵｿﾍ､ﾎｹｶ?､ﾋ?､ﾃ､ﾆ｡｢ﾋﾍ､ｿ､ﾁ､ﾎ<CR>ｿﾈﾂﾎ､ﾏ､ｳ､ﾎﾀ､ｳｦ､ｫ?ｾﾃﾌﾇ､ｷ､ﾆ､ｷ､ﾞ､ｦ､ﾀ?､ｦ｡｣<WAIT_KEY><CR>｡｡ｺ｣､ｳ､ﾎｽﾖｴﾖ､ﾊ?､ﾐ｡｢､ﾞ､ﾀ｡ﾖ?､ﾄﾁｰ､ﾎﾁｪ??､ﾋ??｡ﾗ<CR>?ｻﾈ､ﾃ､ﾆ??ﾄｾ､ｹ､ｳ､ﾈ､ｬ､ﾇ､ｭ?｡｣<WAIT_KEY><CR>｡｡､ｽ?､ﾇ?｡｢?､ｷ､｢､ﾊ､ｿ､ｬ､ｳ､ﾎ･ｨ?･ﾇ･｣?･ｰ??ﾅﾙ?<CR>ｸｫ､ｿ､ｳ､ﾈ､ｬ､ﾊ､､､ﾎ､ﾊ?｡｢､ｳ､ﾎ､ﾞ､ﾞ･ﾚ｡ｼ･ｸ??､ｯ､ﾃ､ﾆ?<CR>､､､､､ﾀ?､ｦ｡｣<WAIT_KEY><CR>｡｡ｼﾂ､ﾋ､ﾄ､ﾞ?､ﾊ､､･ｨ?･ﾇ･｣?･ｰ､ｬﾂﾔ､ﾃ､ﾆ､､?｡｣<PAGE><$>
+  msg[  2]: ｡｡､ｵ､｢｡｢ｼ｡､ﾎ･ﾚ｡ｼ･ｸ､ﾇｽｪ??､ﾀ｡｣<WAIT_KEY><CR>｡｡??ﾄｾ､ｹ､ﾊ?ｺ｣､ｷ､ｫ､ﾊ､､｡｣<PAGE><$>
+  msg[  3]: <DARKEN><FLASH>｡｡･ﾉ･ｫ･ﾃ｡ｪ<WAIT_KEY><CR>｡｡､ｽ､ﾎｽﾖｴﾖ｡｢ﾅｨ､ﾎｹｶ?､ｬﾋﾍ?ｽｱ､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡ｰﾕｼｱ､ｬ??､､､ﾆ､､､ｯ｡｣<WAIT_KEY><CR><M:66>:4d<0x77><BG:303030363131>｡｡ﾌﾜ､ﾎﾁｰ､ﾋ｡ﾄ<WAIT_KEY>?､ｿ､､ｰﾇ､ｬｹｭ､ｬ､ﾃ､ﾆ､､､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡｡｡ﾄ､ｽ､ｦ｡｢ﾋﾍ､ﾏ｡｢??､ﾀ､ﾎ､ﾀ｡｣<WAIT_KEY><CR>｡｡､ｷ､ｫ?･ｨ?･ﾇ･｣?･ｰ､ﾏﾍｽ?､ｷ､ｿﾄﾌ?｡｢､ﾈ､ﾆ､ﾄ?､ﾊ､ｯ<CR>､ﾄ､ﾞ?､ﾊ､ｫ､ﾃ､ｿ｡ﾄ｡｣<PAGE><$>
+  msg[  4]: <0x32><0x31>｡｡ﾍｽﾁﾛﾄﾌ?｡｢､ｳ?
+

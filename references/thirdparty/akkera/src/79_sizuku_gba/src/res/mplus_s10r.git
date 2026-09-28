@@ -1,0 +1,18 @@
+#not include
+-p!
+-m!
+
+#Gfx format
+-gb
+
+#Gfx compression
+-gb
+
+#Gfx bit depth
+-gB8
+
+#file type asm
+-fts
+
+#All data type
+-U8

@@ -1,0 +1,23 @@
+#not include
+-p!
+-m!
+-fh!
+
+#Gfx format
+-gb
+
+#Gfx compression lz77
+-gzl
+
+#Gfx bit depth
+-gB16
+
+#file type asm
+-ftb
+
+#
+-aw 240
+-ah 160
+
+#All data type u16
+-U16

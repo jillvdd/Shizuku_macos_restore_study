@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta name="author" content="Kei Amano">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+<STYLE TYPE="text/css">
+<!--
+A {text-decoration:none;
+font-weight:bold;
+}
+.ichigo {color:#ff9999;
+font-weight:normal;
+}
+
+.link {color:#0000ff;
+font-weight:normal;
+
+}
+-->
+</STYLE>
+<title>■苺電波部冬コミ情報■[LeafBSD 詳細]</title>
+</HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#666666" LINK="#eaeaea" VLINK="#eaeaea" ALINK="#ff1234">
+<H1 align=center>Ichigo-denpa<br>at<br>ComicMarket57</H1>
+
+<h2 align=center>■出展物詳細情報■</h2>
+
+<p align=center>
+[<a href="./" class="link">冬コミ情報に戻る</a>]
+</p>
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="90%" align="center">
+<TR><TD BGCOLOR="#d13838">
+<TABLE BORDER="0" CELLSPACING="1" CELLPADDING="8" WIDTH="100%">
+<TR><TD BGCOLOR="#ff9900">
+<TABLE BORDER="0" CELLSPACING="7" CELLPADDING="0" WIDTH="100%">
+<TR>
+
+<TD BGCOLOR="#ffffff" align="center" width="340">
+<IMG src="akrscn01.jpg" alt="『あかりの日記』ゲーム画面" width="320" height="239"><br>
+<small>くまだらけだな…</small><br>
+<br>
+<IMG src="akrscn02.jpg" alt="『あかりの日記』ゲーム画面" width="320" height="240"></a><br>
+<small>あ…</small><br>
+</td>
+
+
+<td>
+
+<h3><a name="akari">「あかりの日記」(第3版)</a></h3>
+<P>
+種類：CD-ROM (CD-R)<br>
+価格：800円<br>
+部数：300部(予定)
+
+<h4>収録内容</h4>
+
+<ul>
+ <li>苺電波ビジュアルノベルシリーズ vol.1 「あかりの日記」
+ <ul>
+  <li>描き下ろしNewジャケット
+  <li>すでに読んだ文章を素早く表示する機能を追加
+  <li>アルバム機能の拡張
+  <li>Ｈシーン再現機能の追加 (笑)<br>
+  <small>※ シナリオに変更はありません</small>
+ </ul>
+ <li>おまけショートシナリオ 「綾香ちゃんハイキック！」(仮題)
+ <ul>
+  <li>綾香＆セリオが登場
+  <li>ゲストＣＧ作家 <a href="http://www.urban.ne.jp/home/hirok/">こやまひろかずさん</a>によるイベントＣＧ
+ </ul>
+ <li>苺電波ビジュアルノベル デモ 「ダメダメあかりちゃん」
+ <li>苺電波部@CD-ROM
+</ul>
+
+<h4>動作環境</h4>
+
+<p>
+■ 日本語Windows 95/98/NT 4.0 および DNML が正常に動作する機種 ※1, ※2<br>
+■ CD-DA 再生可能なドライブ ■ サウンドデバイス<br>
+</p>
+
+<p>
+<small>
+※1 NT4.0 では SP3 が必要となります<br>
+※2 <a href="http://hp.vector.co.jp/authors/VA015183/">DNML</a> は
+花梨さん製作のプログラムです。実行ファイルは同梱されています。別途入手する必要はありません
+</small>
+</p>
+
+<h4>注意事項</h4>
+
+<p>
+苺電波ビジュアルノベルシリーズ を動作させるためには、
+<strong>Windows95/98 用 の「To Heart」((c)Leaf) が
+別途必要になります</strong>。
+</p>
+
+<p>
+<strong>18歳未満のかたの購入はご遠慮ください</strong>
+</p>
+
+</TD>
+
+</TR></TABLE>
+</td></tr></table>
+</table>
+
+<p align=center>
+[<a href="./" class="link">冬コミ情報に戻る</a>]
+</p>
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="90%" align="center">
+<TR><TD BGCOLOR="#d13838">
+<TABLE BORDER="0" CELLSPACING="1" CELLPADDING="8" WIDTH="100%">
+<TR><TD BGCOLOR="#ff9900">
+<TABLE BORDER="0" CELLSPACING="7" CELLPADDING="0" WIDTH="100%">
+<TR>
+
+<TD BGCOLOR="#ffffff" align="center" width="340">
+<IMG src="ruripen.jpg" alt="るりぺん" width="294" height="400"><br>
+<small>る、るりこさん、なんでぺんぎんなの?</small>
+</td>
+
+<td>
+<h3><a name="leafbsd">「LeafBSD Ver 0.1 Comiket edition」</a></h3>
+<p>
+種類：CD-ROM (CD-R)<br>
+価格：1000円<br>
+部数：50部(予定)
+<p>
+
+<h4>収録内容</h4>
+
+<ul>
+ <li>Leaf Visual Novel System for X (XLVNS)
+ <li>XMulti (改訂版?)
+ <li>XMascot (LEAF Character's Mascot Version)
+ <li>各種おまけ
+ <li>OpenBSD 2.6 (間に合えばi386のコア部分のみ収録予定)
+</ul>
+
+<p>
+ ■ FreeBSD 3.2/OpenBSD 2.5/NeBSD 1.4.1 用バイナリ収録<br>
+ ■ ソースコード収録<br>
+</p>
+
+<h4>動作環境</h4>
+
+<p>
+■ BSD4.4系の UNIX 互換 OS (FreeBSD/OpenBSD/NetBSD) ※1<br>
+■ X Window System (TrueColor Mode 必須) ※2<br>
+■ CD-DA 再生可能なドライブ<br>
+■ OSS 互換サウンドデバイス<br>
+</p>
+
+<p>
+<small>
+※1 ソースは多くの UNIX 系のシステムでコンパイル可能と思われますが全く動作確認を行っていません<br>
+※2 Shared-Extention 環境推奨
+</small>
+</p>
+
+<h4>注意事項</h4>
+
+<p>
+XLVNS はシステムのみの収録です。ゲームとして動作させるためには、
+<strong>Windows95/98 用 の「雫」「痕」「To Heart」((c)Leaf) が
+別途必要になります</strong>。
+</p>
+
+<p>
+収録バージョンでは<strong>「雫」のみが正常にプレイが可能です</strong>。
+</p>
+
+<p>
+OpenBSD2.6 が収録された場合、売り上げの一部は
+OpenBSD Project に寄付されます。
+</p>
+
+</TD>
+
+</TR></TABLE>
+</td></tr></table>
+</table>
+
+<p align=center>
+[<a href="./" class="link">冬コミ情報に戻る</a>]
+</p>
+
+<!-- フッタ-->
+<HR WIDTH="380" noshade>
+<DIV ALIGN="center">
+<FONT SIZE="-2">Copyrights (C) <A href="mailto:ichigo@denpa.org" class="ichigo">Ichigo-denpa</A> 1999 All Right Reserved.</FONT>
+<!-- フッタEND-->
+
+</BODY>
+</html>
+

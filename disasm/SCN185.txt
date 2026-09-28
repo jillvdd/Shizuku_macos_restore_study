@@ -1,0 +1,47 @@
+== SCN185.DAT (384B) ==
+  ev@0x10 lz=44B → decoded=70B
+  msg@0x40 lz=316B → decoded=476B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0x21) ---
+  000b: 5400  MSG (msg_no)
+  000d: 5401  MSG (msg_no)
+  000f: 5402  MSG (msg_no)
+  0011: 5403  MSG (msg_no)
+  0013: 5404  MSG (msg_no)
+  0015: 5405  MSG (msg_no)
+  0017: 5406  MSG (msg_no)
+  0019: 5407  MSG (msg_no)
+  001b: 5408  MSG (msg_no)
+  001d: 04c201  JUMP (scn,blk)
+  0020: 00  END
+
+--- block 2 (event bytes 0x21..0x22) ---
+  0021: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x22..0x46) ---
+  0022: 5403  MSG (msg_no)
+  0024: 5404  MSG (msg_no)
+  0026: 5405  MSG (msg_no)
+  0028: 5406  MSG (msg_no)
+  002a: 5407  MSG (msg_no)
+  002c: 5408  MSG (msg_no)
+  002e: 04c201  JUMP (scn,blk)
+  0031: 00  END
+  ...trailing 20B: ff5454035404540554065407540804c20100ff54
+
+== messages (10) ==
+  msg[  0]: ｡｡ﾋﾍ､ﾏ｣ﾏ｣ﾒ｣ﾉ｣ﾂ｣ﾁ｣ﾓ｣ﾓ､ﾋ??ｱﾟ?ｺｹ､ｷｽﾐ､ｷ､ｿ｡｣<PAGE><$>
+  msg[  1]: ｡ﾖ､ﾊ?､ｸ?､｡､｡､｡､｣｡ｼ｡ﾗ<PAGE><$>
+  msg[  2]: ｡｡｣ﾏ｣ﾒ｣ﾉ｣ﾂ｣ﾁ｣ﾓ｣ﾓ､ﾏ?､ｷ､ｽ､ｦ､ﾋ?ｾﾐ?､ﾈ｡｢ｺｹ､ｷｽﾐ､ｷ､ｿ<CR>?ｻ･??､ｱ?､ﾃ､ｿ｡｣<WAIT_KEY><CR>｡ﾖ､ｳ?､ﾇ?､ｷ､ﾆ､ｯ???､ﾀ?､ｦ､ｫ｡ｩ｡ﾗ<PAGE><$>
+  msg[  3]: ｡ﾖ､ﾊ?､ｸ?､｡､｡､｡､｣｡ｼ｡ﾗ<PAGE><$>
+  msg[  4]: ｡｡､ﾀ､ｬ｣ﾏ｣ﾒ｣ﾉ｣ﾂ｣ﾁ｣ﾓ｣ﾓ､ﾏ｡｢､ｵ?､ﾋ?､ｦ??ｱﾟﾍﾗ?､ｷ､ﾆ<CR>､ｭ､ｿ｡｣<WAIT_KEY><CR>｡ﾖ?｡｢?､ｦ､ﾊ､､?｡ｪ｡ﾗ<PAGE><$>
+  msg[  5]: ｡ﾖ､ﾊ?､ｸ?､｡､｡､｡､｣｡ｼ｡ﾗ<PAGE><$>
+  msg[  6]: ｡ﾖﾋﾜ?､ﾊ?､ﾀ｡ｪ｡ﾗ<PAGE><$>
+  msg[  7]: ｡ﾖ､ﾊ?､ｸ?､｡､｡､｡､｣｡ｼ｡ﾗ<PAGE><M:66>:4d<0x77><$>
+  msg[  8]: ｡｡､ｽ､ﾎ､ﾈ､ｭ｡｢｣ﾏ｣ﾒ｣ﾉ｣ﾂ｣ﾁ｣ﾓ｣ﾓ､ﾏ･ﾙ｡ｼ･ｹ･ｮ･ｿ｡ｼ?ﾋﾍ､ﾎﾆｬ<CR>?､ﾘ､ﾈｿｶ??､ｲ､ｿ｡｣<WAIT_KEY><CR>｡｡｡ﾄ､ﾞ｡｢､ﾞ､ｵ､ｫ｡｣<PAGE><$>
+  msg[  9]: <0x01><PAGE><0x01><L4701?>｡｡ﾋﾍ､ﾏ｣ﾏ｣ﾒ｣ﾉｱﾆ<L7fff?>
+

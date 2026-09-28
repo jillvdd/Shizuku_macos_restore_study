@@ -1,0 +1,127 @@
+First off I'll implement a standard ima adpcm encoder and decoder
+for experience. Then I'll consider tweaking it.  If we don't need
+seekability (e.g. decoding to memory), we don't need to put the
+audio data in packets.
+
+=== IMA ADPCM ===
+
+ADPCM works by predicting the next sample and then storing the error
+between the prediction and the actual sample.  This prediction takes
+the form of an IIR filter applied to encoded and decoded samples.
+Hopefully, this error signal is whiter (less correlated) than the
+original signal and can be stored with fewer bits.
+
+IMA ADPCM predicts not only the next sample but also the size of the
+errors so as to minimize the size of the steps between quantization
+levels and thereby minimize the noise in coding.
+
+const signed char ima_step_indices[16] =
+{
+  -1, -1, -1, -1, 2, 4, 6, 8,
+  -1, -1, -1, -1, 2, 4, 6, 8
+};
+
+const unsigned short ima_step_table[89] =
+{
+      7,    8,    9,   10,   11,   12,   13,   14,   16,   17,
+     19,   21,   23,   25,   28,   31,   34,   37,   41,   45,
+     50,   55,   60,   66,   73,   80,   88,   97,  107,  118,
+    130,  143,  157,  173,  190,  209,  230,  253,  279,  307,
+    337,  371,  408,  449,  494,  544,  598,  658,  724,  796,
+    876,  963, 1060, 1166, 1282, 1411, 1552, 1707, 1878, 2066,
+   2272, 2499, 2749, 3024, 3327, 3660, 4026, 4428, 4871, 5358,
+   5894, 6484, 7132, 7845, 8630, 9493,10442,11487,12635,13899,
+  15289,16818,18500,20350,22385,24623,27086,29794,32767
+};
+
+
+The data section stores nibbles little-endian.
+
+decode ima adpcm:
+  get last_sample from header
+  clamp last_sample to [-32768..32767]
+  get step_index from header
+  for each nibble e[i]:
+    clamp step_index to [0..88]
+    step = ima_step_table[step_index]
+    diff = step >> 3
+    if(e[i] & 1):
+      diff += step >> 2
+    if(e[i] & 2):
+      diff += step >> 1
+    if(e[i] & 4):
+      diff += step
+    if(e[i] & 8):
+      diff = -diff
+    last_sample += diff
+    clamp last_sample to [-32768..32767]
+    y[i] = last_sample
+    step_index += ima_step_indices[e[i]]
+
+encode ima adpcm:
+  somehow guess index and last_sample
+  for each sample x[i]:
+    clamp step_index to [0..88]
+    step = ima_step_table[step_index]
+    diff = x[i] - last_sample
+    if(diff < 0):
+      diff = -diff
+      sign = 8
+    else
+      sign = 0
+    code = 4 * diff / step
+    clamp code to [0..7]
+    e[i] = code + sign
+
+    # use the difference AFTER quantization
+    diff = step >> 3
+    if(e[i] & 1):
+      diff += step >> 2
+    if(e[i] & 2):
+      diff += step >> 1
+    if(e[i] & 4):
+      diff += step
+    if(e[i] & 8):
+      diff = -diff
+    last_sample += diff
+    clamp last_sample to [-32768..32767]
+    step_index += ima_step_indices[e[i]]
+
+
+=== Investigating improvements ===
+
+To control slope overload that manifests itself audibly as IMA
+ADPCM's notorious scratchiness, the following changes can be made
+to the basic IMA method:
+
+* Increasing the minimum step size index from the default value of 0
+  allows for trading off precision in quieter parts for faster gain
+  response in "clicky" parts such as hand claps and some vowels.
+  Set it to 0 for 16-bit reproduction or 48 for 8-bit reproduction.
+* Extend greatest quantization step to 9.5/4 to reduce slope overload
+* Greater step index change for greater innovations to contain
+  slope overload (step table is now -1, -1, -1, -1, 2, 4, 7, 12)
+
+You can configure at runtime for IMA ADPCM using init_encoder_ima()
+or for improved ADPCM using init_encoder_ima9().
+
+Some changes have been investigated but have been
+discarded as not helpful:
+
+* none
+
+Possible changes to be investigated:
+
+* Investigate both 3-bit and 4-bit logarithmic quantizers that
+  approximate a Lloyd-Max quantizer
+* Make predictor replaceable
+  * Try one with a pole at f/2 in addition to 0
+  * Try an adaptive predictor with autocorrelation at
+    lag 1 sample = 1.0, 0.5, 0, -0.5
+  * Try something hardcore: variable two- or three-pole predictors
+    computed using Levinson-Durbin recursion on the Yule-Walker
+    equations (this is what shorten does; most LPC-type codecs
+    use a ten-pole predictor)
+* Compare to VAG compression used in Super NES games and Konami's
+  Dance Dance Revolution.  VAG does not predict the step sizes but
+  rather stores them in a packet header.

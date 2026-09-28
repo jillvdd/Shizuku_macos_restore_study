@@ -1,0 +1,22 @@
+#include "config.tmpl"
+
+CFLAGS+=-DPLUGINDIR=\"$(PLUGINDIR)\" -DBASE_PLUGIN=\"$(BASE_PLUGIN)\"
+XCOMM CFLAGS+= $(CDEBUGFLAGS) -DDEBUG
+CFLAGS+= -Wall $(CDEBUGFLAGS) -DDEBUG
+
+SUBDIRS=plugins
+#define IHaveSubdirs
+#define PassCDebugFlags
+
+OBJS = 	lfview.o mask.o \
+	leafpak.o leafpak1.o leafpak2.o psth.o \
+	xutil.o
+
+SRCS = $(OBJS:.o=.c)
+
+LOCAL_LIBRARIES = $(DLFLAGS) $(XLIB) $(XEXTLIB)
+
+MakeSubdirs($(SUBDIRS))
+XCOMM DependSubdirs($(SUBDIRS))
+
+ComplexProgramTarget(lfview)

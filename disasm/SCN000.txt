@@ -1,0 +1,29 @@
+== SCN000.DAT (64B) ==
+  ev@0x10 lz=28B → decoded=24B
+  msg@0x30 lz=12B → decoded=26B
+
+  blocks: 4 (blk 0..3)
+--- block 0 (event bytes 0xa..0xb) ---
+  000a: 00  END
+
+--- block 1 (event bytes 0xb..0xf) ---
+  000b: 040101  JUMP (scn,blk)
+  000e: 00  END
+
+--- block 2 (event bytes 0xf..0x10) ---
+  000f: ff  UNREACHABLE
+
+--- block 3 (event bytes 0x10..0x18) ---
+  0010: ff  UNREACHABLE
+  0011: ff  UNREACHABLE
+  0012: ff  UNREACHABLE
+  0013: ff  UNREACHABLE
+  0014: ff  UNREACHABLE
+  0015: ff  UNREACHABLE
+  0016: ff  UNREACHABLE
+  0017: ff  UNREACHABLE
+
+== messages (2) ==
+  msg[  0]: <$>
+  msg[  1]: 　　　　　　　　　　　　　　　　　　
+
