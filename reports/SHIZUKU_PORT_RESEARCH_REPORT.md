@@ -1,5 +1,8 @@
 # SHIZUKU PORT RESEARCH REPORT
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](SHIZUKU_PORT_RESEARCH_REPORT.md) ｜ [🇺🇸 English](SHIZUKU_PORT_RESEARCH_REPORT-en.md) ｜ [🇯🇵 日本語](SHIZUKU_PORT_RESEARCH_REPORT-jp.md)
+
+
 《雫》(Leaf 1996 / 2007 再版硬盤版·AUGUST 漢化) → macOS 26 原生運行 — Phase 0 研究報告
 日期:2026-08-17  ·  狀態:Phase 0(資料調查)+ Phase 1(格式識別)完成,已用真實遊戲數據驗證
 

@@ -1,5 +1,8 @@
 # 原版游戏文件清单 — original-files.md
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](original-files.md) ｜ [🇺🇸 English](original-files-en.md) ｜ [🇯🇵 日本語](original-files-jp.md)
+
+
 > 数据源:用户持有的「雫～しずく～1996」Windows 95/98 汉化硬盘版。
 > 清点时间:2026-08-17。所有文件均为只读参照,未做任何修改。
 

@@ -1,5 +1,8 @@
 # 未知 opcode 与待确认项(unknown-opcodes.md)
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](unknown-opcodes.md) ｜ [🇺🇸 English](unknown-opcodes-en.md) ｜ [🇯🇵 日本語](unknown-opcodes-jp.md)
+
+
 > 原则:遇未知不猜,先查历史项目(已做),再以原版运行为 oracle 验证(Phase 3/6)。
 
 ## 事件段低使用率/未确认 opcode

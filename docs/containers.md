@@ -1,5 +1,8 @@
 # 容器格式 — LEAFPACK 与 LAC
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](containers.md) ｜ [🇺🇸 English](containers-en.md) ｜ [🇯🇵 日本語](containers-jp.md)
+
+
 ## LEAFPACK(`MAX_DATA.PAK` 等)
 
 参考实现:XLVNS/mglvns `leafpack.c`(Go Watanabe,©1999-2000,BSD 系许可)。

@@ -1,5 +1,8 @@
 # 雫 macOS 移植 — 续接 Prompt(RESUME PROMPT)
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](RESUME_PROMPT.md) ｜ [🇺🇸 English](RESUME_PROMPT-en.md) ｜ [🇯🇵 日本語](RESUME_PROMPT-jp.md)
+
+
 > 用法:在新 chat 里直接粘贴本文件全文(或说"读取 /Users/abc/Documents/shizuku_macos_experience/RESUME_PROMPT.md 并按它继续")。
 > 本文件是"截止 2026-08-17 的全部状态快照",新会话应先读一遍本文件,再读下述研究文档,然后继续执行「下一步」。
 

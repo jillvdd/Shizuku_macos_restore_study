@@ -1,5 +1,8 @@
 # Shizuku_Restored — 《雫～しずく～》macOS 原生移植 HANDOVER LOG
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](HANDOVER.md) ｜ [🇺🇸 English](HANDOVER-en.md) ｜ [🇯🇵 日本語](HANDOVER-jp.md)
+
+
 > **最后更新：2026-09-20（★★以 §21 为准：M4.4/M4.5 已落地；曲目与 OP 构成纠正——OP 曲是 MUS14 而非 MUS16（MUS16=ハッピーエンド）；§20.1/§20.3 部分事实已被证伪；Scn.swift 尚有一处未提交的解析修复待验证提交★★）**
 > 本文件是项目的**唯一权威交接文档**（取代并吸收 RESUME_PROMPT.md 的状态快照）。
 > 新会话开场：通读本文件 → 查阅 MILESTONES.md → **先读 §21（最新事实与纠正）**，再查 §20.3 操作指南 → 立即开工执行。

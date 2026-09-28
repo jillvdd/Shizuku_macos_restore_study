@@ -1,5 +1,8 @@
 # 历史项目调研:XLVNS / MGLVNS / lfview / leafpak / PVNS / ZVNS
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](history.md) ｜ [🇺🇸 English](history-en.md) ｜ [🇯🇵 日本語](history-jp.md)
+
+
 ## 谱系(依据 mzp.hatenablog 考古文 + denpa.org 一手页面)
 
 ```

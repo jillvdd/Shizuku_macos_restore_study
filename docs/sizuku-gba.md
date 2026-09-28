@@ -1,5 +1,8 @@
 # sizuku advance / sizuku_gba2(akkera102,GBA)
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](sizuku-gba.md) ｜ [🇺🇸 English](sizuku-gba-en.md) ｜ [🇯🇵 日本語](sizuku-gba-jp.md)
+
+
 ## 资料获取
 
 - 老站 `gbadev_old/` 全部在线,四个 zip 已下载到 `research/thirdparty/akkera/`:

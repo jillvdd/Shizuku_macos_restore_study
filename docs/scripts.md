@@ -1,5 +1,8 @@
 # SCN 脚本格式(`SCN%03d.DAT`)
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](scripts.md) ｜ [🇺🇸 English](scripts-en.md) ｜ [🇯🇵 日本語](scripts-jp.md)
+
+
 参考实现:akkera102 `decscn.py`(容器/LZ)、`script.c`(事件与文本解释器,sizuku_gba2 血统)、GBALVNS `EVTDef.s`、XLVNS `LvnsScript.c`。
 全部已用真实 `SCN001.DAT` 等验证。
 

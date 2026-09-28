@@ -1,5 +1,8 @@
 # LFG 图像格式(`LEAFCODE`)
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](lfg.md) ｜ [🇺🇸 English](lfg-en.md) ｜ [🇯🇵 日本語](lfg-jp.md)
+
+
 参考实现:lfview `plugins/lfgdec.c`、mglvns `lfg.c`(Go Watanabe)。
 已用真实文件验证:HVS01.LFG = 640×400,像素字节数 128,000 = 640×400/2。
 

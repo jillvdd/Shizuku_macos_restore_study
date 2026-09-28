@@ -1,5 +1,8 @@
 # GBALVNS(laqieer,GBA,BSD-3-Clause)
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](gbalvns.md) ｜ [🇺🇸 English](gbalvns-en.md) ｜ [🇯🇵 日本語](gbalvns-jp.md)
+
+
 仓库已完整 clone:`research/gbalvns/`(最新提交 `289ff8b`)。
 
 ## 性质(重要)

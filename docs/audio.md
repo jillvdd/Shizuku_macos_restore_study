@@ -1,5 +1,8 @@
 # 音频格式
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](audio.md) ｜ [🇺🇸 English](audio-en.md) ｜ [🇯🇵 日本語](audio-jp.md)
+
+
 雫 2007 版(本用户拷贝)的音频极简,几乎无编解码负担。
 
 ## BGM — `bgmfile.PAK`(LAC 容器)
