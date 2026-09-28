@@ -11,43 +11,50 @@
   <!-- Global Navigation Header -->
   <header class="site-header">
     <div class="nav-container">
-      <a class="site-brand" href="{{ '/' | relative_url }}">🍃 Shizuku Study</a>
+      <a class="site-brand" href="{{ '/' | relative_url }}">🍃 Shizuku 96 study blog</a>
       
       <nav class="nav-menu">
-        <a class="nav-item" href="{{ '/' | relative_url }}">首页</a>
+        <a class="nav-item" id="nav-home" href="{{ '/' | relative_url }}" data-zh="首页" data-en="Home" data-ja="ホーム">首页</a>
 
         <div class="nav-dropdown">
-          <button class="dropdown-trigger">核心技术指南 ▾</button>
+          <button class="dropdown-trigger" id="nav-guides" data-zh="核心技术指南 ▾" data-en="Core Guides ▾" data-ja="技術仕様書 ▾">核心技术指南 ▾</button>
           <div class="dropdown-menu">
-            <a href="{{ '/articles/leaf-galgame-port-zh.html' | relative_url }}">🇨🇳 简体中文工程指南</a>
-            <a href="{{ '/articles/leaf-galgame-port-en.html' | relative_url }}">🇺🇸 English Technical Guide</a>
-            <a href="{{ '/articles/leaf-galgame-port-jp.html' | relative_url }}">🇯🇵 日本語技術仕様書</a>
+            <a href="{{ '/articles/leaf-galgame-port-zh.html' | relative_url }}" data-zh="🇨🇳 简体中文工程指南" data-en="🇨🇳 Chinese Engineering Guide" data-ja="🇨🇳 中国語移植技術ガイド">🇨🇳 简体中文工程指南</a>
+            <a href="{{ '/articles/leaf-galgame-port-en.html' | relative_url }}" data-zh="🇺🇸 English Technical Guide" data-en="🇺🇸 English Technical Guide" data-ja="🇺🇸 英語技術仕様書">🇺🇸 English Technical Guide</a>
+            <a href="{{ '/articles/leaf-galgame-port-jp.html' | relative_url }}" data-zh="🇯🇵 日本語技術仕様書" data-en="🇯🇵 Japanese Technical Spec" data-ja="🇯🇵 日本語技術仕様書">🇯🇵 日本語技術仕様書</a>
           </div>
         </div>
 
         <div class="nav-dropdown">
-          <button class="dropdown-trigger">逆向格式规范 ▾</button>
+          <button class="dropdown-trigger" id="nav-specs" data-zh="逆向格式规范 ▾" data-en="Reverse Specs ▾" data-ja="解析仕様書 ▾">逆向格式规范 ▾</button>
           <div class="dropdown-menu">
-            <a href="{{ '/docs/containers.html' | relative_url }}">📦 LEAFPACK 容器与解密</a>
-            <a href="{{ '/docs/lfg.html' | relative_url }}">🖼 LFG 图像与位交织</a>
-            <a href="{{ '/docs/scripts.html' | relative_url }}">📜 SCN 脚本与双层 VM</a>
-            <a href="{{ '/docs/audio.html' | relative_url }}">🎵 LAC 音频与 BGM 映射</a>
-            <a href="{{ '/docs/history.html' | relative_url }}">⏳ LVNS 引擎版本历史</a>
-            <a href="{{ '/docs/original-files.html' | relative_url }}">📁 Win95 原版文件清单</a>
-            <a href="{{ '/docs/unknown-opcodes.html' | relative_url }}">⚙️ 未知指令与 Skip Opcode</a>
-            <a href="{{ '/docs/gbalvns.html' | relative_url }}">🎮 GBALVNS 架构参考</a>
-            <a href="{{ '/docs/sizuku-gba.html' | relative_url }}">🕹 GBA 移植对比分析</a>
+            <a href="{{ '/docs/containers.html' | relative_url }}" data-zh="📦 LEAFPACK 容器与解密" data-en="📦 LEAFPACK Container & Decryption" data-ja="📦 LEAFPACK コンテナと復号">📦 LEAFPACK 容器与解密</a>
+            <a href="{{ '/docs/lfg.html' | relative_url }}" data-zh="🖼 LFG 图像与位交织" data-en="🖼 LFG Image & Bit Interleaving" data-ja="🖼 LFG 画像とビットインターリーブ">🖼 LFG 图像与位交织</a>
+            <a href="{{ '/docs/scripts.html' | relative_url }}" data-zh="📜 SCN 脚本与双层 VM" data-en="📜 SCN Script & Dual-Layer VM" data-ja="📜 SCN スクリプトと二層VM">📜 SCN 脚本与双层 VM</a>
+            <a href="{{ '/docs/audio.html' | relative_url }}" data-zh="🎵 LAC 音频与 BGM 映射" data-en="🎵 LAC Audio & BGM Mapping" data-ja="🎵 LAC 音声とBGMマッピング">🎵 LAC 音频与 BGM 映射</a>
+            <a href="{{ '/docs/history.html' | relative_url }}" data-zh="⏳ LVNS 引擎版本历史" data-en="⏳ LVNS Engine History" data-ja="⏳ LVNS エンジン進化の歴史">⏳ LVNS 引擎版本历史</a>
+            <a href="{{ '/docs/original-files.html' | relative_url }}" data-zh="📁 Win95 原版文件清单" data-en="📁 Win95 Original Manifest" data-ja="📁 Win95 原版ファイル構成">📁 Win95 原版文件清单</a>
+            <a href="{{ '/docs/unknown-opcodes.html' | relative_url }}" data-zh="⚙️ 未知指令与 Skip Opcode" data-en="⚙️ Unknown Opcodes & Skip Analysis" data-ja="⚙️ 未知命令とSkip Opcode解析">⚙️ 未知指令与 Skip Opcode</a>
+            <a href="{{ '/docs/gbalvns.html' | relative_url }}" data-zh="🎮 GBALVNS 架构参考" data-en="🎮 GBALVNS Architecture Reference" data-ja="🎮 GBALVNS アーキテクチャ参考">🎮 GBALVNS 架构参考</a>
+            <a href="{{ '/docs/sizuku-gba.html' | relative_url }}" data-zh="🕹 GBA 移植对比分析" data-en="🕹 GBA Port Comparative Study" data-ja="🕹 GBA 移植版の比較分析">🕹 GBA 移植对比分析</a>
           </div>
         </div>
 
         <div class="nav-dropdown">
-          <button class="dropdown-trigger">研发报告与日志 ▾</button>
+          <button class="dropdown-trigger" id="nav-reports" data-zh="研发报告与日志 ▾" data-en="Research & Logs ▾" data-ja="研究レポート ▾">研发报告与日志 ▾</button>
           <div class="dropdown-menu">
-            <a href="{{ '/reports/SHIZUKU_PORT_RESEARCH_REPORT.html' | relative_url }}">🔬 Phase 0/1 初始研究报告</a>
-            <a href="{{ '/reports/HANDOVER.html' | relative_url }}">📝 完整研发交接日志 (HANDOVER)</a>
-            <a href="{{ '/reports/MILESTONES.html' | relative_url }}">🎯 里程碑计划与验收标准</a>
-            <a href="{{ '/reports/RESUME_PROMPT.html' | relative_url }}">📋 上下文恢复基线</a>
+            <a href="{{ '/reports/SHIZUKU_PORT_RESEARCH_REPORT.html' | relative_url }}" data-zh="🔬 Phase 0/1 初始研究报告" data-en="🔬 Phase 0/1 Feasibility Report" data-ja="🔬 Phase 0/1 初期研究レポート">🔬 Phase 0/1 初始研究报告</a>
+            <a href="{{ '/reports/HANDOVER.html' | relative_url }}" data-zh="📝 完整研发交接日志 (HANDOVER)" data-en="📝 Dev Handover Log (HANDOVER)" data-ja="📝 開発引き継ぎ日誌 (HANDOVER)">📝 完整研发交接日志 (HANDOVER)</a>
+            <a href="{{ '/reports/MILESTONES.html' | relative_url }}" data-zh="🎯 里程碑计划与验收标准" data-en="🎯 Milestones & Acceptance Criteria" data-ja="🎯 マイルストーンと受入基準">🎯 里程碑计划与验收标准</a>
+            <a href="{{ '/reports/RESUME_PROMPT.html' | relative_url }}" data-zh="📋 上下文恢复基线" data-en="📋 Context Resume Baseline" data-ja="📋 コンテキスト復元ベースライン">📋 上下文恢复基线</a>
           </div>
+        </div>
+
+        <!-- Trilingual Language Switcher -->
+        <div class="lang-switcher" aria-label="Language Selector">
+          <button type="button" class="lang-btn" data-lang-btn="zh">🇨🇳 中文</button>
+          <button type="button" class="lang-btn" data-lang-btn="en">🇺🇸 EN</button>
+          <button type="button" class="lang-btn" data-lang-btn="ja">🇯🇵 日本語</button>
         </div>
       </nav>
     </div>
@@ -63,14 +70,112 @@
   <!-- Global Footer -->
   <footer class="site-footer">
     <div class="footer-container">
-      <p class="footer-title">Shizuku_macos_restore_study · Leaf LVNS Engine Reverse Engineering & Native macOS Restoration</p>
-      <p class="footer-author">
-        jill 推特<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> 微博<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>
+      <p class="footer-title" id="footer-title"
+         data-zh="Shizuku 96 study blog · Leaf LVNS 视觉小说引擎逆向与 macOS 原生重构研究工程资料库"
+         data-en="Shizuku 96 study blog · Leaf LVNS Engine Reverse Engineering & Native macOS Restoration Research"
+         data-ja="Shizuku 96 study blog · Leaf LVNS エンジン解析と macOS ネイティブ移植研究リポジトリ">
+        Shizuku 96 study blog · Leaf LVNS 视觉小说引擎逆向与 macOS 原生重构研究工程资料库
+      </p>
+      <p class="footer-author" id="footer-author"
+         data-zh='jill GitHub<a href="https://github.com/jillvdd" target="_blank" rel="noopener noreferrer">@jillvdd</a> 推特<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> 微博<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>'
+         data-en='jill GitHub<a href="https://github.com/jillvdd" target="_blank" rel="noopener noreferrer">@jillvdd</a> Twitter/X<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> Weibo<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>'
+         data-ja='jill GitHub<a href="https://github.com/jillvdd" target="_blank" rel="noopener noreferrer">@jillvdd</a> X(Twitter)<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> Weibo<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>'>
+        jill GitHub<a href="https://github.com/jillvdd" target="_blank" rel="noopener noreferrer">@jillvdd</a> 推特<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> 微博<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>
       </p>
     </div>
   </footer>
 
   <script>
+    const siteBaseUrl = "{{ '' | relative_url }}";
+
+    function setLanguage(lang, navigate = true) {
+      localStorage.setItem('shizuku_lang', lang);
+      document.documentElement.lang = lang === 'ja' ? 'ja' : (lang === 'en' ? 'en' : 'zh-CN');
+
+      // Update active button state
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === lang);
+      });
+
+      // Update navigation & footer text
+      document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+        const val = el.getAttribute('data-' + lang);
+        if (el.id === 'footer-author') {
+          el.innerHTML = val;
+        } else {
+          el.textContent = val;
+        }
+      });
+
+      // Update home link destination
+      const homeLink = document.getElementById('nav-home');
+      if (homeLink) {
+        if (lang === 'en') {
+          homeLink.setAttribute('href', siteBaseUrl + '/README-en.html');
+        } else if (lang === 'ja') {
+          homeLink.setAttribute('href', siteBaseUrl + '/README-jp.html');
+        } else {
+          homeLink.setAttribute('href', siteBaseUrl + '/');
+        }
+      }
+
+      if (!navigate) return;
+
+      const currentPath = window.location.pathname;
+
+      // Cross-language article switching
+      if (currentPath.includes('leaf-galgame-port-')) {
+        const targetMap = {
+          'zh': siteBaseUrl + '/articles/leaf-galgame-port-zh.html',
+          'en': siteBaseUrl + '/articles/leaf-galgame-port-en.html',
+          'ja': siteBaseUrl + '/articles/leaf-galgame-port-jp.html'
+        };
+        if (targetMap[lang] && !currentPath.endsWith(targetMap[lang])) {
+          window.location.href = targetMap[lang];
+        }
+      }
+      // Cross-language homepage switching
+      else if (
+        currentPath.endsWith('/') || 
+        currentPath.endsWith('/index.html') || 
+        currentPath.endsWith('/README.html') ||
+        currentPath.endsWith('/README-en.html') ||
+        currentPath.endsWith('/README-jp.html')
+      ) {
+        const targetMap = {
+          'zh': siteBaseUrl + '/',
+          'en': siteBaseUrl + '/README-en.html',
+          'ja': siteBaseUrl + '/README-jp.html'
+        };
+        if (targetMap[lang] && !currentPath.endsWith(targetMap[lang])) {
+          window.location.href = targetMap[lang];
+        }
+      }
+    }
+
+    // Determine initial language based on current URL or saved preference
+    let initialLang = 'zh';
+    const path = window.location.pathname;
+    if (path.includes('-en.html') || path.endsWith('/README-en.html')) {
+      initialLang = 'en';
+    } else if (path.includes('-jp.html') || path.endsWith('/README-jp.html') || path.includes('-ja.html')) {
+      initialLang = 'ja';
+    } else if (path.includes('-zh.html')) {
+      initialLang = 'zh';
+    } else {
+      initialLang = localStorage.getItem('shizuku_lang') || 'zh';
+    }
+
+    // Apply initial language without triggering redirect
+    setLanguage(initialLang, false);
+
+    // Bind click handlers to language buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.getAttribute('data-lang-btn'), true);
+      });
+    });
+
     // Automatically map internal relative .md links to .html on GitHub Pages
     document.querySelectorAll('.content-container a').forEach(a => {
       const href = a.getAttribute('href');

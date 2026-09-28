@@ -2,6 +2,8 @@
 ## Leaf LVNS 视觉小说引擎逆向与 macOS 原生重构研究工程资料库
 ### Reverse Engineering & Native macOS (Swift + Metal) Restoration Study for Leaf's *《雫～しずく～》* (1996)
 
+> 🌐 **Language / 多语言**: [🇨🇳 简体中文](README.md) ｜ [🇺🇸 English](README-en.md) ｜ [🇯🇵 日本語](README-jp.md)
+
 ---
 
 ## 📖 仓库简介
