@@ -201,6 +201,24 @@
       });
     });
 
+    // Dropdown click-to-toggle support
+    document.querySelectorAll('.dropdown-trigger').forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const parent = trigger.closest('.nav-dropdown');
+        const wasOpen = parent.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+        if (!wasOpen) {
+          parent.classList.add('open');
+        }
+      });
+    });
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    });
+
     // Automatically map internal relative .md links to .html on GitHub Pages
     document.querySelectorAll('.content-container a').forEach(a => {
       const href = a.getAttribute('href');
