@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shizuku_macos_restore_study · Leaf LVNS 逆向与 macOS 原生重构研究工程</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <div class="logo-area">
+                <a href="index.html">🍃 Shizuku_macos_restore_study</a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html" class="lang-btn active">🏠 Home</a>
+                <a href="article-zh.html" class="lang-btn">🇨🇳 简体中文</a>
+                <a href="article-en.html" class="lang-btn">🇺🇸 English</a>
+                <a href="article-jp.html" class="lang-btn">🇯🇵 日本語</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1 class="hero-title">Leaf LVNS 逆向与 macOS 原生重构研究工程</h1>
+            <p class="hero-subtitle">
+                完整记录如何将 Leaf 于 1996 年发布的经典视觉小说《雫～しずく～》（以及同架构的 LVNS 引擎家族）从 Windows 95 原始数据中解构，并使用现代 Swift + Metal 管线原生呈现为 60Hz 独立应用的技术全景资料库。
+            </p>
+        </section>
+
+        <section class="article-cards">
+            <div class="article-card">
+                <div>
+                    <div class="card-tag">🇨🇳 简体中文 · 深度工程复盘</div>
+                    <h2 class="card-title">中文工程技术指南</h2>
+                    <p class="card-desc">
+                        剔除全部修饰性文字的务实技术文档。深入二进制加法滚动解密、LZS3 截断守卫、24×24 点阵字库列优先解码、双层虚拟机（Event VM + Inline VM）、调色板暗化、13 种转场几何算法，以及钟楼 (448, 128) 隐藏音乐室反汇编实录。
+                    </p>
+                </div>
+                <a href="article-zh.html" class="card-btn">阅读中文全文 →</a>
+            </div>
+
+            <div class="article-card">
+                <div>
+                    <div class="card-tag">🇺🇸 English · Engineering Postmortem</div>
+                    <h2 class="card-title">English Technical Guide</h2>
+                    <p class="card-desc">
+                        A rigorous, pragmatic systems engineering postmortem. Covers proprietary PAK XOR cryptanalysis, positive vs inverted LZS3 decompression, 24x24 1bpp vertical font typography, CoreAudio mono 11025Hz exception handling, and App Nap throttling circumvention.
+                    </p>
+                </div>
+                <a href="article-en.html" class="card-btn">Read English Article →</a>
+            </div>
+
+            <div class="article-card">
+                <div>
+                    <div class="card-tag">🇯🇵 日本語 · 技術仕様書</div>
+                    <h2 class="card-title">日本語技術仕様書</h2>
+                    <p class="card-desc">
+                        LVNSエンジンのバイナリ解析、2層仮想マシンの設計、描画およびCoreAudio障害追究、タイトル画面 VA 0x430ebc の第5不可視ポインタから導く隠し音楽室の復元など、全工程を実務的・網羅的に解説した技術ドキュメント。
+                    </p>
+                </div>
+                <a href="article-jp.html" class="card-btn">技術仕様書を読む →</a>
+            </div>
+        </section>
+
+        <section class="feature-grid">
+            <div class="feature-box">
+                <h4>🔐 LEAFPACK 解密</h4>
+                <p>11 字节累加滚动异或密钥盲破还原，无源码逆向 403 个游戏资产。</p>
+            </div>
+            <div class="feature-box">
+                <h4>📜 双层虚拟机 (VM)</h4>
+                <p>外层 Block 事件机与内层行内演出宏（B/E, C, S, D, M, P, F, Q）精准解耦。</p>
+            </div>
+            <div class="feature-box">
+                <h4>🎨 视觉高保真渲染</h4>
+                <p>25×13 Sound Novel 网格、三 Pass 硬阴影字绘、11/16 调色板暗化与 13 种转场。</p>
+            </div>
+            <div class="feature-box">
+                <h4>🎵 音频与底层系统排错</h4>
+                <p>AVAudioConverter 重采样规避 AppKit 静默异常，ProcessInfo 锁死 60Hz 刷新。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p class="footer-title">Shizuku_macos_restore_study · Leaf LVNS Engine Reverse Engineering & Native macOS Restoration</p>
+            <p class="footer-author">
+                jill 推特<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> 微博<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaf LVNS 移植技術仕様書 (日本語) - Shizuku_macos_restore_study</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <div class="logo-area">
+                <a href="index.html">🍃 Shizuku_macos_restore_study</a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html" class="lang-btn">🏠 Home</a>
+                <a href="article-zh.html" class="lang-btn ">🇨🇳 简体中文</a>
+                <a href="article-en.html" class="lang-btn ">🇺🇸 English</a>
+                <a href="article-jp.html" class="lang-btn active">🇯🇵 日本語</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <aside class="toc-sidebar">
+            <h3>Table of Contents</h3>
+            <div class="toc">
+<ul>
+<li><a href="#leaf-lvns-macos-swift">Leaf クラシックビジュアルノベル（LVNS）リバースエンジニアリングと macOS Swift ネイティブ移植技術仕様書</a><ul>
+<li><a href="#windows-95">——『雫～しずく～』に基づく Windows 95 レガシーゲームの現代的再構築実録</a></li>
+<li><a href="#_1">目次</a></li>
+<li><a href="#1">1. 技術的目標とアーキテクチャの選定方針</a><ul>
+<li><a href="#11-wine">1.1 Wine / 仮想マシン方式を破棄した理由</a></li>
+<li><a href="#12-swift-metal">1.2 Swift + Metal による現代的レイヤード設計</a></li>
+</ul>
+</li>
+<li><a href="#2">2. リバースエンジニアリング手法と検証基準</a><ul>
+<li><a href="#21">2.1 先行オープンソース資産の価値と落とし穴</a></li>
+<li><a href="#22-wine-oracle">2.2 正解基準の確立：静的逆アセンブルと Wine 動的 Oracle</a></li>
+</ul>
+</li>
+<li><a href="#3">3. バイナリデータ形式のフィールド単位解析と復号仕様</a><ul>
+<li><a href="#31-leafpack-max_datapak">3.1 LEAFPACK アーカイブコンテナ（MAX_DATA.PAK）</a><ul>
+<li><a href="#_2">暗号化アルゴリズムと復号</a></li>
+<li><a href="#_3">ディレクトリ構造と自動鍵推測</a></li>
+</ul>
+</li>
+<li><a href="#32-lzs">3.2 LZS 圧縮の変種と出力ストリーム切り詰めの鉄則</a><ul>
+<li><a href="#1_1">1. 正論理と反転論理の使い分け</a></li>
+<li><a href="#2_1">2. 出力ストリームの厳格な切り詰め（末尾ゴミデータの遮断）</a></li>
+</ul>
+</li>
+<li><a href="#33-lfgleafcode">3.3 LFG（LEAFCODE）画像フォーマットとビットインターリーブ</a></li>
+<li><a href="#34-lac">3.4 LAC オーディオコンテナ</a></li>
+<li><a href="#35-knj_allknj">3.5 KNJ_ALL.KNJ ビットマップフォントの物理レイアウト</a><ul>
+<li><a href="#3_1">物理メモリ構造（3列縦ストリップ優先）</a></li>
+<li><a href="#1-based-sizfonttbl">1-based 葉コードと sizfont.tbl</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-2vm">4. 2層仮想マシン（VM）のアーキテクチャ設計と実装</a><ul>
+<li><a href="#41-scn-block">4.1 SCN スクリプト構造と Block モデル</a></li>
+<li><a href="#42-event-vm-skip">4.2 外側イベント仮想マシン（Event VM）と Skip 命令の罠</a><ul>
+<li><a href="#skip">Skip 命令のパース処理</a></li>
+</ul>
+</li>
+<li><a href="#43-inline-vm">4.3 内側インライン演出仮想マシン（Inline VM）の決定的一大発見</a></li>
+</ul>
+</li>
+<li><a href="#5">5. 描画パイプラインとピクセル精度の再現実装</a><ul>
+<li><a href="#51">5.1 全画面サウンドノベルタイポグラフィと改行規則</a></li>
+<li><a href="#52-3">5.2 パレット輝度減衰と3パス重ね刷りハードシャドウ描画</a></li>
+<li><a href="#53">5.3 入力待ちカーソルの厳密な意味論と点滅位相リセット</a></li>
+<li><a href="#54-bgmappalmap">5.4 地点番号の畳み込み（bgmap）と天候パレット（palmap）</a></li>
+<li><a href="#55-13-lvns-dpi">5.5 13種類の LVNS 伝統トランジションの幾何学再現と高DPI対応</a></li>
+<li><a href="#56-guruguru">5.6 渦巻きトランジション（GURUGURU）のアルゴリズム修正</a></li>
+<li><a href="#57-opcode-0x01-4">5.7 Opcode 0x01 の4つのサブタイプと正弦波背景歪曲</a><ul>
+<li><a href="#_4">正弦波歪曲の数学とパイプラインフェーズ</a></li>
+</ul>
+</li>
+<li><a href="#58-lvnshistory-vram">5.8 全画面バックログ（LvnsHistory）と二重テキスト VRAM</a></li>
+</ul>
+</li>
+<li><a href="#6-macos">6. 音声システムと macOS 低レベル工学的トラブルシューティング</a><ul>
+<li><a href="#61-bgm-bgmmap-cd-da">6.1 BGM 番号マッピング（bgmmap）と CD-DA オフセット</a></li>
+<li><a href="#62-coreaudio-11025hz">6.2 CoreAudio モノラル11025Hz例外の握り潰しによるプロセスハング</a><ul>
+<li><a href="#_5">原因</a></li>
+<li><a href="#_6">対策</a></li>
+</ul>
+</li>
+<li><a href="#63-60hz-macos-app-nap">6.3 60Hz クロックと macOS App Nap によるスロットリング</a><ul>
+<li><a href="#app-nap-112">App Nap による1/12倍速化</a></li>
+<li><a href="#_7">対策</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#7">7. 実戦的バイナリフォレンジック：時計塔の隠し音楽室（音楽モード）</a><ul>
+<li><a href="#71-5">7.1 突破口：タイトルメニューの第5の不可視ポインタ</a></li>
+<li><a href="#72">7.2 座標単位の数学的証明とピクセルアライメント</a></li>
+<li><a href="#73-0x24">7.3 音楽室本体ルーチンと葉コード 0x24 終端の罠</a></li>
+</ul>
+</li>
+<li><a href="#8">8. スタッフロールのブロッキングスクリプト解析</a></li>
+<li><a href="#9-leaf-to-heart">9. 他の Leaf 作品（『痕』『To Heart』）への横展開手法</a><ul>
+<li><a href="#91">9.1 エンジン系譜コンポーネント再利用性マトリクス</a></li>
+<li><a href="#92-9">9.2 新作移植における標準化9ステップ手順書</a></li>
+</ul>
+</li>
+<li><a href="#10">10. 自動化検証ツールとデバッグインフラ基盤</a><ul>
+<li><a href="#101-shizuku_shot">10.1 ヘッドレス自動フレーム出力パイプライン（SHIZUKU_SHOT）</a></li>
+<li><a href="#102-watchdog">10.2 本番バイナリ内蔵の自律治癒フリップ番犬（Watchdog）</a></li>
+</ul>
+</li>
+<li><a href="#a-opcode">付録 A：主要 Opcode およびインライン制御文字リファレンス</a><ul>
+<li><a href="#1-opcode">1. 外側イベント Opcode</a></li>
+<li><a href="#2_2">2. 内側インライン演出制御文字</a></li>
+</ul>
+</li>
+<li><a href="#b">付録 B：設計的逸脱およびアクセシビリティ拡張仕様対照表</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+        </aside>
+
+        <article class="markdown-body">
+            <h1 id="leaf-lvns-macos-swift">Leaf クラシックビジュアルノベル（LVNS）リバースエンジニアリングと macOS Swift ネイティブ移植技術仕様書</h1>
+<h2 id="windows-95">——『雫～しずく～』に基づく Windows 95 レガシーゲームの現代的再構築実録</h2>
+<blockquote>
+<p>🌐 <strong>多言語ナビゲーション / Language</strong>: <a href="leaf-galgame-port-jp.md">🇯🇵 日本語</a> ｜ <a href="leaf-galgame-port-zh.md">🇨🇳 简体中文</a> ｜ <a href="leaf-galgame-port-en.md">🇺🇸 English</a></p>
+<p>本稿は、現代のソフトウェアエンジニアに向けた実務的技術ドキュメントである。Leaf（現アクアプラス）が1996年に発表したビジュアルノベル『雫～しずく～』および同系統のLVNSエンジンを、Windows 95当時のバイナリデータから解析・復元し、現代のmacOS（Apple Silicon）上でSwiftとMetalを用いて60Hz動作のスタンドアロンアプリ（Ver.1.0）として完全再実装した工程のすべてを記録している。</p>
+<p>感情的な修辞や物語調の記述を排し、バイナリ形式の逆アセンブル、Opcode意味論の導出、2層仮想マシンの設計、レンダリングおよびCoreAudioパイプラインでの障害追究、そして『痕』や『To Heart』へ横展開するための汎用手順など、具体的なエンジニアリングの実態のみに焦点を絞って記述する。</p>
+</blockquote>
+<hr />
+<h2 id="_1">目次</h2>
+<ul>
+<li><a href="#1-技術的目標とアーキテクチャの選定方針">1. 技術的目標とアーキテクチャの選定方針</a></li>
+<li><a href="#11-wine--仮想マシン方式を破棄した理由">1.1 Wine / 仮想マシン方式を破棄した理由</a></li>
+<li><a href="#12-swift--metal-による現代的レイヤード設計">1.2 Swift + Metal による現代的レイヤード設計</a></li>
+<li><a href="#2-リバースエンジニアリング手法と検証基準">2. リバースエンジニアリング手法と検証基準</a></li>
+<li><a href="#21-先行オープンソース資産の価値と落とし穴">2.1 先行オープンソース資産の価値と落とし穴</a></li>
+<li><a href="#22-正解基準の確立静的逆アセンブルと-wine-動的-oracle">2.2 正解基準の確立：静的逆アセンブルと Wine 動的 Oracle</a></li>
+<li><a href="#3-バイナリデータ形式のフィールド単位解析と復号仕様">3. バイナリデータ形式のフィールド単位解析と復号仕様</a></li>
+<li><a href="#31-leafpack-アーカイブコンテナmax_datapak">3.1 LEAFPACK アーカイブコンテナ（MAX_DATA.PAK）</a></li>
+<li><a href="#32-lzs-圧縮の変種と出力ストリーム切り詰めの鉄則">3.2 LZS 圧縮の変種と出力ストリーム切り詰めの鉄則</a></li>
+<li><a href="#33-lfgleafcode-画像フォーマットとビットインターリーブ">3.3 LFG（LEAFCODE）画像フォーマットとビットインターリーブ</a></li>
+<li><a href="#34-lac-オーディオコンテナ">3.4 LAC オーディオコンテナ</a></li>
+<li><a href="#35-knj_allknj-ビットマップフォントの物理レイアウト">3.5 KNJ_ALL.KNJ ビットマップフォントの物理レイアウト</a></li>
+<li><a href="#4-2層仮想マシンvmのアーキテクチャ設計と実装">4. 2層仮想マシン（VM）のアーキテクチャ設計と実装</a></li>
+<li><a href="#41-scn-スクリプト構造と-block-モデル">4.1 SCN スクリプト構造と Block モデル</a></li>
+<li><a href="#42-外側イベント仮想マシンevent-vmと-skip-命令の罠">4.2 外側イベント仮想マシン（Event VM）と Skip 命令の罠</a></li>
+<li><a href="#43-内側インライン演出仮想マシンinline-vmの決定的一大発見">4.3 内側インライン演出仮想マシン（Inline VM）の決定的一大発見</a></li>
+<li><a href="#5-描画パイプラインとピクセル精度の再現実装">5. 描画パイプラインとピクセル精度の再現実装</a></li>
+<li><a href="#51-全画面サウンドノベルタイポグラフィと改行規則">5.1 全画面サウンドノベルタイポグラフィと改行規則</a></li>
+<li><a href="#52-パレット輝度減衰と3パス重ね刷りハードシャドウ描画">5.2 パレット輝度減衰と3パス重ね刷りハードシャドウ描画</a></li>
+<li><a href="#53-入力待ちカーソルの厳密な意味論と点滅位相リセット">5.3 入力待ちカーソルの厳密な意味論と点滅位相リセット</a></li>
+<li><a href="#54-地点番号の畳み込みbgmapと天候パレットpalmap">5.4 地点番号の畳み込み（bgmap）と天候パレット（palmap）</a></li>
+<li><a href="#55-13種類の-lvns-伝統トランジションの幾何学再現と高dpi対応">5.5 13種類の LVNS 伝統トランジションの幾何学再現と高DPI対応</a></li>
+<li><a href="#56-渦巻きトランジションguruguruのアルゴリズム修正">5.6 渦巻きトランジション（GURUGURU）のアルゴリズム修正</a></li>
+<li><a href="#57-opcode-0x01-の4つのサブタイプと正弦波背景歪曲">5.7 Opcode 0x01 の4つのサブタイプと正弦波背景歪曲</a></li>
+<li><a href="#58-全画面バックログlvnshistoryと二重テキスト-vram">5.8 全画面バックログ（LvnsHistory）と二重テキスト VRAM</a></li>
+<li><a href="#6-音声システムと-macos-低レベル工学的トラブルシューティング">6. 音声システムと macOS 低レベル工学的トラブルシューティング</a></li>
+<li><a href="#61-bgm-番号マッピングbgmmapと-cd-da-オフセット">6.1 BGM 番号マッピング（bgmmap）と CD-DA オフセット</a></li>
+<li><a href="#62-coreaudio-モノラル11025hz例外の握り潰しによるプロセスハング">6.2 CoreAudio モノラル11025Hz例外の握り潰しによるプロセスハング</a></li>
+<li><a href="#63-60hz-クロックと-macos-app-nap-によるスロットリング">6.3 60Hz クロックと macOS App Nap によるスロットリング</a></li>
+<li><a href="#7-実戦的バイナリフォレンジック時計塔の隠し音楽室音楽モード">7. 実戦的バイナリフォレンジック：時計塔の隠し音楽室（音楽モード）</a></li>
+<li><a href="#71-突破口タイトルメニューの第5の不可視ポインタ">7.1 突破口：タイトルメニューの第5の不可視ポインタ</a></li>
+<li><a href="#72-座標単位の数学的証明とピクセルアライメント">7.2 座標単位の数学的証明とピクセルアライメント</a></li>
+<li><a href="#73-音楽室本体ルーチンと葉コード-0x24-終端の罠">7.3 音楽室本体ルーチンと葉コード 0x24 終端の罠</a></li>
+<li><a href="#8-スタッフロールのブロッキングスクリプト解析">8. スタッフロールのブロッキングスクリプト解析</a></li>
+<li><a href="#9-他の-leaf-作品痕to-heartへの横展開手法">9. 他の Leaf 作品（『痕』『To Heart』）への横展開手法</a></li>
+<li><a href="#91-エンジン系譜コンポーネント再利用性マトリクス">9.1 エンジン系譜コンポーネント再利用性マトリクス</a></li>
+<li><a href="#92-新規移植における標準化9ステップ手順書">9.2 新規移植における標準化9ステップ手順書</a></li>
+<li><a href="#10-自動化検証ツールとデバッグインフラ基盤">10. 自動化検証ツールとデバッグインフラ基盤</a></li>
+<li><a href="#101-ヘッドレス自動フレーム出力パイプラインshizuku_shot">10.1 ヘッドレス自動フレーム出力パイプライン（SHIZUKU_SHOT）</a></li>
+<li><a href="#102-本番バイナリ内蔵の自律治癒フリップ番犬watchdog">10.2 本番バイナリ内蔵の自律治癒フリップ番犬（Watchdog）</a></li>
+<li><a href="#付録-a主要-opcode-およびインライン制御文字リファレンス">付録 A：主要 Opcode およびインライン制御文字リファレンス</a></li>
+<li><a href="#付録-b設計的逸脱およびアクセシビリティ拡張仕様対照表">付録 B：設計的逸脱およびアクセシビリティ拡張仕様対照表</a></li>
+</ul>
+<hr />
+<h2 id="1">1. 技術的目標とアーキテクチャの選定方針</h2>
+<h3 id="11-wine">1.1 Wine / 仮想マシン方式を破棄した理由</h3>
+<p>90年代のレトロゲームを現代のmacOS（Apple Silicon）環境へ移植する際、Wineプレフィックスの同梱やエミュレーションラッパーの採用が真っ先に検討されがちである。しかし、初期検証の段階で以下の決定的な技術的欠陥が判明し、この方針は破棄された：</p>
+<ol>
+<li><strong>Retinaディスプレイと拡大スケーリングの破綻</strong>：Wineは640×400の低解像度パレットバッファを単純なバイリニア補間で引き伸ばすため、文字ドットのエッジが不鮮明になり、Metalを用いた正確な整数倍ニアレストネイバー拡大ができない。</li>
+<li><strong>デバッグの不透明性</strong>：古いWin32 GDI、DirectDraw、DirectSoundコールがRosetta 2とWineを経由する構成では、予期せぬ競合やハングが発生した際に、LLDBやInstrumentsを用いてバイト単位のスタックトレースやプロファイリングを行うことが極めて困難である。</li>
+<li><strong>ネイティブUI連携の欠如</strong>：macOS標準メニューバーの統合、システムショートカットの連携、トラックパッドジェスチャーのサポート、Dockアイコンのスマートな挙動制御が一切行えない。</li>
+</ol>
+<p>これにより、<strong>レガシーPE実行ファイルを完全に破棄し、データ構造と仮想マシン仕様をゼロからホワイトボックス化して、SwiftとMetalで100%ネイティブ再構築する</strong>という設計方針が確定した。</p>
+<h3 id="12-swift-metal">1.2 Swift + Metal による現代的レイヤード設計</h3>
+<p>実装はSPM（Swift Package Manager）を用い、<code>ShizukuRuntime</code>配下に4つのモジュールを明確な単方向依存関係で構築した：</p>
+<pre><code>+--------------------------------------------------------------------------+
+|  [ ShizukuApp ] (macOS AppKit シェル層)                                  |
+|  - main.swift / NSApplication / ネイティブメニューバー / 入力ルーティング|
+|  - MetalGameView: MTKView コンテナ, 60Hz 描画駆動, マウス・キーボード制御 |
++--------------------------------------------------------------------------+
+                                    │
++--------------------------------------------------------------------------+
+|  [ ShizukuRender ] (画面合成および描画処理層)                            |
+|  - SceneComposer: 640x400 32-bit RGBA オフスクリーンバッファ管理        |
+|  - 3-Pass Glyph Stamping: ドットフォントの硬質影付き多重重ね刷り描画     |
+|  - TransitionRenderer: 13種類の LVNS 伝統トランジション演算器           |
+|  - HistoryView (バックログ) / MusicRoom (音楽室) / StaffRoll (ロール)    |
++--------------------------------------------------------------------------+
+                                    │
++--------------------------------------------------------------------------+
+|  [ ShizukuEngine ] (ビジネスロジックおよび仮想マシン実行層)              |
+|  - Engine.swift: 2層仮想マシン (Event VM + Inline VM) 状態遷移マシン     |
+|  - AudioController: AVAudioEngine 制御, リサンプリング, フェード管理     |
+|  - SaveManager: JSON形式による進行度永続化およびセーブ・ロード管理       |
++--------------------------------------------------------------------------+
+                                    │
++--------------------------------------------------------------------------+
+|  [ ShizukuCore ] (純粋データモデルおよびデコーダ層)                      |
+|  - Leafpack: アーカイブの復号とアンパック                                |
+|  - Lzs: 正論理・反転論理 LZSS 伸張アルゴリズム                           |
+|  - Lfg: 4-bit パレット展開およびビットインターリーブ解除                 |
+|  - Knj: 24x24 1bpp ビットマップ文字抽出                                  |
+|  - Scn: バイトコード解析およびインライン演出トークナイザ                 |
+|  - BackgroundMap: 地点番号および天候パレット対応テーブル                 |
++--------------------------------------------------------------------------+
+</code></pre>
+<hr />
+<h2 id="2">2. リバースエンジニアリング手法と検証基準</h2>
+<h3 id="21">2.1 先行オープンソース資産の価値と落とし穴</h3>
+<p>LVNSエンジンを解析する上で、過去の先人による3つのコードベースが参照可能であった：</p>
+<ol>
+<li><strong>XLVNS / mglvns (Go Watanabe, 1999–2000, BSD)</strong>：</li>
+<li><em>価値</em>：C言語による網羅的な実装。LEAFPACK、LFG、多くのSCN opcode、トランジションが網羅されている。</li>
+<li><em>注意点</em>：コード内に大量の<code>#ifdef USE_MGL</code>ブランチが存在する。これは1999年当時の低スペックなLinux/X11（320×200解像度）向けの回避コードであり、<strong>これを無批判に移植するとWindowsオリジナル版と異なる壊れた挙動を引き起こす</strong>。</li>
+<li><strong>akkera102 GBA ツールチェーン (個人研究用)</strong>：</li>
+<li><em>価値</em>：SCN抽出スクリプト<code>decscn.py</code>および命令定義<code>script.c</code>を提供。</li>
+<li><em>注意点</em>：GBAハードウェア特化のため固定長バッファ切り詰めがあり、フォント構造がPC版と非同型。</li>
+<li><strong>GBALVNS (BSD-3-Clause)</strong>：</li>
+<li><em>価値</em>：状態遷移の設計参考。</li>
+<li><em>注意点</em>：独自に再変換されたGBA用アセットのみを読み、Windows版元データを直接扱わない。</li>
+</ol>
+<h3 id="22-wine-oracle">2.2 正解基準の確立：静的逆アセンブルと Wine 動的 Oracle</h3>
+<p>仕様の齟齬を排除するため、以下の2つの絶対的検証基準を運用した：</p>
+<ol>
+<li><strong>Capstone + pefile による静的逆アセンブルと厳密なセクションアライメント</strong>：
+   オリジナル版<code>Sizuku.exe</code>は、ASLRが無効化され再配置テーブルを持たない32ビットPE形式であり、デフォルトのロードベースアドレスは<code>0x400000</code>で固定されている。
+   <code>pefile</code>によるセクションヘッダ検証の結果、<code>.text</code>（コード領域、RVA <code>0x1000</code>、Raw <code>0x1000</code>）、<code>.rdata</code>（定数データ、RVA <code>0x2E000</code>、Raw <code>0x2E000</code>）、<code>.data</code>（大域変数データ、RVA <code>0x30000</code>、Raw <code>0x30000</code>）のメモリ配置とファイル配置が完全に一致（<code>0x1000</code>ページ境界一致）していることが確認された。したがって、全実行コードおよび静的テーブルにおいて、仮想アドレス（VA）とディスク上のファイルオフセットは常に1対1の決定論的関係を保つ：
+   $$\text{File Offset} = \text{RVA} = \text{VA} - 0x400000$$
+   バイトコード幅や状態遷移の仕様に疑義が生じた際は、該当する仮想アドレスのx86機械語命令列およびジャンプテーブルを直接逆アセンブルすることで、絶対的な正解（Ground Truth）を導出した。</li>
+<li><strong>Wine を用いた動的 Oracle</strong>：
+   画面描画や演出タイミングの挙動に疑問が生じた場合、Wine 11.15上でオリジナル版を実行し、ブレークポイントとメモリダンプによって実機VRAMの各フレームの状態を客観的「正解（Ground Truth）」として採取した。</li>
+</ol>
+<hr />
+<h2 id="3">3. バイナリデータ形式のフィールド単位解析と復号仕様</h2>
+<h3 id="31-leafpack-max_datapak">3.1 LEAFPACK アーカイブコンテナ（MAX_DATA.PAK）</h3>
+<p>全403ファイルが<code>MAX_DATA.PAK</code>に格納されている。</p>
+<pre><code>+--------------------------------------------------------------------------+
+| オフセット    | フィールド名    | 型          | 説明                     |
+|---------------|-----------------|-------------|--------------------------|
+| 0..7          | Magic           | 8 Bytes     | 固定文字列 &quot;LEAFPACK&quot;    |
+| 8..9          | FileCount       | uint16_le   | 格納ファイル数（雫は 403）|
+| 10..TableEnd  | File Payloads   | 可変長      | 巡回加算暗号化データ領域 |
+| 末尾 24*N B   | File Directory  | 24B / Entry | 暗号化ディレクトリ構造体 |
++--------------------------------------------------------------------------+
+</code></pre>
+<h4 id="_2">暗号化アルゴリズムと復号</h4>
+<p>データ領域は<strong>バイト巡回加算暗号</strong>で難読化されている：
+$$\text{EncryptedByte} = (\text{PlainByte} + \text{Key}[k]) \pmod{256}$$
+復号は単なる減算である：
+$$\text{PlainByte} = (\text{EncryptedByte} - \text{Key}[k] + 256) \pmod{256}$$</p>
+<p>鍵は11バイトの静的配列である：</p>
+<pre><code class="language-c">static const uint8_t LEAF_KEY[11] = {
+    0x71, 0x48, 0x6a, 0x55, 0x9f, 0x13, 0x58, 0xf7, 0xd1, 0x7c, 0x3e
+};
+</code></pre>
+<h4 id="_3">ディレクトリ構造と自動鍵推測</h4>
+<p>ファイル末尾のディレクトリテーブル（各エントリ24バイト）：
+- <code>name[8]</code>：大文字ASCIIファイル名、余白はスペース（<code>0x20</code>）；
+- <code>ext[3]</code>：大文字拡張子（<code>LFG</code>, <code>SCN</code>, <code>KNJ</code>）；
+- <code>zero</code>：パディング（<code>0x00</code>）；
+- <code>offset</code>：uint32_le、コンテナ内の絶対開始オフセット；
+- <code>length</code>：uint32_le、展開後のデータサイズ；
+- <code>next_offset</code>：uint32_le。</p>
+<p><em>注釈</em>：キーインデックスはファイル間を跨いで連続的に進む（<code>k = (k + 1) % 11</code>）。ディレクトリエントリは大文字ASCIIとスペースで占められているため、任意の連続する3エントリ以上を切り出せば、EXEを読まずとも連立一次合同方程式によって11バイトの鍵配列を100%自動推測可能である。</p>
+<h3 id="32-lzs">3.2 LZS 圧縮の変種と出力ストリーム切り詰めの鉄則</h3>
+<p>LeafのLZSS変種（LZS）の実装には、2つの重大な落とし穴が存在する：</p>
+<h4 id="1_1">1. 正論理と反転論理の使い分け</h4>
+<ul>
+<li><strong>標準 <code>lzs</code>（正論理）</strong>：フラグビットが1で直接データ、0で辞書参照。リングバッファ<code>0x1000</code>バイト、初期ポインタ<code>0xFEE</code>。<strong>LFG画像ビットマップ専用</strong>。</li>
+<li><strong><code>lzs3</code>（反転論理）</strong>：フラグビットが反転（<code>~flag</code>、0で直接、1で参照）。リングバッファ<code>0x1011</code>バイト。<strong>SCNスクリプトのイベント部およびメッセージ部に適用</strong>。</li>
+</ul>
+<h4 id="2_1">2. 出力ストリームの厳格な切り詰め（末尾ゴミデータの遮断）</h4>
+<p>SCNスクリプトのヘッダには、展開後の正確なサイズ<code>declaredSize</code>が記述されている。
+入力ストリームが尽きるまで無制限に解凍を続けると、LZSSアルゴリズムは末尾のアライメントパディング（<code>0x00</code>や<code>0xFF</code>）を誤ってデコードし続け、巨大なゴミデータを生み出す。197個のスクリプトのうち、<strong>173個のスクリプト</strong>でこの末尾汚染が発生し、最終メッセージのオフセットが破壊されていた。</p>
+<p><strong>対策</strong>：解凍ループは<code>output.count == declaredSize</code>に達した瞬間、強制的にブレークさせなければならない。</p>
+<h3 id="33-lfgleafcode">3.3 LFG（LEAFCODE）画像フォーマットとビットインターリーブ</h3>
+<p>静止画アセットはすべて<code>.LFG</code>形式であり、先頭マジックは<code>"LEAFCODE"</code>である。</p>
+<pre><code>+--------------------------------------------------------------------------+
+| バイト範囲 | フィールド定義                                              |
+|------------|-------------------------------------------------------------|
+| 0..7       | 固定マジック &quot;LEAFCODE&quot;                                     |
+| 8..31      | 16色パレット（4-bit RGB、6バイトで4色をパッキング）          |
+| 32..33     | xoffset (uint16_be)：立ち絵の画面配置Xオフセット            |
+| 34..35     | yoffset (uint16_be)：画面配置Yオフセット                    |
+| 36..37     | raw_width (uint16_be)：実横幅 = (raw_width + 1) * 8         |
+| 38..39     | raw_height (uint16_be)：実縦幅 = raw_height + 1             |
+| 40         | direction (uint8)：0 は列主序（Vertical）                   |
+| 41         | transparent (uint8)：透明色インデックス（背景は 0xFF）       |
+| 44..47     | decompressed_size (uint32_le)：解凍後サイズ = w * h / 2     |
+| 48..EOF    | 標準正論理 LZS 圧縮ビットマップデータ                       |
++--------------------------------------------------------------------------+
+</code></pre>
+<ul>
+<li><strong>パレット展開</strong>：4-bitカラー成分（0..15）は、ニブル倍加によって8-bit（0..255）へ展開する：
+  <code>swift
+  let r8 = (r4 &lt;&lt; 4) | r4
+  let g8 = (g4 &lt;&lt; 4) | g4
+  let b8 = (b4 &lt;&lt; 4) | b4</code></li>
+<li><strong>立ち絵の寸法と配置</strong>：立ち絵は解凍後の高さが常に400px（画面高さと一致）であり、描画Y座標は常に0である。3つのスロットの描画X座標は、左<code>0</code>、中央<code>160</code>、右<code>320</code>で固定されている。</li>
+</ul>
+<h3 id="34-lac">3.4 LAC オーディオコンテナ</h3>
+<p><code>bgmfile.PAK</code>および<code>soundds.PAK</code>はLACコンテナ形式を採用している：
+- 先頭<code>"LAC\0"</code> + uint32_leエントリ数 + ディレクトリテーブル（エントリあたり42バイト：名前8バイト + オフセットuint32_le + 長さuint32_le）。
+- <code>bgmfile.PAK</code>：25曲のOgg Vorbis（44.1kHz / 48kHzステレオBGM）。
+- <code>soundds.PAK</code>：13音のRIFF WAV（<strong>モノラル、11025Hz</strong>）。</p>
+<p>macOSのAVFoundationはOgg Vorbisコンテナのデコードに非対応であるため、Xiph公式の<code>libogg</code>および<code>libvorbis</code>を静的リンクし、メモリ上で32-bit Float PCMへ直接デコードして再生する。</p>
+<h3 id="35-knj_allknj">3.5 KNJ_ALL.KNJ ビットマップフォントの物理レイアウト</h3>
+<p><code>KNJ_ALL.KNJ</code>のファイルサイズは厳密に133,344バイトである。24×24ドット文字（1bpp、1字あたり72バイト）換算で、収録文字数は：
+$$133,344 \div 72 = 1,852 \text{ 文字}$$</p>
+<h4 id="3_1">物理メモリ構造（3列縦ストリップ優先）</h4>
+<p>文字データは行主序ではなく、<strong>3本の縦列ブロック（Column Strip）</strong>として格納されている：</p>
+<pre><code>+--------------------------------------------------------------------------+
+|  Glyph 24x24 (合計 72 バイト):                                            |
+|  - 列 0 (X: 0..7)  : 24 バイト (byte 0..23)                              |
+|  - 列 1 (X: 8..15) : 24 バイト (byte 24..47)                             |
+|  - 列 2 (X: 16..23): 24 バイト (byte 48..71)                             |
+|                                                                          |
+|  各バイトは横8ピクセルを表し、最上位ビット（Bit 7）が左端ピクセルに対応する。|
++--------------------------------------------------------------------------+
+</code></pre>
+<p>Swift によるピクセルサンプリング処理：</p>
+<pre><code class="language-swift">public func pixel(atX x: Int, y: Int, inGlyph glyph: [UInt8]) -&gt; Bool {
+    guard x &gt;= 0, x &lt; 24, y &gt;= 0, y &lt; 24 else { return false }
+    let col = x / 8
+    let bit = 7 - (x % 8)
+    let byte = glyph[col * 24 + y]
+    return ((byte &gt;&gt; bit) &amp; 1) != 0
+}
+</code></pre>
+<h4 id="1-based-sizfonttbl">1-based 葉コードと sizfont.tbl</h4>
+<ul>
+<li><strong>葉コード（Leaf Code）</strong>：スクリプトに記述された2バイトの値。フォントスロットへ直結する：
+  $$\text{Slot Index} = \text{Leaf Code} - 1$$
+  葉コードが0の場合は全角スペースを表し、描画をスキップして座標のみ進める。</li>
+<li><strong><code>sizfont.tbl</code></strong>（3,703バイト）：1,851個の葉コードをEUC-JP文字へ変換する対応表。<strong>外部ツールによる文字列抽出用であり、ゲームの描画エンジンはこのテーブルを一切参照しない</strong>。</li>
+</ul>
+<hr />
+<h2 id="4-2vm">4. 2層仮想マシン（VM）のアーキテクチャ設計と実装</h2>
+<h3 id="41-scn-block">4.1 SCN スクリプト構造と Block モデル</h3>
+<p>各<code>SCN%03d.DAT</code>は2つのセクションに分かれている：
+- オフセット 0..1：uint16_le、イベント部の開始位置（値 $\times 16$）；
+- オフセット 2..3：uint16_le、メッセージ部の開始位置（値 $\times 16$）。
+いずれも反転論理<code>lzs3</code>で解凍される。</p>
+<p>イベント部は先頭に各Blockのオフセット配列を持つ。
+<strong>Blockはスクリプトジャンプとセーブデータ管理の最小単位である。</strong></p>
+<h3 id="42-event-vm-skip">4.2 外側イベント仮想マシン（Event VM）と Skip 命令の罠</h3>
+<p>外側VMは進行制御を担う。主なOpcode：
+- <code>0x00</code>：Block終了；
+- <code>0x04</code>：<code>JUMP scn, blk</code>（指定Blockへジャンプ）；
+- <code>0x05</code>：<code>SELECT</code>（選択肢分岐）；
+- <code>0x0a</code>：背景地点の設定；
+- <code>0x14</code>：完全画面消去（画像・テキストの両方）；
+- <code>0x22</code>：単一立ち絵の表示；
+- <code>0x24</code>：アップ立ち絵（中央スロット<code>'c'</code>に強制表示）；
+- <code>0x38</code>：画面表示更新（<code>LvnsDisp</code>）＋ <strong>予約BGMの再生開始トリガー</strong>；
+- <code>0x3d</code>/<code>0x3e</code>：フラグ条件相対ジャンプ；
+- <code>0x47</code>/<code>0x48</code>：フラグ代入および加算；
+- <code>0x54</code>：メッセージ部の指定メッセージを表示；
+- <code>0x6e</code>：BGMループ再生；
+- <code>0x7d</code>：スタッフロール実行；
+- <code>0x7e</code>：エンディング番号記録。</p>
+<h4 id="skip">Skip 命令のパース処理</h4>
+<p>スクリプト内には13個の何もしない命令（<code>0x03</code>, <code>0x06</code>, <code>0x5a</code>, <code>0x5c</code>, <code>0x60-0x66</code>, <code>0x6f</code>, <code>0x73</code>）が存在する。実行動作はないが1〜3バイトの固定オペランド長を持つため、パーサーはこれらを適切に読み飛ばさなければ後続の解析が破綻する。</p>
+<h3 id="43-inline-vm">4.3 内側インライン演出仮想マシン（Inline VM）の決定的一大発見</h3>
+<p>本リバースエンジニアリングにおける最大の成果：
+<strong>『雫』の立ち絵、背景、CG切り替え、BGMや効果音の発火は、外側イベント部ではなく、テキストメッセージ内のインラインASCII制御文字によってリアルタイムに駆動されている！</strong></p>
+<p><code>0x54</code>でメッセージが呼ばれると、パーサーはバイト列を走査する：
+1. <strong>バイト $\ge 0x80$</strong>：後続バイトと結合して16ビット葉コードを生成し、フォントを描画。
+2. <strong>バイト $&lt; 0x80$</strong>：演出コマンドとして処理：
+   - <code>$</code>：メッセージ終了；
+   - <code>p</code>：改ページ待機（Page Break）。入力待ち後、画面テキスト全消去；
+   - <code>k</code>/<code>K</code>：入力待機（Wait Key）。テキストを消去せず次行に追記；
+   - <code>r</code>：改行；
+   - <code>B</code>/<code>E</code>（7バイト）：背景変更（地点ID + トランジションID）；
+   - <code>C</code>（4バイト）：立ち絵表示（スロット<code>l/c/r</code> + キャラID）；
+   - <code>D</code>：立ち絵消去（<code>Da</code>で全消去）；
+   - <code>S</code>（10バイト）：背景と立ち絵を同時にアトミック切り替え；
+   - <code>A</code>/<code>a</code>：3人立ち絵配置；
+   - <code>V</code>/<code>H</code>：全画面CGまたはH-CGのロード；
+   - <code>M</code>：BGM制御群（<code>Mf</code>フェード、<code>Ms</code>停止、<code>Mn</code>予約、<code>Mw</code>待機、<code>M00-M25</code>即時再生）；
+   - <code>P</code>：PCM効果音再生（<code>P01-P13</code>）；
+   - <code>F</code>：全画面白フラッシュ；
+   - <code>Q</code>：全画面震動；
+   - <code>X</code>/<code>s</code>：文字描画の水平オフセットおよびタイプライター表示速度。</p>
+<p>メッセージを構造化セグメントとしてパースする：</p>
+<pre><code class="language-swift">public struct MessageSegment {
+    public let actions: [InlineAction] // 当該セグメントで実行する演出一覧
+    public let lines: [[Int]]          // 描画すべき葉コード行
+    public let pause: MessagePauseType // 待機形式：.waitKey, .pageBreak, .messageEnd
+}
+</code></pre>
+<hr />
+<h2 id="5">5. 描画パイプラインとピクセル精度の再現実装</h2>
+<h3 id="51">5.1 全画面サウンドノベルタイポグラフィと改行規則</h3>
+<ul>
+<li>画面全体（640×400）がテキストバッファ；</li>
+<li>描画原点：<code>(20, 18)</code>；</li>
+<li>グリッド：横25文字 × 縦13行；</li>
+<li>文字間隔：横送り24px、行送り28px（字高24px + 行間4px）；</li>
+<li><strong>改行規則</strong>：Windowsオリジナル版には<strong>禁則処理は一切存在しない</strong>。横文字数<code>cur_x &gt; 24</code>に達した瞬間に無条件改行される。</li>
+</ul>
+<h3 id="52-3">5.2 パレット輝度減衰と3パス重ね刷りハードシャドウ描画</h3>
+<ol>
+<li><strong>パレット輝度減衰（Latitude Darkening）</strong>：
+   テキスト表示中、背景画像はAlpha合成ではなく、DACパレットの輝度を一律スケールして暗転させる：
+   $$\text{latitude_dark} = \frac{11}{16} = 0.6875$$
+   背景が全体的に31.25%暗転する。</li>
+<li><strong>3パス重ね刷り描画</strong>：
+   1bppのフォントマスクを用い、フレームバッファへ3回書き込む：</li>
+<li>パス1：<code>(x + 1, y + 1)</code>に純黒を書き込む（影1）；</li>
+<li>パス2：<code>(x + 2, y + 1)</code>に純黒を書き込む（右側の影を太くする）；</li>
+<li>パス3：原位置<code>(x, y)</code>に純白または灰色を書き込む（文字本体）。
+   アンチエイリアス処理を一切行わないことで、1996年の鮮明なドット感を保つ。</li>
+</ol>
+<h3 id="53">5.3 入力待ちカーソルの厳密な意味論と点滅位相リセット</h3>
+<ul>
+<li><strong>カーソル形状</strong>：</li>
+<li>キー入力待ち（<code>k</code>/<code>K</code>）：葉コード102（<strong>右向き黒三角 ▶</strong>）；</li>
+<li>改ページ待ち（<code>p</code>）：葉コード103（<strong>紙アイコン</strong>）。</li>
+<li><strong>描画位置</strong>：最終文字の直後のグリッド内に描画。</li>
+<li><strong>点滅位相のリセット</strong>：
+  カーソルは6フリップ点灯・6フリップ消灯（200ms周期）で点滅する。
+  <em>対策</em>：待機状態に入った瞬間に基準時刻をラッチし（<code>entryFlip = flipCount</code>）、<strong>待機の第1フレームは常に点灯状態から開始する</strong>。</li>
+</ul>
+<h3 id="54-bgmappalmap">5.4 地点番号の畳み込み（bgmap）と天候パレット（palmap）</h3>
+<ol>
+<li><strong>地点番号の畳み込み（<code>bgmap</code>）</strong>：
+   56個の地点番号は35枚の<code>MAX_S*.LFG</code>に集約される（例：地点4/5は<code>MAX_S02</code>、41/42は<code>MAX_S15</code>）。地点0は<strong>画面消去（純黒）</strong>。</li>
+<li><strong>天候パレット（<code>palmap</code>）</strong>：
+   同一の教室画像に対し、9種類の天候パレットを用いて<strong>パレットのエントリ0..3のみを差し替える（エントリ4の純白は保持する）</strong>ことで、昼と夕方を表現する。</li>
+<li><strong>欠落した VIS21 の扱い</strong>：
+   <code>VIS21.LFG</code>はディスク上に存在しない。オリジナルのコード内で、21番が要求された場合は<code>VIS02</code>を読み込んで紫色パレットを強制適用するよう実装されている。</li>
+</ol>
+<h3 id="55-13-lvns-dpi">5.5 13種類の LVNS 伝統トランジションの幾何学再現と高DPI対応</h3>
+<p><code>sizuku_effect[13]</code>に定義された13大トランジション（パレットフェード、矩形螺旋、斜めタイル、菱形収縮、ディザ、櫛歯ワイプなど）。</p>
+<ul>
+<li><strong>所要時間計算（56フレーム効果の場合）</strong>：
+  切り替え全体 = <code>LvnsClear</code>（56フリップで旧画面消去）+ <code>LvnsDisp</code>（56フリップで新画面描画）+ 描画後静止30フリップ = <strong>142フリップ（約2.36秒）</strong>。
+  トランジション実行中は仮想マシンをブロッキングする。</li>
+<li><strong>高DPIディスプレイへの適応</strong>：
+  Retina等の高解像度環境では、論理640×400へ一度縮小してトランジションマスクを計算し、それを整数倍拡大して表示することでブロックの解像感を維持する。</li>
+</ul>
+<h3 id="56-guruguru">5.6 渦巻きトランジション（GURUGURU）のアルゴリズム修正</h3>
+<p><code>mglvns</code>の<code>#ifdef USE_MGL</code>ブランチにはループ終了判定のバグがあり、第26列（全40列中）で螺旋が途切れて右側1/3が上からの百葉箱状の塗りつぶしに化けていた。</p>
+<p><strong>修正</strong>：<code>#ifndef USE_MGL</code>（Windows版ブランチ）に厳密準拠し、40×25タイルのグリッド上で<code>(27, 12)</code>を中心に螺旋臂を完全に対称展開させる。</p>
+<h3 id="57-opcode-0x01-4">5.7 Opcode 0x01 の4つのサブタイプと正弦波背景歪曲</h3>
+<ul>
+<li>第1式：正弦波背景歪曲を開始、テキスト終了後に黒へ暗転；</li>
+<li>第2式：歪曲を維持したままフェードイン；</li>
+<li>第3式：ブロッキング題字アニメーション（<code>sizuku01</code> 38コマ / <code>sizuku02</code> 19コマ）；</li>
+<li>第4式：通常メッセージ。</li>
+</ul>
+<h4 id="_4">正弦波歪曲の数学とパイプラインフェーズ</h4>
+<p>361個のサンプリングテーブル<code>sintable[361]</code>を使用（振幅 $\pm 160\text{px}$、総和は固有値 <strong>-1</strong>）。
+<strong>描画フェーズ</strong>：歪曲は<strong>背景画像を描画した後、立ち絵と文字を乗せる前</strong>に適用する。行ごとに<code>vram[x] = bg[x + shift]</code>でピクセルをずらすことで、文字は真っ直ぐなまま背景のみが大きく波打つ。</p>
+<h3 id="58-lvnshistory-vram">5.8 全画面バックログ（LvnsHistory）と二重テキスト VRAM</h3>
+<ul>
+<li>突入時に状態をスナップショット保存し、離脱時に完全復帰する；</li>
+<li>背景画像は維持したまま、テキストバッファを<code>current_tvram = 1</code>に切り替え、1ページ分を一括描画する；</li>
+<li>14箇所の<code>if (!history_mode)</code>ガードにより、立ち絵や効果音処理をバイパスする；</li>
+<li>画面右端の▲ / ▼記号は第25列のフォントセルであり、クリック判定は当該セルの属性を読み取る。</li>
+</ul>
+<hr />
+<h2 id="6-macos">6. 音声システムと macOS 低レベル工学的トラブルシューティング</h2>
+<h3 id="61-bgm-bgmmap-cd-da">6.1 BGM 番号マッピング（bgmmap）と CD-DA オフセット</h3>
+<p>スクリプト内のBGM番号は実ファイル名と一致しないため、変換が必要である：</p>
+<pre><code class="language-c">int bgmmap(int script_no) {
+    if (script_no == 14) return 2;  // 特例：トラック2（Jingle）へ
+    if (script_no &lt; 16)  return script_no + 2;
+    return script_no + 1;
+}
+</code></pre>
+<p>実ファイル名は<code>MUS(track - 2).OGG</code>となる。このマッピングを怠ると、30%以上のシーンで誤った曲が流れる。
+公式サウンドトラックとの音響指紋照合により、OP曲は78.2秒の<code>MUS14.OGG</code>（<code>MUS16.OGG</code>はエンディング曲）であることを確定した。</p>
+<h3 id="62-coreaudio-11025hz">6.2 CoreAudio モノラル11025Hz例外の握り潰しによるプロセスハング</h3>
+<p>効果音再生時にプロセスがエラー出力なしで停止する現象が発生した。</p>
+<h4 id="_5">原因</h4>
+<p>効果音ファイルは<strong>11025Hz モノラル WAV</strong>である。
+macOSの<code>AVAudioEngine</code>は<strong>48000Hz ステレオ</strong>で動作している。
+フォーマットが一致しないバッファを<code>AVAudioPlayerNode.scheduleBuffer</code>に投入すると、CoreAudio内部でObjective-Cの<code>NSException</code>が送出される。
+CLI環境ではクラッシュログが出力されるが、<strong>AppKitのGUIアプリではメインRunLoop最上位の<code>@catch</code>ブロックが例外を静かに握り潰してコールスタックを巻き戻す</strong>ため、ログなしでインタプリタが消滅し、無言のハング状態に陥っていた。</p>
+<h4 id="_6">対策</h4>
+<p><code>AudioController</code>内で自動フォーマット変換を実装した：</p>
+<pre><code class="language-swift">private func convertedBuffer(from inputBuffer: AVAudioPCMBuffer, to targetFormat: AVAudioFormat) -&gt; AVAudioPCMBuffer {
+    if inputBuffer.format == targetFormat { return inputBuffer }
+    guard let converter = AVAudioConverter(from: inputBuffer.format, to: targetFormat) else { return inputBuffer }
+    let capacity = AVAudioFrameCount(Double(inputBuffer.frameLength) * targetFormat.sampleRate / inputBuffer.format.sampleRate) + 1024
+    guard let outputBuffer = AVAudioPCMBuffer(pcmFormat: targetFormat, frameCapacity: capacity) else { return inputBuffer }
+    var error: NSError?
+    converter.convert(to: outputBuffer, error: &amp;error) { _, outStatus in
+        outStatus.pointee = .haveData
+        return inputBuffer
+    }
+    return outputBuffer
+}
+</code></pre>
+<h3 id="63-60hz-macos-app-nap">6.3 60Hz クロックと macOS App Nap によるスロットリング</h3>
+<p>エンジンの時間基準は<code>INTERVAL = 60</code>で定義された<strong>1/60秒（1フリップ）</strong>である。</p>
+<h4 id="app-nap-112">App Nap による1/12倍速化</h4>
+<p>ウィンドウが非アクティブになった際、macOSの<strong>App Nap</strong>機能によってタイマーが<strong>約1Hz</strong>まで間引かれ、毎秒5フレーム（1/12倍速）まで著しく低下した。</p>
+<h4 id="_7">対策</h4>
+<p>ゲームループ稼働中は、OSに対して遅延アサーションを明示的に取得する：</p>
+<pre><code class="language-swift">self.activityToken = ProcessInfo.processInfo.beginActivity(
+    options: [.userInitiated, .latencyCritical],
+    reason: &quot;60 Hz reference flip loop (Lvns INTERVAL)&quot;
+)
+</code></pre>
+<hr />
+<h2 id="7">7. 実戦的バイナリフォレンジック：時計塔の隠し音楽室（音楽モード）</h2>
+<h3 id="71-5">7.1 突破口：タイトルメニューの第5の不可視ポインタ</h3>
+<p>歴史的オープンソース移植である <code>mglvns</code> において音楽室関連ルーチンが <code>#if 0</code> で除外されていたことから、Windows オリジナル版には音楽モードが未実装であるという誤認が長年定着していた。
+しかし、Capstone を用いて <code>Sizuku.exe</code> のタイトルメニューポインタ配列（VA <code>0x430ebc</code>、ファイルオフセット <code>0x30ebc</code>）を精密に逆アセンブル・解析した結果、配列には画面に見える 4 項目（「最初から」「栞から」等）に加え、明確に <strong>5 番目のポインタ</strong>（<code>0x00430ebc</code>, <code>0x00430ed0</code>, <code>0x00430ee4</code>, <code>0x00430ef8</code>, <code>0x00430f0c</code>）が格納されている事実を突き止めた。
+<code>0x00430f0c</code> が指す実体データは極めて特殊な葉コード列であった：
+<code>73 30</code>（"s0"、フォントスタイル 0） + <code>58 35 36 59 31 32 38</code>（"X56Y128"、ASCII 文字による絶対座標指定） + <code>ff ff</code>（全角空白の葉コード） + <code>72 24</code>（"r$"、改行および終端記号）。
+すなわち、印字される文字列は全角空白のみ（画面上は完全に不可視）でありながら、独自の座標コードによって画面上の特定位置にピンポイントで配置された隠し判定スロットであった。この領域をクリックすると、メニュー振り分けテーブル <code>0x409558</code> の Case 4 が発火し、直ちに <code>0x408d40</code> へジャンプして本物の音楽室が初期化される。</p>
+<h3 id="72">7.2 座標単位の数学的証明とピクセルアライメント</h3>
+<p>Leafの座標定義規則：
+- <code>Y</code>：ピクセル単位；
+- <code>X</code>：<strong>半角文字幅（8ピクセル）単位</strong>。</p>
+<p>ターゲット物理座標：
+$$X = 56 \times 8 = 448\text{px}, \quad Y = 128\text{px}$$
+タイトル背景<code>TITLE0.LFG</code>上にマッピングした結果、<strong>校舎右棟の上段右端の窓ガラス</strong>に寸分違わず合致した。</p>
+<h3 id="73-0x24">7.3 音楽室本体ルーチンと葉コード 0x24 終端の罠</h3>
+<p>逆アセンブルを追跡し、<code>0x408d40</code>にジュークボックス本体を確認：
+- 背景画像：<code>VIS17.LFG</code>（オルゴール）；
+- 24曲のタイトルと作曲者テーブル；
+- <strong>終端罠</strong>：曲名文字列は<code>0x24</code>（ASCII <code>$</code>）で終端されているが、<code>0x24</code>は日本語の葉コードの第2バイトとしても正当に出現する（例：「叔父さん」の「叔」）。単純に<code>0x24</code>で文字列を切り出すと曲名が途中で切断されるため、デコーダは厳密に2バイト単位で進める必要がある。</p>
+<hr />
+<h2 id="8">8. スタッフロールのブロッキングスクリプト解析</h2>
+<p><code>0x7d END_BGM</code>で起動するスタッフロールはブロッキング実行される：
+1. 14枚のカードを順次処理：背景ロード $\to$ 文字表示6秒 $\to$ パレット暗転16フリップ $\to$ 新背景明転16フリップ $\to$ 背景のみ表示1秒 $\to$ 文字表示；
+2. 全体の所要時間は固定である：
+   $$16 + (13 \times 436) + 76 = 5760 \text{ フリップ} \approx 96 \text{ 秒}$$
+3. <strong>CLICK_JUMP 仕様</strong>：クリック時は即座に飛ばすのではなく、<code>selectPending</code>を立ててカードの6秒終了を待ってから最終カードへ滑らかに遷移する。</p>
+<hr />
+<h2 id="9-leaf-to-heart">9. 他の Leaf 作品（『痕』『To Heart』）への横展開手法</h2>
+<h3 id="91">9.1 エンジン系譜コンポーネント再利用性マトリクス</h3>
+<table>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>雫 (1996)</th>
+<th>痕 (1996)</th>
+<th>To Heart (1997)</th>
+<th>再利用方針</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LEAFPACK 抽出</strong></td>
+<td>403ファイル</td>
+<td>511ファイル</td>
+<td>584 / 993ファイル</td>
+<td><strong>100%共通</strong>。ファイル数で自動識別</td>
+</tr>
+<tr>
+<td><strong>LZS 展開ルーチン</strong></td>
+<td>正論理 + LZS3</td>
+<td>正論理 + LZS3</td>
+<td>正論理 + LZS3</td>
+<td><strong>100%共通</strong>。そのまま利用可能</td>
+</tr>
+<tr>
+<td><strong>LFG 画像デコーダ</strong></td>
+<td>16色 4-bit</td>
+<td>16色 4-bit</td>
+<td>256色 8-bit</td>
+<td><strong>90%共通</strong>。『To Heart』のみ256色対応</td>
+</tr>
+<tr>
+<td><strong>KNJ フォント処理</strong></td>
+<td>24×24 @1bpp</td>
+<td>24×24 @1bpp</td>
+<td>24×24 @1bpp</td>
+<td><strong>構造100%共通</strong>。文字データのみ各作から抽出</td>
+</tr>
+<tr>
+<td><strong>外側 Event VM</strong></td>
+<td>0x00~0x7e</td>
+<td>0x00~0x7e</td>
+<td>拡張命令追加</td>
+<td><strong>85%共通</strong>。ディスパッチループを流用</td>
+</tr>
+<tr>
+<td><strong>内側 Inline VM</strong></td>
+<td>B, C, S, D, M, P...</td>
+<td>微修正</td>
+<td>演出タグ拡張</td>
+<td><strong>75%共通</strong>。インライン文字テーブルを差し替え</td>
+</tr>
+<tr>
+<td><strong>13大トランジション</strong></td>
+<td>13種類</td>
+<td>13種類</td>
+<td>13種類 + 拡張</td>
+<td><strong>95%共通</strong>。そのまま動作可能</td>
+</tr>
+<tr>
+<td><strong>BGM/地点テーブル</strong></td>
+<td><code>bgmap</code>/<code>palmap</code></td>
+<td>要抽出</td>
+<td>要抽出</td>
+<td><strong>0%</strong>。ロジック共通だがEXEからの逆アセンブル抽出が必須</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92-9">9.2 新作移植における標準化9ステップ手順書</h3>
+<ol>
+<li><strong>アーカイブ展開</strong>：<code>unpack_leafpack.py</code>でファイル数を照合し全データを展開；</li>
+<li><strong>先行コード精査</strong>：<code>mglvns</code>のドライバ（<code>kizuato.c</code>, <code>toheart.c</code>）の<code>#ifndef USE_MGL</code>ブランチを確認；</li>
+<li><strong>フォント表示の先行検証</strong>：3列縦ストリップ優先アルゴリズムでフォント出力を確認；</li>
+<li><strong>Opcode 頻度分析</strong>：出現頻度の高い上位80%の命令を優先実装；</li>
+<li><strong>未知命令の Wine 検証</strong>：推測で書かずWine上の実機動作で仕様を確定；</li>
+<li><strong>音響指紋による BGM 同定</strong>：無損OSTと波形照合を行い<code>bgmmap</code>を作成；</li>
+<li><strong>60Hz クロック固定</strong>：すべてのウェイト処理を<code>INTERVAL = 60</code>に同期；</li>
+<li><strong>自動フレーム出力の配備</strong>：自動テストに組み込み、出力PNGを目視検査；</li>
+<li><strong>逆アセンブラの待機</strong>：Capstoneを用いて適宜テーブル情報を逆引き。</li>
+</ol>
+<hr />
+<h2 id="10">10. 自動化検証ツールとデバッグインフラ基盤</h2>
+<h3 id="101-shizuku_shot">10.1 ヘッドレス自動フレーム出力パイプライン（SHIZUKU_SHOT）</h3>
+<p>描画順のバグによる非表示事故を防ぐため、自動出力ツールをランタイムに内蔵した：</p>
+<pre><code class="language-bash">SHIZUKU_SHOT=boot,title,game,esc,spiral,music ./build/ShizukuApp
+</code></pre>
+<p>仮想タイマーを進め、各シーンの640×400 RGBAバッファを無劣化PNGとして出力する。<strong>画面表示に関する修正は、出力されたPNGの目視確認をもって完了とする。</strong></p>
+<h3 id="102-watchdog">10.2 本番バイナリ内蔵の自律治癒フリップ番犬（Watchdog）</h3>
+<p>Releaseビルドにはメインスレッド監視の番犬スレッドを常駐させている：
+エンジンが稼働中であるにもかかわらず2.0秒間フリップが途絶えた場合、<code>~/Library/Logs/Shizuku_Restored/diagnostic.log</code>にスナップショットを記録し、<strong>DisplayLinkループを強制再起動して自動復帰させる</strong>。</p>
+<hr />
+<h2 id="a-opcode">付録 A：主要 Opcode およびインライン制御文字リファレンス</h2>
+<h3 id="1-opcode">1. 外側イベント Opcode</h3>
+<table>
+<thead>
+<tr>
+<th>Opcode</th>
+<th>バイト長</th>
+<th>引数</th>
+<th>動作内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x00</code></td>
+<td>1B</td>
+<td>なし</td>
+<td>Block終了</td>
+</tr>
+<tr>
+<td><code>0x01</code></td>
+<td>3B</td>
+<td><code>sub, arg</code></td>
+<td>複合トランジション（正弦波歪曲/黒フェード/題字/テキスト）</td>
+</tr>
+<tr>
+<td><code>0x04</code></td>
+<td>3B</td>
+<td><code>scn, blk</code></td>
+<td>JUMP：指定Blockへ遷移</td>
+</tr>
+<tr>
+<td><code>0x05</code></td>
+<td>可変長</td>
+<td><code>msg, cnt, ...</code></td>
+<td>SELECT：選択肢メニュー表示</td>
+</tr>
+<tr>
+<td><code>0x07</code></td>
+<td>1B</td>
+<td>なし</td>
+<td>直前の選択肢アンカーマーク</td>
+</tr>
+<tr>
+<td><code>0x0a</code></td>
+<td>2B</td>
+<td><code>loc_no</code></td>
+<td>背景設定（<code>bgmap</code>変換）</td>
+</tr>
+<tr>
+<td><code>0x14</code></td>
+<td>2B</td>
+<td><code>type</code></td>
+<td>画面完全消去（画像および文字）</td>
+</tr>
+<tr>
+<td><code>0x16</code></td>
+<td>2B</td>
+<td><code>hvs_no</code></td>
+<td>H-CG背景ロード</td>
+</tr>
+<tr>
+<td><code>0x22</code></td>
+<td>3B</td>
+<td><code>chr, pos</code></td>
+<td>立ち絵表示（スロット指定）</td>
+</tr>
+<tr>
+<td><code>0x24</code></td>
+<td>3B</td>
+<td><code>chr, pos</code></td>
+<td>アップ立ち絵（中央<code>'c'</code>強制）</td>
+</tr>
+<tr>
+<td><code>0x28</code></td>
+<td>1B</td>
+<td>なし</td>
+<td>マーク2</td>
+</tr>
+<tr>
+<td><code>0x38</code></td>
+<td>2B</td>
+<td><code>effect</code></td>
+<td>画面更新（<code>LvnsDisp</code>）+ 予約BGM再生開始</td>
+</tr>
+<tr>
+<td><code>0x3d</code></td>
+<td>4B</td>
+<td><code>flag, val, off</code></td>
+<td>条件分岐（<code>flag[id] == val</code>）</td>
+</tr>
+<tr>
+<td><code>0x3e</code></td>
+<td>4B</td>
+<td><code>flag, val, off</code></td>
+<td>条件分岐（<code>flag[id] != val</code>）</td>
+</tr>
+<tr>
+<td><code>0x47</code></td>
+<td>3B</td>
+<td><code>flag, val</code></td>
+<td>フラグ代入</td>
+</tr>
+<tr>
+<td><code>0x48</code></td>
+<td>3B</td>
+<td><code>flag, delta</code></td>
+<td>フラグ加算</td>
+</tr>
+<tr>
+<td><code>0x54</code></td>
+<td>2B</td>
+<td><code>msg_idx</code></td>
+<td>メッセージセクションのメッセージを表示</td>
+</tr>
+<tr>
+<td><code>0x6e</code></td>
+<td>2B</td>
+<td><code>bgm_no</code></td>
+<td>BGMループ再生（<code>bgmmap</code>変換）</td>
+</tr>
+<tr>
+<td><code>0x7d</code></td>
+<td>2B</td>
+<td><code>bgm_no</code></td>
+<td>スタッフロールスクリプト実行</td>
+</tr>
+<tr>
+<td><code>0x7e</code></td>
+<td>2B</td>
+<td><code>ed_no</code></td>
+<td>エンディング番号記録</td>
+</tr>
+<tr>
+<td><code>0xff</code></td>
+<td>1B</td>
+<td>なし</td>
+<td>終端番兵</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2_2">2. 内側インライン演出制御文字</h3>
+<table>
+<thead>
+<tr>
+<th>文字</th>
+<th>引数長</th>
+<th>記述例</th>
+<th>演出動作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$</code></td>
+<td>0B</td>
+<td>なし</td>
+<td>メッセージ終了</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>0B</td>
+<td>なし</td>
+<td>改ページ待機（紙アイコン表示、クリック後消去）</td>
+</tr>
+<tr>
+<td><code>k</code>/<code>K</code></td>
+<td>0B</td>
+<td>なし</td>
+<td>キー待機（▶アイコン表示、クリック後次行追記）</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>0B</td>
+<td>なし</td>
+<td>改行</td>
+</tr>
+<tr>
+<td><code>B</code>/<code>E</code></td>
+<td>6B</td>
+<td><code>B070808</code></td>
+<td>背景ロード（地点07、効果08）</td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td>3B</td>
+<td><code>Cr51</code></td>
+<td>立ち絵ロード（右スロットに51番）</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>1B</td>
+<td><code>Da</code>, <code>Dl</code></td>
+<td>立ち絵消去（<code>Da</code>で全消去）</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>9B</td>
+<td><code>S...</code></td>
+<td>背景・立ち絵同時変更</td>
+</tr>
+<tr>
+<td><code>A</code>/<code>a</code></td>
+<td>可変</td>
+<td><code>A...</code></td>
+<td>3人立ち絵配置</td>
+</tr>
+<tr>
+<td><code>V</code></td>
+<td>可変</td>
+<td><code>V01...</code></td>
+<td>イベントCGロード</td>
+</tr>
+<tr>
+<td><code>H</code></td>
+<td>可変</td>
+<td><code>H01...</code></td>
+<td>H-CGロード</td>
+</tr>
+<tr>
+<td><code>M</code></td>
+<td>可変</td>
+<td><code>Mf</code>, <code>Mn01</code></td>
+<td>BGM制御（フェード/予約/切替）</td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>可変</td>
+<td><code>P01-P13</code></td>
+<td>PCM効果音再生</td>
+</tr>
+<tr>
+<td><code>F</code></td>
+<td>0B</td>
+<td>なし</td>
+<td>全画面白フラッシュ</td>
+</tr>
+<tr>
+<td><code>Q</code></td>
+<td>0B</td>
+<td>なし</td>
+<td>全画面震動</td>
+</tr>
+<tr>
+<td><code>X</code></td>
+<td>2B</td>
+<td><code>X08</code></td>
+<td>行描画水平オフセット</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>1B</td>
+<td><code>s02</code></td>
+<td>タイプライター文字表示速度</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="b">付録 B：設計的逸脱およびアクセシビリティ拡張仕様対照表</h2>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>1996年原版の仕様</th>
+<th>macOS版の仕様 (Ver.1.0)</th>
+<th>設計理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>セーブスロット数</strong></td>
+<td>手動しおり3枠 + 自動退避1枠</td>
+<td>手動しおり6枠 + クイックセーブ1枠</td>
+<td>大画面デスクトップでの実用性向上のため拡張</td>
+</tr>
+<tr>
+<td><strong>セーブデータ形式</strong></td>
+<td>232バイトバイナリ構造体</td>
+<td>構造化JSONテキストファイル</td>
+<td>将来の拡張性、互換性、可読性を確保</td>
+</tr>
+<tr>
+<td><strong>音楽室の入口</strong></td>
+<td>完全不可視、フィードバックなし</td>
+<td>マウスホバーで白枠表示、メニューバー直行</td>
+<td>イースターエッグ性を保ちつつ発見性を付与</td>
+</tr>
+<tr>
+<td><strong>音楽室の脱出</strong></td>
+<td>マウス右クリックのみ</td>
+<td>右クリックおよび<code>ESC</code>キー（ガイド表示あり）</td>
+<td>現代的なキーボード操作感への適合</td>
+</tr>
+<tr>
+<td><strong>回想画面の操作</strong></td>
+<td>画面右端の▲ / ▼記号をクリック</td>
+<td>記号クリックに加え、ホイールおよびタッチパッド操作</td>
+<td>macOS標準ハードウェアの操作性を活用</td>
+</tr>
+<tr>
+<td><strong>早送りキーの仕様</strong></td>
+<td>ウィンドウメニューのみ、Enter長押し無効</td>
+<td>メニュー項目（Tab/Z）、キーリピート遮断</td>
+<td>誤操作を排し原版の動作を忠実に維持</td>
+</tr>
+<tr>
+<td><strong>エフェクト省略</strong></td>
+<td>コマンドライン引数 <code>-n e</code></td>
+<td>メニューバー「表示 $\to$ 画面エフェクトを省く」</td>
+<td>内蔵機能を標準UIとして露出</td>
+</tr>
+<tr>
+<td><strong>カーソル字形</strong></td>
+<td>フォントに▼なし（プログラム描画）</td>
+<td>葉コード102（▶）と103（紙）を厳格に使い分け</td>
+<td>待機意味論の混同を解消し正しく表現</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>注記：本プロジェクトにおける解析および再実装は、合法的に取得された実物メディアを対象に実施された。ゲームソフトウェア、美術、音楽に関するすべての権利は Leaf / 株式会社アクアプラスに帰属する。本稿はリバースエンジニアリングに関する技術的知見の共有、デジタル保存、ソフトウェア工学の研究を目的としている。</em></p>
+        </article>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p class="footer-title">Shizuku_macos_restore_study · Leaf LVNS Engine Reverse Engineering & Native macOS Restoration</p>
+            <p class="footer-author">
+                jill 推特<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> 微博<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

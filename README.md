@@ -12,13 +12,31 @@
 
 ---
 
-## 📑 核心技术工程指南 / Flagship Articles
+## 📑 核心技术工程指南与文章互引 / Flagship Articles & Cross-Indexing
 
-本项目历经完整逆向推导与实机排错，总结撰写了详尽的工程技术复盘长文，提供中、英、日三语版本：
+本项目历经完整逆向推导与实机排错，总结撰写了详尽的工程技术复盘长文。三篇文档内容互相锚定、结构严密对齐，并在文首均提供语言一键互换跳转：
 
-- 🇨🇳 **[中文工程技术指南 (Chinese)](articles/leaf-galgame-port-zh.md)**：深入剖析数据解密、双层虚拟机、渲染管线、音频与系统级排错，以及向《痕》《To Heart》横向推广的完整指南。
-- 🇺🇸 **[Engineering Guide (English)](articles/leaf-galgame-port-en.md)**：A comprehensive, pragmatic technical postmortem covering binary reverse-engineering, dual-layer VM architecture, graphics and audio systems, and the Swift + Metal implementation.
-- 🇯🇵 **[技術仕様書・実装報告 (Japanese)](articles/leaf-galgame-port-jp.md)**：バイナリ解析、2層仮想マシン設計、描画およびCoreAudio障害追究、他作品への横展開手法を網羅した詳細な技術文書。
+| 语言版本 / Edition | Markdown 源文档 | 静态网页端 / Web View (GitHub Pages) | 核心定位与特色 |
+|---|---|---|---|
+| 🇨🇳 **简体中文** | [`articles/leaf-galgame-port-zh.md`](articles/leaf-galgame-port-zh.md) | [**进入中文版网页 →**](article-zh.html) | 面向现代软件工程师的务实技术文档，系统阐释二进制解密、双层虚拟机、渲染管线、音频异常与向《痕》《To Heart》复用的 9 步工单。 |
+| 🇺🇸 **English** | [`articles/leaf-galgame-port-en.md`](articles/leaf-galgame-port-en.md) | [**View English Article →**](article-en.html) | A pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, CoreAudio exception swallowing, and Apple Silicon adaptations. |
+| 🇯🇵 **日本語** | [`articles/leaf-galgame-port-jp.md`](leaf-galgame-port-jp.md) | [**技術仕様書を見る →**](article-jp.html) | LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、タイトル画面 VA 0x430ebc の第 5 不可視ポインタから導く隠し音楽室の復元など、全工程を実務的に解説した技術仕様書。 |
+
+> 💡 **文章互引说明**：
+> - 每篇 Markdown 文档顶部均配有统一语言导航条：`> 🌐 语言 / Language: [🇨🇳 简体中文](leaf-galgame-port-zh.md) ｜ [🇺🇸 English](leaf-galgame-port-en.md) ｜ [🇯🇵 日本語](leaf-galgame-port-jp.md)`；
+> - 静态网页端右上角设有常驻语言切换按钮（`[Home]` `[🇨🇳 简体中文]` `[🇺🇸 English]` `[🇯🇵 日本語]`），支持平滑跨语种对照阅读。
+
+---
+
+## 🌐 静态 HTML 网页门户 / GitHub Pages Ready
+
+本仓库根目录已内置开箱即用的轻量级响应式静态站点，无需额外构建流水线即可直接托管于 **GitHub Pages**：
+
+- **[index.html](index.html)**：项目技术门户主页，包含架构可视化图解、核心格式卡片、工具链速查与产物直达；
+- **[article-zh.html](article-zh.html)**：中文工程技术指南完整排版页，带左侧悬浮目录（TOC）与代码语法高亮；
+- **[article-en.html](article-en.html)**：English Technical Guide 完整排版页；
+- **[article-jp.html](article-jp.html)**：日本語技術仕様書 完整排版页；
+- **[style.css](style.css)**：纯原生 CSS，支持系统级浅色/深色主题自适应，零外部网络 CDN 依赖。
 
 ---
 
@@ -26,15 +44,20 @@
 
 ```text
 Shizuku_macos_restore_study/
-├── README.md                      # 本文档：仓库索引与导航
-├── .gitignore                     # Git 忽略规则
+├── README.md                      # 本文档：仓库索引、文章互引与导航
+├── .gitignore                     # Git 忽略规则（排除编译缓存与系统元数据）
+├── index.html                     # 静态网页门户主页（GitHub Pages 就绪）
+├── article-zh.html                # 中文版静态排版页面
+├── article-en.html                # 英文版静态排版页面
+├── article-jp.html                # 日文版静态排版页面
+├── style.css                      # 静态网页轻量级响应式主题样式表
 │
 ├── articles/                      # 核心工程技术复盘长文（中／英／日三语对齐）
 │   ├── leaf-galgame-port-zh.md    # 中文工程技术指南
 │   ├── leaf-galgame-port-en.md    # English Engineering Guide
 │   └── leaf-galgame-port-jp.md    # 日本語技術仕様書
 │
-├── docs/                          # 基础格式字段级规范与逆向分析文档
+├── docs/                          # 基础格式字段级规范与逆向分析文档（9 份）
 │   ├── containers.md              # LEAFPACK 容器格式与 11 字节异或解密规范
 │   ├── lfg.md                     # LFG 图像格式、4 位调色板高低位复制与垂直列交织
 │   ├── scripts.md                 # SCN 脚本结构、Block 执行模型与行内宏指令
@@ -45,7 +68,7 @@ Shizuku_macos_restore_study/
 │   ├── gbalvns.md                 # GBALVNS 开源架构与指令集参考
 │   └── sizuku-gba.md              # GBA 移植版实现对比分析
 │
-├── reports/                       # 全量研究报告与工程交接研发日志
+├── reports/                       # 全量研究报告与工程交接研发日志（4 份）
 │   ├── SHIZUKU_PORT_RESEARCH_REPORT.md  # Phase 0/1 初始研究报告（数据验证与可行性）
 │   ├── HANDOVER.md                # 完整研发交接日志（340KB，包含 M4.10/M4.11 所有攻坚细节）
 │   ├── MILESTONES.md              # 里程碑计划与验收标准记录
@@ -162,3 +185,7 @@ python3 -m tools.shizuku_cli extract /path/to/MAX_DATA.PAK -o output_dir/
 - 本仓库所载的研究文档、逆向分析工具、反汇编说明与现代架构代码仅供计算机软件工程、老旧系统兼容性研究与数字化文化资产保护参考学习之用。
 - 《雫～しずく～》及其角色、剧本、音乐与美术资产版权归 Leaf / AQUAPLUS 所有。
 - 本仓库不分发任何原版商业游戏的受版权保护的原始资源文件（如原始 CD 镜像、PAK 归档）。
+
+---
+
+jill 推特[@jill05617147](https://x.com/jill05617147) 微博[@jill_mk3](https://weibo.com/n/jill_mk3)

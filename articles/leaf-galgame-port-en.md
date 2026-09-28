@@ -1,6 +1,8 @@
 # Porting Classic Leaf Visual Novels (LVNS) to macOS: A Native Swift Engineering Guide
 ## — Rebuilding Windows 95 Visual Novels on Modern Platforms: The 《雫 (Shizuku)》 Experience
 
+> 🌐 **Language / Other Languages**: [🇺🇸 English](leaf-galgame-port-en.md) ｜ [🇨🇳 简体中文](leaf-galgame-port-zh.md) ｜ [🇯🇵 日本語](leaf-galgame-port-jp.md)
+>
 > This document is a pragmatic, technical engineering postmortem. It details how the 1996 visual novel *《雫～しずく～》* (Shizuku) by Leaf (now AQUAPLUS)—and the underlying Leaf Visual Novel System (LVNS) engine family—was reverse-engineered from legacy Windows 95 binary assets and rebuilt from scratch as a native, 60Hz Metal-accelerated Swift application for macOS on Apple Silicon (Ver. 1.0).
 >
 > All storytelling flourishes and dramatic prose have been removed. This guide focuses strictly on engineering realities: reverse-engineering proprietary binary formats, deducing bytecode opcode semantics, architecting a dual-layer virtual machine, debugging rendering and CoreAudio pipelines, and generalizing the toolchain to port companion titles like *Kizuato* and *To Heart*.
@@ -126,9 +128,10 @@ Three open-source codebases provided historical context for the Leaf Visual Nove
 To resolve conflicting documentation:
 
 1. **Static Disassembly with Capstone & pefile**:
-   The original `Sizuku.exe` is a non-ASLR, non-relocated 32-bit PE binary loaded at base address `0x400000`. Virtual Addresses (VA) map directly to file offsets:
-   $$\text{File Offset} = \text{VA} - 0x400000$$
-   Whenever behavior was disputed, we disassembled the exact x86 function or jump table in question.
+   The original `Sizuku.exe` is a non-ASLR, non-relocated 32-bit PE binary loaded at a fixed base address of `0x400000`.
+   Parsing the section header table via `pefile` confirms that `.text` (code, RVA `0x1000`, Raw `0x1000`), `.rdata` (read-only data, RVA `0x2E000`, Raw `0x2E000`), and `.data` (globals, RVA `0x30000`, Raw `0x30000`) share identical memory alignment and disk file alignment (`0x1000` page boundaries). Consequently, for all executable code routines and static tables, Virtual Addresses (VA) map directly and deterministically to disk file offsets:
+   $$\text{File Offset} = \text{RVA} = \text{VA} - 0x400000$$
+   Whenever bytecode widths, jump tables, or timing semantics were disputed, disassembling the exact x86 machine instructions at the target VA provided instantaneous, indisputable ground truth.
 2. **The Wine Runtime Oracle**:
    When static disassembly left ambiguity regarding timing or graphics states, we ran the original Japanese binary in Wine 11.15 under Rosetta 2. Using breakpoints and memory dumps, we recorded the exact VRAM buffer states and register values across individual frames as the ground truth baseline.
 
@@ -482,11 +485,11 @@ self.activityToken = ProcessInfo.processInfo.beginActivity(
 
 ### 7.1 The Breakthrough: Fifth Menu Pointer at VA 0x430ebc
 
-Historical source code had commented out the music room, leading to the belief that it was absent in the PC release.
-Disassembling the title menu jump table at VA `0x430ebc` in `Sizuku.exe` revealed **5 pointers**, not 4.
-The 5th pointer referenced the byte sequence:
-`73 30` ("s0") `58 35 36 59 31 32 38` ("X56Y128") `ff ff` `72 24`.
-This defined an invisible menu item with empty text positioned at absolute coordinates.
+In historical open-source ports such as `mglvns`, the music room routine was commented out with `#if 0`, creating a widespread historical misconception that the Windows 95 release omitted the feature entirely.
+Disassembling the title menu pointer table in `Sizuku.exe` at VA `0x430ebc` (file offset `0x30ebc`) revealed that the array holds **5 entry pointers** (`0x00430ebc`, `0x00430ed0`, `0x00430ee4`, `0x00430ef8`, `0x00430f0c`), rather than the 4 visible menu options.
+The first four pointers resolve to standard title strings ("最初から", "栞から", etc.), while the fifth pointer at `0x00430f0c` points to an extraordinary raw byte sequence:
+`73 30` ("s0", font style 0) + `58 35 36 59 31 32 38` ("X56Y128", explicit ASCII screen positioning) + `ff ff` (Leaf Code fullwidth space) + `72 24` ("r$", line feed and string termination).
+Because its rendered glyph content consists solely of an empty fullwidth space, the item is completely invisible to the player, yet it acts as a discrete, coordinate-pinned hit-test hitbox. Clicking this hitbox fires case 4 in menu dispatch table `0x409558`, immediately jumping to `0x408d40` to initialize the authentic Music Room.
 
 ### 7.2 Coordinate Unit Math & Pixel-Level Alignment
 

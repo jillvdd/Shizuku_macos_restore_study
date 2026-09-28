@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaf LVNS Porting Guide (English) - Shizuku_macos_restore_study</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <div class="logo-area">
+                <a href="index.html">🍃 Shizuku_macos_restore_study</a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html" class="lang-btn">🏠 Home</a>
+                <a href="article-zh.html" class="lang-btn ">🇨🇳 简体中文</a>
+                <a href="article-en.html" class="lang-btn active">🇺🇸 English</a>
+                <a href="article-jp.html" class="lang-btn ">🇯🇵 日本語</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <aside class="toc-sidebar">
+            <h3>Table of Contents</h3>
+            <div class="toc">
+<ul>
+<li><a href="#porting-classic-leaf-visual-novels-lvns-to-macos-a-native-swift-engineering-guide">Porting Classic Leaf Visual Novels (LVNS) to macOS: A Native Swift Engineering Guide</a><ul>
+<li><a href="#rebuilding-windows-95-visual-novels-on-modern-platforms-the-shizuku-experience">— Rebuilding Windows 95 Visual Novels on Modern Platforms: The 《雫 (Shizuku)》 Experience</a></li>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#1-technical-goals-high-level-architecture">1. Technical Goals &amp; High-Level Architecture</a><ul>
+<li><a href="#11-why-wine-and-emulation-wrappers-were-rejected">1.1 Why Wine and Emulation Wrappers Were Rejected</a></li>
+<li><a href="#12-modern-swift-metal-layered-architecture">1.2 Modern Swift + Metal Layered Architecture</a></li>
+</ul>
+</li>
+<li><a href="#2-reverse-engineering-methodology-ground-truth">2. Reverse Engineering Methodology &amp; Ground Truth</a><ul>
+<li><a href="#21-evaluating-historical-open-source-implementations">2.1 Evaluating Historical Open-Source Implementations</a></li>
+<li><a href="#22-establishing-ground-truth-disassembly-wine-as-an-oracle">2.2 Establishing Ground Truth: Disassembly &amp; Wine as an Oracle</a></li>
+</ul>
+</li>
+<li><a href="#3-binary-data-formats-decryption-specifications">3. Binary Data Formats &amp; Decryption Specifications</a><ul>
+<li><a href="#31-the-leafpack-archive-container-max_datapak">3.1 The LEAFPACK Archive Container (MAX_DATA.PAK)</a><ul>
+<li><a href="#decryption-math-and-rolling-key">Decryption Math and Rolling Key</a></li>
+<li><a href="#directory-layout-key-recovery">Directory Layout &amp; Key Recovery</a></li>
+</ul>
+</li>
+<li><a href="#32-lzs-compression-variants-stream-truncation-hazards">3.2 LZS Compression Variants &amp; Stream Truncation Hazards</a><ul>
+<li><a href="#1-positive-vs-inverted-logic-variants">1. Positive vs. Inverted Logic Variants</a></li>
+<li><a href="#2-enforcing-strict-stream-truncation">2. Enforcing Strict Stream Truncation</a></li>
+</ul>
+</li>
+<li><a href="#33-lfg-leafcode-graphic-format-bit-interleaving">3.3 LFG (LEAFCODE) Graphic Format &amp; Bit Interleaving</a></li>
+<li><a href="#34-the-lac-audio-container">3.4 The LAC Audio Container</a></li>
+<li><a href="#35-physical-layout-of-knj_allknj-bitmap-font">3.5 Physical Layout of KNJ_ALL.KNJ Bitmap Font</a><ul>
+<li><a href="#3-column-strip-organization-column-major">3-Column Strip Organization (Column-Major)</a></li>
+<li><a href="#1-based-leaf-codes-sizfonttbl">1-Based Leaf Codes &amp; sizfont.tbl</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-dual-layer-virtual-machine-vm-architecture-implementation">4. Dual-Layer Virtual Machine (VM) Architecture &amp; Implementation</a><ul>
+<li><a href="#41-scn-script-structure-the-block-model">4.1 SCN Script Structure &amp; The Block Model</a></li>
+<li><a href="#42-layer-1-outer-event-vm-skip-opcode-traps">4.2 Layer 1: Outer Event VM &amp; Skip Opcode Traps</a><ul>
+<li><a href="#skip-opcode-parsing-guard">Skip Opcode Parsing Guard</a></li>
+</ul>
+</li>
+<li><a href="#43-layer-2-inner-inline-presentation-vm">4.3 Layer 2: Inner Inline Presentation VM</a></li>
+</ul>
+</li>
+<li><a href="#5-graphics-pipeline-high-fidelity-reconstruction">5. Graphics Pipeline &amp; High-Fidelity Reconstruction</a><ul>
+<li><a href="#51-full-screen-sound-novel-layout-line-wrapping-rules">5.1 Full-Screen Sound Novel Layout &amp; Line Wrapping Rules</a></li>
+<li><a href="#52-palette-darkening-three-pass-stamped-hard-shadow-glyphs">5.2 Palette Darkening &amp; Three-Pass Stamped Hard Shadow Glyphs</a></li>
+<li><a href="#53-waiting-cursor-semantics-phase-synchronization">5.3 Waiting Cursor Semantics &amp; Phase Synchronization</a></li>
+<li><a href="#54-location-folding-bgmap-atmosphere-palettes-palmap">5.4 Location Folding (bgmap) &amp; Atmosphere Palettes (palmap)</a></li>
+<li><a href="#55-mathematical-implementation-of-13-lvns-transitions">5.5 Mathematical Implementation of 13 LVNS Transitions</a></li>
+<li><a href="#56-correcting-the-spiral-transition-guruguru">5.6 Correcting the Spiral Transition (GURUGURU)</a></li>
+<li><a href="#57-opcode-0x01-subtypes-sine-wave-background-shearing">5.7 Opcode 0x01 Subtypes &amp; Sine Wave Background Shearing</a><ul>
+<li><a href="#math-pipeline-phase-of-sine-shear">Math &amp; Pipeline Phase of Sine Shear</a></li>
+</ul>
+</li>
+<li><a href="#58-full-screen-backlog-lvnshistory-dual-text-vram">5.8 Full-Screen Backlog (LvnsHistory) &amp; Dual Text VRAM</a></li>
+</ul>
+</li>
+<li><a href="#6-audio-subsystems-macos-low-level-engineering-pitfalls">6. Audio Subsystems &amp; macOS Low-Level Engineering Pitfalls</a><ul>
+<li><a href="#61-bgm-track-mapping-bgmmap-cd-da-offsets">6.1 BGM Track Mapping (bgmmap) &amp; CD-DA Offsets</a></li>
+<li><a href="#62-coreaudio-mono-11025hz-crash-swallowed-by-appkit">6.2 CoreAudio Mono 11025Hz Crash Swallowed by AppKit</a><ul>
+<li><a href="#root-cause">Root Cause</a></li>
+<li><a href="#fix">Fix</a></li>
+</ul>
+</li>
+<li><a href="#63-60hz-flip-loop-macos-app-nap-throttling">6.3 60Hz Flip Loop &amp; macOS App Nap Throttling</a><ul>
+<li><a href="#app-nap-112th-speed-degradation">App Nap 1/12th Speed Degradation</a></li>
+<li><a href="#fix_1">Fix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#7-practical-binary-forensics-the-hidden-title-music-room">7. Practical Binary Forensics: The Hidden Title Music Room</a><ul>
+<li><a href="#71-the-breakthrough-fifth-menu-pointer-at-va-0x430ebc">7.1 The Breakthrough: Fifth Menu Pointer at VA 0x430ebc</a></li>
+<li><a href="#72-coordinate-unit-math-pixel-level-alignment">7.2 Coordinate Unit Math &amp; Pixel-Level Alignment</a></li>
+<li><a href="#73-the-music-room-routine-leaf-string-0x24-terminator-hazard">7.3 The Music Room Routine &amp; Leaf String 0x24 Terminator Hazard</a></li>
+</ul>
+</li>
+<li><a href="#8-dissecting-the-staff-roll-credit-sequence">8. Dissecting the Staff Roll Credit Sequence</a></li>
+<li><a href="#9-generalizing-to-other-leaf-classics-kizuato-to-heart">9. Generalizing to Other Leaf Classics (Kizuato, To Heart)</a><ul>
+<li><a href="#91-engine-family-component-reusability-matrix">9.1 Engine Family Component Reusability Matrix</a></li>
+<li><a href="#92-standardized-nine-step-porting-pipeline">9.2 Standardized Nine-Step Porting Pipeline</a></li>
+</ul>
+</li>
+<li><a href="#10-automated-verification-debugging-infrastructure">10. Automated Verification &amp; Debugging Infrastructure</a><ul>
+<li><a href="#101-automated-headless-frame-capture-shizuku_shot">10.1 Automated Headless Frame Capture (SHIZUKU_SHOT)</a></li>
+<li><a href="#102-production-self-healing-flip-watchdog">10.2 Production Self-Healing Flip Watchdog</a></li>
+</ul>
+</li>
+<li><a href="#appendix-a-core-opcode-inline-token-quick-reference">Appendix A: Core Opcode &amp; Inline Token Quick Reference</a><ul>
+<li><a href="#1-outer-event-opcodes">1. Outer Event Opcodes</a></li>
+<li><a href="#2-inner-inline-tokens">2. Inner Inline Tokens</a></li>
+</ul>
+</li>
+<li><a href="#appendix-b-register-of-known-deviations-and-enhancements">Appendix B: Register of Known Deviations and Enhancements</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+        </aside>
+
+        <article class="markdown-body">
+            <h1 id="porting-classic-leaf-visual-novels-lvns-to-macos-a-native-swift-engineering-guide">Porting Classic Leaf Visual Novels (LVNS) to macOS: A Native Swift Engineering Guide</h1>
+<h2 id="rebuilding-windows-95-visual-novels-on-modern-platforms-the-shizuku-experience">— Rebuilding Windows 95 Visual Novels on Modern Platforms: The 《雫 (Shizuku)》 Experience</h2>
+<blockquote>
+<p>🌐 <strong>Language / Other Languages</strong>: <a href="leaf-galgame-port-en.md">🇺🇸 English</a> ｜ <a href="leaf-galgame-port-zh.md">🇨🇳 简体中文</a> ｜ <a href="leaf-galgame-port-jp.md">🇯🇵 日本語</a></p>
+<p>This document is a pragmatic, technical engineering postmortem. It details how the 1996 visual novel <em>《雫～しずく～》</em> (Shizuku) by Leaf (now AQUAPLUS)—and the underlying Leaf Visual Novel System (LVNS) engine family—was reverse-engineered from legacy Windows 95 binary assets and rebuilt from scratch as a native, 60Hz Metal-accelerated Swift application for macOS on Apple Silicon (Ver. 1.0).</p>
+<p>All storytelling flourishes and dramatic prose have been removed. This guide focuses strictly on engineering realities: reverse-engineering proprietary binary formats, deducing bytecode opcode semantics, architecting a dual-layer virtual machine, debugging rendering and CoreAudio pipelines, and generalizing the toolchain to port companion titles like <em>Kizuato</em> and <em>To Heart</em>.</p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#1-technical-goals--high-level-architecture">1. Technical Goals &amp; High-Level Architecture</a></li>
+<li><a href="#11-why-wine-and-emulation-wrappers-were-rejected">1.1 Why Wine and Emulation Wrappers Were Rejected</a></li>
+<li><a href="#12-modern-swift--metal-layered-architecture">1.2 Modern Swift + Metal Layered Architecture</a></li>
+<li><a href="#2-reverse-engineering-methodology--ground-truth">2. Reverse Engineering Methodology &amp; Ground Truth</a></li>
+<li><a href="#21-evaluating-historical-open-source-implementations">2.1 Evaluating Historical Open-Source Implementations</a></li>
+<li><a href="#22-establishing-ground-truth-disassembly--wine-as-an-oracle">2.2 Establishing Ground Truth: Disassembly &amp; Wine as an Oracle</a></li>
+<li><a href="#3-binary-data-formats--decryption-specifications">3. Binary Data Formats &amp; Decryption Specifications</a></li>
+<li><a href="#31-the-leafpack-archive-container-max_datapak">3.1 The LEAFPACK Archive Container (MAX_DATA.PAK)</a></li>
+<li><a href="#32-lzs-compression-variants--stream-truncation-hazards">3.2 LZS Compression Variants &amp; Stream Truncation Hazards</a></li>
+<li><a href="#33-lfg-leafcode-graphic-format--bit-interleaving">3.3 LFG (LEAFCODE) Graphic Format &amp; Bit Interleaving</a></li>
+<li><a href="#34-the-lac-audio-container">3.4 The LAC Audio Container</a></li>
+<li><a href="#35-physical-layout-of-knj_allknj-bitmap-font">3.5 Physical Layout of KNJ_ALL.KNJ Bitmap Font</a></li>
+<li><a href="#4-dual-layer-virtual-machine-vm-architecture--implementation">4. Dual-Layer Virtual Machine (VM) Architecture &amp; Implementation</a></li>
+<li><a href="#41-scn-script-structure--the-block-model">4.1 SCN Script Structure &amp; The Block Model</a></li>
+<li><a href="#42-layer-1-outer-event-vm--skip-opcode-traps">4.2 Layer 1: Outer Event VM &amp; Skip Opcode Traps</a></li>
+<li><a href="#43-layer-2-inner-inline-presentation-vm">4.3 Layer 2: Inner Inline Presentation VM</a></li>
+<li><a href="#5-graphics-pipeline--high-fidelity-reconstruction">5. Graphics Pipeline &amp; High-Fidelity Reconstruction</a></li>
+<li><a href="#51-full-screen-sound-novel-layout--line-wrapping-rules">5.1 Full-Screen Sound Novel Layout &amp; Line Wrapping Rules</a></li>
+<li><a href="#52-palette-darkening--three-pass-stamped-hard-shadow-glyphs">5.2 Palette Darkening &amp; Three-Pass Stamped Hard Shadow Glyphs</a></li>
+<li><a href="#53-waiting-cursor-semantics--phase-synchronization">5.3 Waiting Cursor Semantics &amp; Phase Synchronization</a></li>
+<li><a href="#54-location-folding-bgmap--atmosphere-palettes-palmap">5.4 Location Folding (bgmap) &amp; Atmosphere Palettes (palmap)</a></li>
+<li><a href="#55-mathematical-implementation-of-13-lvns-transitions">5.5 Mathematical Implementation of 13 LVNS Transitions</a></li>
+<li><a href="#56-correcting-the-spiral-transition-guruguru">5.6 Correcting the Spiral Transition (GURUGURU)</a></li>
+<li><a href="#57-opcode-0x01-subtypes--sine-wave-background-shearing">5.7 Opcode 0x01 Subtypes &amp; Sine Wave Background Shearing</a></li>
+<li><a href="#58-full-screen-backlog-lvnshistory--dual-text-vram">5.8 Full-Screen Backlog (LvnsHistory) &amp; Dual Text VRAM</a></li>
+<li><a href="#6-audio-subsystems--macos-low-level-engineering-pitfalls">6. Audio Subsystems &amp; macOS Low-Level Engineering Pitfalls</a></li>
+<li><a href="#61-bgm-track-mapping-bgmmap--cd-da-offsets">6.1 BGM Track Mapping (bgmmap) &amp; CD-DA Offsets</a></li>
+<li><a href="#62-coreaudio-mono-11025hz-crash-swallowed-by-appkit">6.2 CoreAudio Mono 11025Hz Crash Swallowed by AppKit</a></li>
+<li><a href="#63-60hz-flip-loop--macos-app-nap-throttling">6.3 60Hz Flip Loop &amp; macOS App Nap Throttling</a></li>
+<li><a href="#7-practical-binary-forensics-the-hidden-title-music-room">7. Practical Binary Forensics: The Hidden Title Music Room</a></li>
+<li><a href="#71-the-breakthrough-fifth-menu-pointer-at-va-0x430ebc">7.1 The Breakthrough: Fifth Menu Pointer at VA 0x430ebc</a></li>
+<li><a href="#72-coordinate-unit-math--pixel-level-alignment">7.2 Coordinate Unit Math &amp; Pixel-Level Alignment</a></li>
+<li><a href="#73-the-music-room-routine--leaf-string-0x24-terminator-hazard">7.3 The Music Room Routine &amp; Leaf String 0x24 Terminator Hazard</a></li>
+<li><a href="#8-dissecting-the-staff-roll-credit-sequence">8. Dissecting the Staff Roll Credit Sequence</a></li>
+<li><a href="#9-generalizing-to-other-leaf-classics-kizuato-to-heart">9. Generalizing to Other Leaf Classics (Kizuato, To Heart)</a></li>
+<li><a href="#91-engine-family-component-reusability-matrix">9.1 Engine Family Component Reusability Matrix</a></li>
+<li><a href="#92-standardized-nine-step-porting-pipeline">9.2 Standardized Nine-Step Porting Pipeline</a></li>
+<li><a href="#10-automated-verification--debugging-infrastructure">10. Automated Verification &amp; Debugging Infrastructure</a></li>
+<li><a href="#101-automated-headless-frame-capture-shizuku_shot">10.1 Automated Headless Frame Capture (SHIZUKU_SHOT)</a></li>
+<li><a href="#102-production-self-healing-flip-watchdog">10.2 Production Self-Healing Flip Watchdog</a></li>
+<li><a href="#appendix-a-core-opcode--inline-token-quick-reference">Appendix A: Core Opcode &amp; Inline Token Quick Reference</a></li>
+<li><a href="#appendix-b-register-of-known-deviations-and-enhancements">Appendix B: Register of Known Deviations and Enhancements</a></li>
+</ul>
+<hr />
+<h2 id="1-technical-goals-high-level-architecture">1. Technical Goals &amp; High-Level Architecture</h2>
+<h3 id="11-why-wine-and-emulation-wrappers-were-rejected">1.1 Why Wine and Emulation Wrappers Were Rejected</h3>
+<p>When porting legacy 1990s visual novels to macOS (Apple Silicon), a common quick-and-dirty approach is bundling a lightweight Wine prefix or using commercial emulation wrappers. Early in this project, that route was evaluated and discarded due to critical engineering limitations:</p>
+<ol>
+<li><strong>Retina and Upscaling Degradation</strong>: Wine handles low-resolution 640×400 paletted buffers via basic blitting or generic bilinear filtering. It cannot natively hook into Metal to perform integer nearest-neighbor or custom CRT/Retina sampling while maintaining pixel-crisp typography.</li>
+<li><strong>Zero Debugging Observability</strong>: Legacy Win32 GDI, DirectDraw, and DirectSound calls traversing Rosetta 2 and Wine create unpredictable edge-case failures. When crashes or audio hangs occur, LLDB and Instruments cannot cleanly inspect the call stack or profile memory leaks down to the byte level.</li>
+<li><strong>Lack of macOS System Integration</strong>: Emulation wrappers cannot easily integrate with the native macOS menu bar, support trackpad gestures natively, handle system-level key equivalents, or manage graceful window state transitions without leaving zombie processes in the Dock.</li>
+</ol>
+<p>Consequently, the core engineering requirement was established: <strong>discard the legacy PE executable entirely, deconstruct all asset formats and bytecode VM logic, and rebuild the engine natively in Swift and Metal.</strong></p>
+<h3 id="12-modern-swift-metal-layered-architecture">1.2 Modern Swift + Metal Layered Architecture</h3>
+<p>The project is structured under <code>ShizukuRuntime</code> into four decoupled Swift Package Manager (SPM) modules with strict unidirectional dependencies:</p>
+<pre><code>+--------------------------------------------------------------------------+
+|  [ ShizukuApp ] (macOS AppKit Shell)                                     |
+|  - main.swift / NSApplication / Native Menu Bar / System Hotkey Routing  |
+|  - MetalGameView: MTKView wrapper, 60Hz loop, mouse/keyboard dispatcher  |
++--------------------------------------------------------------------------+
+                                    │
++--------------------------------------------------------------------------+
+|  [ ShizukuRender ] (Compositing &amp; Presentation)                          |
+|  - SceneComposer: 640x400 32-bit RGBA offscreen framebuffer              |
+|  - 3-Pass Glyph Stamping: Hard-shadow multi-pass bitmap typography       |
+|  - TransitionRenderer: 13 LVNS transition math operators                 |
+|  - HistoryView (Backlog) / MusicRoom / StaffRoll sequence player         |
++--------------------------------------------------------------------------+
+                                    │
++--------------------------------------------------------------------------+
+|  [ ShizukuEngine ] (Business Logic &amp; VM Execution)                       |
+|  - Engine.swift: Dual-layer VM (Event VM + Inline VM) state machine      |
+|  - AudioController: AVAudioEngine pipeline, resampling, fade automation  |
+|  - SaveManager: JSON-backed high-water persistence &amp; cross-run saves     |
++--------------------------------------------------------------------------+
+                                    │
++--------------------------------------------------------------------------+
+|  [ ShizukuCore ] (Data Models &amp; Decoders)                                |
+|  - Leafpack: Archive decryption and extraction                           |
+|  - Lzs: Standard positive and inverted LZSS decompression variants       |
+|  - Lfg: 4-bit palette decoding and bit-interleaving de-indexing          |
+|  - Knj: 24x24 1bpp bitmap font extraction                                |
+|  - Scn: Bytecode parser and inline command tokenizer                     |
+|  - BackgroundMap: Location IDs and atmosphere palette lookup tables      |
++--------------------------------------------------------------------------+
+</code></pre>
+<hr />
+<h2 id="2-reverse-engineering-methodology-ground-truth">2. Reverse Engineering Methodology &amp; Ground Truth</h2>
+<h3 id="21-evaluating-historical-open-source-implementations">2.1 Evaluating Historical Open-Source Implementations</h3>
+<p>Three open-source codebases provided historical context for the Leaf Visual Novel System (LVNS):</p>
+<ol>
+<li><strong>XLVNS / mglvns (Go Watanabe, 1999–2000, BSD)</strong>:</li>
+<li><em>Value</em>: Detailed C source covering LEAFPACK, LFG, and most SCN opcodes and transitions.</li>
+<li><em>Caveat</em>: Heavy use of <code>#ifdef USE_MGL</code> compiler branches. These branches were low-performance workarounds targeting 320×200 resolution for 1990s Linux X11 systems. <strong>Blindly copying MGL branches produces broken behaviors that contradict the Windows 95 release.</strong></li>
+<li><strong>akkera102's Sizuku GBA Tools (Personal Research)</strong>:</li>
+<li><em>Value</em>: Provided prototype SCN unpacker <code>decscn.py</code> and opcode definitions in <code>script.c</code>.</li>
+<li><em>Caveat</em>: Specifically adapted for the Game Boy Advance; contains hardcoded buffer truncations, and the font structure is completely non-isomorphic to the PC version.</li>
+<li><strong>GBALVNS (BSD-3-Clause)</strong>:</li>
+<li><em>Value</em>: Clean reference for state machine structuring.</li>
+<li><em>Caveat</em>: Uses re-baked assets; does not parse original PC data.</li>
+</ol>
+<h3 id="22-establishing-ground-truth-disassembly-wine-as-an-oracle">2.2 Establishing Ground Truth: Disassembly &amp; Wine as an Oracle</h3>
+<p>To resolve conflicting documentation:</p>
+<ol>
+<li><strong>Static Disassembly with Capstone &amp; pefile</strong>:
+   The original <code>Sizuku.exe</code> is a non-ASLR, non-relocated 32-bit PE binary loaded at a fixed base address of <code>0x400000</code>.
+   Parsing the section header table via <code>pefile</code> confirms that <code>.text</code> (code, RVA <code>0x1000</code>, Raw <code>0x1000</code>), <code>.rdata</code> (read-only data, RVA <code>0x2E000</code>, Raw <code>0x2E000</code>), and <code>.data</code> (globals, RVA <code>0x30000</code>, Raw <code>0x30000</code>) share identical memory alignment and disk file alignment (<code>0x1000</code> page boundaries). Consequently, for all executable code routines and static tables, Virtual Addresses (VA) map directly and deterministically to disk file offsets:
+   $$\text{File Offset} = \text{RVA} = \text{VA} - 0x400000$$
+   Whenever bytecode widths, jump tables, or timing semantics were disputed, disassembling the exact x86 machine instructions at the target VA provided instantaneous, indisputable ground truth.</li>
+<li><strong>The Wine Runtime Oracle</strong>:
+   When static disassembly left ambiguity regarding timing or graphics states, we ran the original Japanese binary in Wine 11.15 under Rosetta 2. Using breakpoints and memory dumps, we recorded the exact VRAM buffer states and register values across individual frames as the ground truth baseline.</li>
+</ol>
+<hr />
+<h2 id="3-binary-data-formats-decryption-specifications">3. Binary Data Formats &amp; Decryption Specifications</h2>
+<h3 id="31-the-leafpack-archive-container-max_datapak">3.1 The LEAFPACK Archive Container (MAX_DATA.PAK)</h3>
+<p><code>MAX_DATA.PAK</code> contains all 403 game assets.</p>
+<pre><code>+--------------------------------------------------------------------------+
+| Offset (Bytes)| Field Name      | Type        | Description              |
+|---------------|-----------------|-------------|--------------------------|
+| 0..7          | Magic           | 8 Bytes     | Constant ASCII &quot;LEAFPACK&quot;|
+| 8..9          | FileCount       | uint16_le   | Total files (403/0x0193) |
+| 10..TableEnd  | File Payloads   | Variable    | Additive rolling cipher  |
+| Final 24*N B  | File Directory  | 24B / Entry | Encrypted directory table|
++--------------------------------------------------------------------------+
+</code></pre>
+<h4 id="decryption-math-and-rolling-key">Decryption Math and Rolling Key</h4>
+<p>Data payloads use an <strong>additive rolling byte cipher</strong>:
+$$\text{EncryptedByte} = (\text{PlainByte} + \text{Key}[k]) \pmod{256}$$
+Decryption reverses this:
+$$\text{PlainByte} = (\text{EncryptedByte} - \text{Key}[k] + 256) \pmod{256}$$</p>
+<p>The key is a static 11-byte array:</p>
+<pre><code class="language-c">static const uint8_t LEAF_KEY[11] = {
+    0x71, 0x48, 0x6a, 0x55, 0x9f, 0x13, 0x58, 0xf7, 0xd1, 0x7c, 0x3e
+};
+</code></pre>
+<h4 id="directory-layout-key-recovery">Directory Layout &amp; Key Recovery</h4>
+<p>The directory table resides at the end of the file. Each entry is 24 bytes:
+- <code>name[8]</code>: Uppercase ASCII, padded with spaces (<code>0x20</code>);
+- <code>ext[3]</code>: Uppercase extension (<code>LFG</code>, <code>SCN</code>, <code>KNJ</code>);
+- <code>zero</code>: Reserved byte (<code>0x00</code>);
+- <code>offset</code>: uint32_le, start offset in the archive;
+- <code>length</code>: uint32_le, decompressed payload length;
+- <code>next_offset</code>: uint32_le.</p>
+<p><em>Note</em>: The key index advances continuously across bytes (<code>k = (k + 1) % 11</code>). Because directory entries contain mostly uppercase ASCII and spaces, one can deduce the entire 11-byte key without inspecting the executable by solving linear modular equations across any 3 consecutive directory entries.</p>
+<h3 id="32-lzs-compression-variants-stream-truncation-hazards">3.2 LZS Compression Variants &amp; Stream Truncation Hazards</h3>
+<p>Leaf uses LZSS-based compression (LZS) with two critical implementation details:</p>
+<h4 id="1-positive-vs-inverted-logic-variants">1. Positive vs. Inverted Logic Variants</h4>
+<ul>
+<li><strong>Standard <code>lzs</code> (Positive Logic)</strong>: Flag bit = 1 indicates uncompressed literal; 0 indicates window reference. Ring buffer is <code>0x1000</code> bytes, initialized at <code>0xFEE</code>. <strong>Used exclusively for LFG image bitmaps</strong>.</li>
+<li><strong><code>lzs3</code> (Inverted Logic)</strong>: Flag bit is inverted (<code>~flag</code>: 0 = literal, 1 = reference). Ring buffer is <code>0x1011</code> bytes. <strong>Used exclusively for SCN script Event and Message sections</strong>.</li>
+</ul>
+<h4 id="2-enforcing-strict-stream-truncation">2. Enforcing Strict Stream Truncation</h4>
+<p>SCN script headers declare the exact decompressed byte size <code>declaredSize</code>.
+If the decompressor reads until input EOF, LZSS will continue decompressing trailing padding bytes (<code>0x00</code> or <code>0xFF</code>) into spurious data. Across 197 scripts, <strong>173 scripts were corrupted</strong> by trailing garbage when using unbounded decompressors, altering message offsets in 166 dialogues.</p>
+<p><strong>Fix</strong>: The decompression loop must break immediately once <code>output.count == declaredSize</code>.</p>
+<h3 id="33-lfg-leafcode-graphic-format-bit-interleaving">3.3 LFG (LEAFCODE) Graphic Format &amp; Bit Interleaving</h3>
+<p>Static graphics are stored as <code>.LFG</code> files with a <code>"LEAFCODE"</code> magic header.</p>
+<pre><code>+--------------------------------------------------------------------------+
+| Byte Range | Field Definition                                            |
+|------------|-------------------------------------------------------------|
+| 0..7       | Magic string &quot;LEAFCODE&quot;                                     |
+| 8..31      | 16-color palette (4-bit RGB per color, packed 6B for 4 clrs)|
+| 32..33     | xoffset (uint16_be): On-screen X offset for portraits       |
+| 34..35     | yoffset (uint16_be): Y offset                               |
+| 36..37     | raw_width (uint16_be): True width = (raw_width + 1) * 8     |
+| 38..39     | raw_height (uint16_be): True height = raw_height + 1        |
+| 40         | direction (uint8): 0 indicates vertical column-major        |
+| 41         | transparent (uint8): Transparent index (0xFF for BGs)       |
+| 44..47     | decompressed_size (uint32_le): Uncompressed bytes = w*h/2   |
+| 48..EOF    | Standard positive-logic LZS compressed bitmap payload       |
++--------------------------------------------------------------------------+
+</code></pre>
+<ul>
+<li><strong>Palette Expansion</strong>: 4-bit color components (0..15) must be expanded to 8-bit (0..255) using nibble doubling:
+  <code>swift
+  let r8 = (r4 &lt;&lt; 4) | r4
+  let g8 = (g4 &lt;&lt; 4) | g4
+  let b8 = (b4 &lt;&lt; 4) | b4</code></li>
+<li><strong>Portrait Metrics</strong>: Character portraits have a decompressed height of exactly 400px (matching the screen height). Their render Y coordinate is always 0. The three standard portrait slots map to fixed X coordinates: Left <code>0</code>, Center <code>160</code>, Right <code>320</code>.</li>
+</ul>
+<h3 id="34-the-lac-audio-container">3.4 The LAC Audio Container</h3>
+<p><code>bgmfile.PAK</code> and <code>soundds.PAK</code> use the LAC container format:
+- Header <code>"LAC\0"</code> + uint32_le entry count + directory table (42 bytes per entry: 8-byte ASCII name + uint32_le offset + uint32_le length).
+- <code>bgmfile.PAK</code>: 25 Ogg Vorbis tracks (44.1kHz / 48kHz stereo BGM).
+- <code>soundds.PAK</code>: 13 RIFF WAV tracks (<strong>mono, 11025Hz</strong>).</p>
+<p>Because AVFoundation lacks native Ogg Vorbis decoding on macOS, we statically link <code>libogg</code> and <code>libvorbis</code> to decode audio in memory to 32-bit float Linear PCM before feeding <code>AVAudioEngine</code>.</p>
+<h3 id="35-physical-layout-of-knj_allknj-bitmap-font">3.5 Physical Layout of KNJ_ALL.KNJ Bitmap Font</h3>
+<p><code>KNJ_ALL.KNJ</code> is exactly 133,344 bytes. At 24×24 pixels per glyph (1bpp, 72 bytes per glyph), it stores:
+$$133,344 \div 72 = 1,852 \text{ glyphs}$$</p>
+<h4 id="3-column-strip-organization-column-major">3-Column Strip Organization (Column-Major)</h4>
+<p>The glyphs are stored as <strong>3 vertical column strips</strong> rather than row-major lines:</p>
+<pre><code>+--------------------------------------------------------------------------+
+|  Glyph 24x24 (72 Bytes total):                                           |
+|  - Col 0 (X: 0..7)  : 24 bytes (byte 0..23)                              |
+|  - Col 1 (X: 8..15) : 24 bytes (byte 24..47)                             |
+|  - Col 2 (X: 16..23): 24 bytes (byte 48..71)                             |
+|                                                                          |
+|  Each byte represents 8 horizontal pixels; Bit 7 is the leftmost pixel.  |
++--------------------------------------------------------------------------+
+</code></pre>
+<p>Swift pixel sampling:</p>
+<pre><code class="language-swift">public func pixel(atX x: Int, y: Int, inGlyph glyph: [UInt8]) -&gt; Bool {
+    guard x &gt;= 0, x &lt; 24, y &gt;= 0, y &lt; 24 else { return false }
+    let col = x / 8
+    let bit = 7 - (x % 8)
+    let byte = glyph[col * 24 + y]
+    return ((byte &gt;&gt; bit) &amp; 1) != 0
+}
+</code></pre>
+<h4 id="1-based-leaf-codes-sizfonttbl">1-Based Leaf Codes &amp; <code>sizfont.tbl</code></h4>
+<ul>
+<li><strong>Leaf Code</strong>: 2-byte index used in scripts, mapping directly to font slots:
+  $$\text{Slot Index} = \text{Leaf Code} - 1$$
+  Code 0 represents a full-width space (advances cursor, draws nothing).</li>
+<li><strong><code>sizfont.tbl</code></strong> (3,703 bytes): Maps 1,851 Leaf codes to EUC-JP characters. <strong>Used only by external disassembly tools; the runtime engine indexes the font directly without consulting this table.</strong></li>
+</ul>
+<hr />
+<h2 id="4-dual-layer-virtual-machine-vm-architecture-implementation">4. Dual-Layer Virtual Machine (VM) Architecture &amp; Implementation</h2>
+<h3 id="41-scn-script-structure-the-block-model">4.1 SCN Script Structure &amp; The Block Model</h3>
+<p>Each <code>SCN%03d.DAT</code> script contains two sections:
+- Offset 0..1: uint16_le, event section offset in file ($\times 16$);
+- Offset 2..3: uint16_le, message section offset in file ($\times 16$).
+Both are decompressed with inverted-logic <code>lzs3</code>.</p>
+<p>The event section starts with a uint16_le array of Block offsets.
+<strong>Blocks are the atomic units for execution jumps and save points.</strong></p>
+<h3 id="42-layer-1-outer-event-vm-skip-opcode-traps">4.2 Layer 1: Outer Event VM &amp; Skip Opcode Traps</h3>
+<p>The Outer VM controls high-level game flow. Common opcodes include:
+- <code>0x00</code>: End of block;
+- <code>0x04</code>: <code>JUMP scn, blk</code>;
+- <code>0x05</code>: <code>SELECT</code> (branching choice menu);
+- <code>0x0a</code>: Set background location ID;
+- <code>0x14</code>: Screen clear (erases both graphics and text);
+- <code>0x22</code>: Load single portrait slot;
+- <code>0x24</code>: Foreground close-up portrait (forced to center slot <code>'c'</code>);
+- <code>0x38</code>: Update screen (<code>LvnsDisp</code>) and <strong>flush queued BGM</strong>;
+- <code>0x3d</code>/<code>0x3e</code>: Conditional relative jump on flag comparison;
+- <code>0x47</code>/<code>0x48</code>: Flag assignment and addition;
+- <code>0x54</code>: Display dialogue from message section;
+- <code>0x6e</code>: Loop play BGM;
+- <code>0x7d</code>: Execute blocking Staff Roll sequence;
+- <code>0x7e</code>: Record ending index.</p>
+<h4 id="skip-opcode-parsing-guard">Skip Opcode Parsing Guard</h4>
+<p>Thirteen opcodes (<code>0x03</code>, <code>0x06</code>, <code>0x5a</code>, <code>0x5c</code>, <code>0x60-0x66</code>, <code>0x6f</code>, <code>0x73</code>) are no-ops with fixed 1–3 byte argument lengths. Parsers must consume their operands according to an opcode-width table, or subsequent bytecode parsing will become misaligned.</p>
+<h3 id="43-layer-2-inner-inline-presentation-vm">4.3 Layer 2: Inner Inline Presentation VM</h3>
+<p>A central discovery of our reverse-engineering work was:
+<strong>Leaf visual novel staging—character portraits, background switches, CG reveals, BGM cues, and sound effects—is driven primarily by inline ASCII tokens embedded directly within dialogue text streams.</strong></p>
+<p>When <code>0x54</code> invokes a message, the parser reads the stream byte-by-byte:
+1. <strong>Byte $\ge 0x80$</strong>: Combined with the next byte to form a 16-bit Leaf code, dispatching to the font renderer.
+2. <strong>Byte $&lt; 0x80$</strong>: Staging command:
+   - <code>$</code> : End of message, return control to Outer Event VM;
+   - <code>p</code> : Page break (await click, then clear dialogue text);
+   - <code>k</code>/<code>K</code> : Wait key (await click, then append to next line without clearing);
+   - <code>r</code> : Carriage return;
+   - <code>B</code>/<code>E</code> (7 bytes) : Load background (location ID + transition ID);
+   - <code>C</code> (4 bytes) : Load portrait (slot <code>l/c/r</code> + character ID);
+   - <code>D</code> : Clear portraits (<code>Da</code> clears all; <code>Dl/Dc/Dr</code> clear specific slot);
+   - <code>S</code> (10 bytes) : Atomically load background and portrait;
+   - <code>A</code>/<code>a</code> : Triple-portrait staging;
+   - <code>V</code>/<code>H</code> : Full-screen visual CG or H-CG;
+   - <code>M</code> : BGM controls (<code>Mf</code> fade, <code>Ms</code> pause, <code>Mn</code> queue, <code>Mw</code> wait for fade, <code>M00-M25</code> play immediately);
+   - <code>P</code> : Play PCM sound effect (<code>P01-P13</code>);
+   - <code>F</code> : White screen flash;
+   - <code>Q</code> : Full-screen screen shake;
+   - <code>X</code>/<code>s</code> : Set line horizontal offset and typewriter speed.</p>
+<p>Each message is parsed into structured segments:</p>
+<pre><code class="language-swift">public struct MessageSegment {
+    public let actions: [InlineAction] // Staging actions (portraits/music/backgrounds)
+    public let lines: [[Int]]          // Dialogue Leaf codes
+    public let pause: MessagePauseType // Pause type: .waitKey, .pageBreak, .messageEnd
+}
+</code></pre>
+<hr />
+<h2 id="5-graphics-pipeline-high-fidelity-reconstruction">5. Graphics Pipeline &amp; High-Fidelity Reconstruction</h2>
+<h3 id="51-full-screen-sound-novel-layout-line-wrapping-rules">5.1 Full-Screen Sound Novel Layout &amp; Line Wrapping Rules</h3>
+<p><em>Shizuku</em> uses full-screen Sound Novel typography:
+- Entire 640×400 canvas acts as the text buffer;
+- Origin: <code>(20, 18)</code>;
+- Text grid: 25 columns × 13 rows;
+- Spacing: 24px column advance, 28px line pitch (24px glyph + 4px leading);
+- <strong>Line Wrapping</strong>: The Windows 95 release has <strong>zero word-wrapping rules</strong>. When <code>cur_x &gt; 24</code>, the engine wraps unconditionally.</p>
+<h3 id="52-palette-darkening-three-pass-stamped-hard-shadow-glyphs">5.2 Palette Darkening &amp; Three-Pass Stamped Hard Shadow Glyphs</h3>
+<ol>
+<li><strong>Palette Darkening (Latitude Darkening)</strong>:
+   When text is displayed, background brightness is reduced by scaling DAC palette entries by:
+   $$\text{latitude_dark} = \frac{11}{16} = 0.6875$$
+   This darkens the background globally by 31.25% without using alpha blending.</li>
+<li><strong>Three-Pass Glyph Stamping</strong>:
+   1bpp font masks are stamped into the frame buffer across three passes:</li>
+<li>Pass 1: Offset <code>(x + 1, y + 1)</code>, write solid black (shadow 1);</li>
+<li>Pass 2: Offset <code>(x + 2, y + 1)</code>, write solid black (thickened shadow);</li>
+<li>Pass 3: Origin <code>(x, y)</code>, write solid white or gray (foreground glyph).
+   Mask bits of 0 leave the background untouched, preserving crisp 1996 retro edges.</li>
+</ol>
+<h3 id="53-waiting-cursor-semantics-phase-synchronization">5.3 Waiting Cursor Semantics &amp; Phase Synchronization</h3>
+<ul>
+<li><strong>Cursor Shapes</strong>:</li>
+<li>In-line wait key (<code>k</code>/<code>K</code>): Leaf code 102 (<strong>solid right arrow ▶</strong>);</li>
+<li>Page break wait (<code>p</code>): Leaf code 103 (<strong>folded paper icon</strong>).</li>
+<li><strong>Placement</strong>: Stamped directly into the grid cell following the last printed character.</li>
+<li><strong>Blink Synchronization</strong>:
+  Cursors toggle every 6 flips (200ms period).
+  <em>Pitfall</em>: Sampling the global flip counter <code>(flipCount / 6) % 2</code> causes the cursor to sometimes start in an "off" phase, making the engine feel unresponsive.
+  <em>Fix</em>: Synchronize the blink anchor to the entry flip (<code>entryFlip = flipCount</code>), ensuring the cursor is <strong>always visible on frame 0 of the wait state</strong>.</li>
+</ul>
+<h3 id="54-location-folding-bgmap-atmosphere-palettes-palmap">5.4 Location Folding (bgmap) &amp; Atmosphere Palettes (palmap)</h3>
+<p>Script location IDs do not map 1:1 to image filenames:
+1. <strong>Location Folding (<code>bgmap</code>)</strong>:
+   56 location IDs fold into 35 <code>MAX_S*.LFG</code> files. For instance, locations 4/5 map to <code>MAX_S02</code>, and 41/42 map to <code>MAX_S15</code>. Location 0 maps to a <strong>pure black screen clear</strong>.
+2. <strong>Atmosphere Palettes (<code>palmap</code>)</strong>:
+   Locations 41 and 42 share the same classroom image, but represent daytime and sunset respectively. The engine uses 9 atmosphere palette sets to <strong>overwrite only palette entries 0..3 of the image, preserving entry 4 (constant white)</strong>.
+3. <strong>The Orphan VIS21 Asset</strong>:
+   <code>VIS21.LFG</code> does not exist on disk. <code>SizukuLoadVisual</code> intercepts ID 21, loads <code>VIS02.LFG</code>, and overrides it with a purple palette.</p>
+<h3 id="55-mathematical-implementation-of-13-lvns-transitions">5.5 Mathematical Implementation of 13 LVNS Transitions</h3>
+<p><code>sizuku_effect[13]</code> defines 13 transitions (palette fades, spiral, diagonal tiles, collapsing diamonds, dither dissolves, and vertical/horizontal comb wipes).</p>
+<ul>
+<li><strong>Total Transition Duration</strong>:
+  A complete transition = <code>LvnsClear</code> (56 flips to wipe old image) + <code>LvnsDisp</code> (56 flips to reveal new image) + 30 flips hold = <strong>142 flips (approx. 2.36s)</strong>.
+  The VM blocks input during transitions.</li>
+<li><strong>High-DPI Adaptation</strong>:
+  On Retina displays, computing 32px masks in physical window coordinates shrinks blocks to half their intended scale.
+  <em>Fix</em>: Downscale frames to canonical 640×400, compute transitions on the logical grid, and integer-upscale back to the target viewport.</li>
+</ul>
+<h3 id="56-correcting-the-spiral-transition-guruguru">5.6 Correcting the Spiral Transition (GURUGURU)</h3>
+<p>Transition 1 (<code>GURUGURU</code>) expands in 16px tiles outward from the center.
+The <code>#ifdef USE_MGL</code> branch in <code>mglvns</code> had a bug where the loop terminated prematurely at column 26 (out of 40 columns), leaving the right 1/3 of the screen to fall back to a top-to-bottom row-major fill.</p>
+<p><strong>Fix</strong>: Match the <code>#ifndef USE_MGL</code> Windows branch, expanding symmetrically on a 40×25 grid of 16px tiles centered at <code>(27, 12)</code>.</p>
+<h3 id="57-opcode-0x01-subtypes-sine-wave-background-shearing">5.7 Opcode 0x01 Subtypes &amp; Sine Wave Background Shearing</h3>
+<p>Opcode <code>0x01</code> executes four composite staging subtypes:
+- Subtype 1: Sine background shear, fading to black upon dialogue completion;
+- Subtype 2: Fade in while maintaining sine shear;
+- Subtype 3: Blocking title animation (<code>sizuku01</code> 38 frames / <code>sizuku02</code> 19 frames);
+- Subtype 4: Standard dialogue.</p>
+<h4 id="math-pipeline-phase-of-sine-shear">Math &amp; Pipeline Phase of Sine Shear</h4>
+<p>Uses lookup table <code>sintable[361]</code> (1° interval, amplitude $\pm 160\text{px}$). Padded with zeros at both ends, the table sums to <strong>-1</strong> (an original implementation artifact that must not be altered).
+<strong>Pipeline Phase</strong>: Shearing must occur <strong>after background blitting, but before character merging and text stamping</strong>. Rows are displaced by <code>vram[x] = bg[x + shift]</code>, keeping text sharp while the background twists.</p>
+<h3 id="58-full-screen-backlog-lvnshistory-dual-text-vram">5.8 Full-Screen Backlog (LvnsHistory) &amp; Dual Text VRAM</h3>
+<ul>
+<li>Preserves scenario state upon entry and restores it completely on exit;</li>
+<li>Retains background graphics while flipping text to <code>current_tvram = 1</code> to lay out the full page instantly;</li>
+<li>14 <code>if (!history_mode)</code> guards bypass portraits, sound, and wait delays during replay;</li>
+<li>▲ / ▼ icons are text cells in column 25; clicking reads the cell attribute to scroll.</li>
+</ul>
+<hr />
+<h2 id="6-audio-subsystems-macos-low-level-engineering-pitfalls">6. Audio Subsystems &amp; macOS Low-Level Engineering Pitfalls</h2>
+<h3 id="61-bgm-track-mapping-bgmmap-cd-da-offsets">6.1 BGM Track Mapping (bgmmap) &amp; CD-DA Offsets</h3>
+<p>Script BGM IDs require translation via <code>bgmmap</code>:</p>
+<pre><code class="language-c">int bgmmap(int script_no) {
+    if (script_no == 14) return 2;  // Special case: maps to track 2 (Jingle)
+    if (script_no &lt; 16)  return script_no + 2;
+    return script_no + 1;
+}
+</code></pre>
+<p>Physical filenames map to <code>MUS(track - 2).OGG</code>. Omitting this mapping causes over 30% of scenes to play incorrect tracks.
+Acoustic fingerprinting against the 1996 lossless soundtrack confirmed with 0.898 confidence that the Opening Theme is <code>MUS14.OGG</code> (78.2s), not <code>MUS16.OGG</code> (219s Happy Ending theme).</p>
+<h3 id="62-coreaudio-mono-11025hz-crash-swallowed-by-appkit">6.2 CoreAudio Mono 11025Hz Crash Swallowed by AppKit</h3>
+<p>During development, parsing sound effects caused silent process hangs with 100% CPU usage.</p>
+<h4 id="root-cause">Root Cause</h4>
+<p><code>soundds.PAK</code> sound effects are <strong>11025Hz mono WAVs</strong>.
+macOS <code>AVAudioEngine</code> operates at <strong>48000Hz stereo</strong>.
+Passing mismatched buffers to <code>AVAudioPlayerNode.scheduleBuffer</code> throws an Objective-C <code>NSException</code>.
+In CLI environments, this crashes with a stack trace. <strong>In AppKit GUI applications, NSApplication's main RunLoop wraps event handling in a default <code>@catch</code> block that silently swallowed the exception and collapsed the call stack</strong>, leaving the VM frozen without error logs.</p>
+<h4 id="fix">Fix</h4>
+<p>Added an explicit resampling conversion pipeline in <code>AudioController</code>:</p>
+<pre><code class="language-swift">private func convertedBuffer(from inputBuffer: AVAudioPCMBuffer, to targetFormat: AVAudioFormat) -&gt; AVAudioPCMBuffer {
+    if inputBuffer.format == targetFormat { return inputBuffer }
+    guard let converter = AVAudioConverter(from: inputBuffer.format, to: targetFormat) else { return inputBuffer }
+    let capacity = AVAudioFrameCount(Double(inputBuffer.frameLength) * targetFormat.sampleRate / inputBuffer.format.sampleRate) + 1024
+    guard let outputBuffer = AVAudioPCMBuffer(pcmFormat: targetFormat, frameCapacity: capacity) else { return inputBuffer }
+    var error: NSError?
+    converter.convert(to: outputBuffer, error: &amp;error) { _, outStatus in
+        outStatus.pointee = .haveData
+        return inputBuffer
+    }
+    return outputBuffer
+}
+</code></pre>
+<h3 id="63-60hz-flip-loop-macos-app-nap-throttling">6.3 60Hz Flip Loop &amp; macOS App Nap Throttling</h3>
+<p>Leaf engines clock all timing to <strong>1/60th second (1 Flip)</strong> via <code>INTERVAL = 60</code>.</p>
+<h4 id="app-nap-112th-speed-degradation">App Nap 1/12th Speed Degradation</h4>
+<p>When the game window lost focus or was partially occluded, macOS <strong>App Nap</strong> throttled timers down to <strong>~1Hz</strong>, slowing the game down to 5 FPS (1/12th normal speed).</p>
+<h4 id="fix_1">Fix</h4>
+<p>Hold an explicit power management activity assertion during active gameplay:</p>
+<pre><code class="language-swift">self.activityToken = ProcessInfo.processInfo.beginActivity(
+    options: [.userInitiated, .latencyCritical],
+    reason: &quot;60 Hz reference flip loop (Lvns INTERVAL)&quot;
+)
+</code></pre>
+<hr />
+<h2 id="7-practical-binary-forensics-the-hidden-title-music-room">7. Practical Binary Forensics: The Hidden Title Music Room</h2>
+<h3 id="71-the-breakthrough-fifth-menu-pointer-at-va-0x430ebc">7.1 The Breakthrough: Fifth Menu Pointer at VA 0x430ebc</h3>
+<p>In historical open-source ports such as <code>mglvns</code>, the music room routine was commented out with <code>#if 0</code>, creating a widespread historical misconception that the Windows 95 release omitted the feature entirely.
+Disassembling the title menu pointer table in <code>Sizuku.exe</code> at VA <code>0x430ebc</code> (file offset <code>0x30ebc</code>) revealed that the array holds <strong>5 entry pointers</strong> (<code>0x00430ebc</code>, <code>0x00430ed0</code>, <code>0x00430ee4</code>, <code>0x00430ef8</code>, <code>0x00430f0c</code>), rather than the 4 visible menu options.
+The first four pointers resolve to standard title strings ("最初から", "栞から", etc.), while the fifth pointer at <code>0x00430f0c</code> points to an extraordinary raw byte sequence:
+<code>73 30</code> ("s0", font style 0) + <code>58 35 36 59 31 32 38</code> ("X56Y128", explicit ASCII screen positioning) + <code>ff ff</code> (Leaf Code fullwidth space) + <code>72 24</code> ("r$", line feed and string termination).
+Because its rendered glyph content consists solely of an empty fullwidth space, the item is completely invisible to the player, yet it acts as a discrete, coordinate-pinned hit-test hitbox. Clicking this hitbox fires case 4 in menu dispatch table <code>0x409558</code>, immediately jumping to <code>0x408d40</code> to initialize the authentic Music Room.</p>
+<h3 id="72-coordinate-unit-math-pixel-level-alignment">7.2 Coordinate Unit Math &amp; Pixel-Level Alignment</h3>
+<p>Leaf coordinate encoding:
+- <code>Y</code>: 1-pixel units;
+- <code>X</code>: <strong>8-pixel units (half-width character pitch)</strong>.</p>
+<p>Absolute target coordinates:
+$$X = 56 \times 8 = 448\text{px}, \quad Y = 128\text{px}$$
+Projected onto <code>TITLE0.LFG</code> (640×400), this hits the <strong>upper-right window pane of the school building</strong>.</p>
+<h3 id="73-the-music-room-routine-leaf-string-0x24-terminator-hazard">7.3 The Music Room Routine &amp; Leaf String 0x24 Terminator Hazard</h3>
+<p>Tracing the pointer to <code>0x408d40</code> revealed the standalone music room routine:
+- Background plate: <code>VIS17.LFG</code> (music box);
+- Dispatches 24 tracks with composer credits;
+- <strong>Decoding Trap</strong>: Track strings end in <code>0x24</code> (ASCII <code>$</code>). However, <code>0x24</code> is also a valid 2nd byte in Japanese Leaf codes (e.g., the kanji 叔 in "叔父さん"). Splitting naively on <code>0x24</code> truncates titles midway. The decoder must advance in 2-byte aligned increments.</p>
+<hr />
+<h2 id="8-dissecting-the-staff-roll-credit-sequence">8. Dissecting the Staff Roll Credit Sequence</h2>
+<p>Opcode <code>0x7d END_BGM</code> triggers the credits:
+1. Iterates through 14 visual cards: background ready $\to$ 6s static text $\to$ 16-step palette fade to black $\to$ 16-step fade in to new background $\to$ 1s static background $\to$ text reveal;
+2. Total execution duration is fixed:
+   $$16 + (13 \times 436) + 76 = 5,760 \text{ Flips} \approx 96 \text{ Seconds}$$
+3. <strong>CLICK_JUMP Handling</strong>: Clicking flags <code>selectPending</code>, allowing the 6-second timer to reach the end of its active card before smoothly transitioning into the copyright card.</p>
+<hr />
+<h2 id="9-generalizing-to-other-leaf-classics-kizuato-to-heart">9. Generalizing to Other Leaf Classics (Kizuato, To Heart)</h2>
+<h3 id="91-engine-family-component-reusability-matrix">9.1 Engine Family Component Reusability Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Shizuku (1996)</th>
+<th>Kizuato (1996)</th>
+<th>To Heart (1997)</th>
+<th>Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LEAFPACK Extraction</strong></td>
+<td>403 files</td>
+<td>511 files</td>
+<td>584 / 993 files</td>
+<td><strong>100% Reusable</strong>. Auto-detect via file count</td>
+</tr>
+<tr>
+<td><strong>LZS Decompressor</strong></td>
+<td>Positive + LZS3</td>
+<td>Positive + LZS3</td>
+<td>Positive + LZS3</td>
+<td><strong>100% Reusable</strong>. Direct drop-in</td>
+</tr>
+<tr>
+<td><strong>LFG Image Decoder</strong></td>
+<td>16-color 4-bit</td>
+<td>16-color 4-bit</td>
+<td>256-color 8-bit</td>
+<td><strong>90% Reusable</strong>. Expand palette array to 256</td>
+</tr>
+<tr>
+<td><strong>KNJ Font Pipeline</strong></td>
+<td>24×24 @1bpp</td>
+<td>24×24 @1bpp</td>
+<td>24×24 @1bpp</td>
+<td><strong>100% Structure</strong>. Extract game-specific glyphs</td>
+</tr>
+<tr>
+<td><strong>Outer Event VM</strong></td>
+<td>0x00~0x7e</td>
+<td>0x00~0x7e</td>
+<td>Added opcodes</td>
+<td><strong>85% Reusable</strong>. Core dispatch loop is shared</td>
+</tr>
+<tr>
+<td><strong>Inner Inline VM</strong></td>
+<td>B, C, S, D, M, P...</td>
+<td>Minor edits</td>
+<td>Extended tokens</td>
+<td><strong>75% Reusable</strong>. Override inline token dictionary</td>
+</tr>
+<tr>
+<td><strong>13 Transitions</strong></td>
+<td>13 effects</td>
+<td>13 effects</td>
+<td>13 effects + ext</td>
+<td><strong>95% Reusable</strong>. Direct drop-in</td>
+</tr>
+<tr>
+<td><strong>BGM/Location Maps</strong></td>
+<td><code>bgmap</code>/<code>palmap</code></td>
+<td>Needs extraction</td>
+<td>Needs extraction</td>
+<td><strong>0%</strong>. Logic identical; tables require disassembly</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92-standardized-nine-step-porting-pipeline">9.2 Standardized Nine-Step Porting Pipeline</h3>
+<ol>
+<li><strong>Unpack Archive</strong>: Run <code>unpack_leafpack.py</code>, verify file counts, extract raw assets;</li>
+<li><strong>Review Historical Code</strong>: Check driver files (<code>kizuato.c</code>, <code>toheart.c</code>) in <code>mglvns</code>, focusing on <code>#ifndef USE_MGL</code> branches;</li>
+<li><strong>Verify Font First</strong>: Extract and render glyphs using 3-column MSB layout; confirm coverage tests;</li>
+<li><strong>Opcode Profiling</strong>: Run frequency analysis on SCN scripts to prioritize opcodes;</li>
+<li><strong>Dynamic Oracle Verification</strong>: Resolve unknown opcodes in Wine before coding;</li>
+<li><strong>Acoustic Fingerprinting</strong>: Align OGG/WAV files with official OST releases to build <code>bgmmap</code>;</li>
+<li><strong>Lock Clock to 60Hz</strong>: Anchor timing constants to <code>INTERVAL = 60</code>;</li>
+<li><strong>Automated Headless Capture</strong>: Hook rendering into automated tests and inspect exported PNGs;</li>
+<li><strong>Keep Disassembler Ready</strong>: Use Capstone to resolve jump tables and string blocks.</li>
+</ol>
+<hr />
+<h2 id="10-automated-verification-debugging-infrastructure">10. Automated Verification &amp; Debugging Infrastructure</h2>
+<h3 id="101-automated-headless-frame-capture-shizuku_shot">10.1 Automated Headless Frame Capture (SHIZUKU_SHOT)</h3>
+<p>To prevent green test suites from masking visual bugs (such as incorrect z-ordering rendering backgrounds over text), the runtime embeds a headless capture pipeline:</p>
+<pre><code class="language-bash">SHIZUKU_SHOT=boot,title,game,esc,spiral,music ./build/ShizukuApp
+</code></pre>
+<p>It advances virtual clock ticks and dumps 640×400 RGBA buffers directly to lossless PNGs for manual visual inspection.</p>
+<h3 id="102-production-self-healing-flip-watchdog">10.2 Production Self-Healing Flip Watchdog</h3>
+<p>Release builds include an independent main-thread watchdog:
+When the engine is active (transitions, reveals, fast-forwarding), if 2.0 seconds elapse without a flip tick, the watchdog dumps a snapshot (<code>scn</code>, <code>blk</code>, <code>pc</code>, active background, transition state) to <code>~/Library/Logs/Shizuku_Restored/diagnostic.log</code> and <strong>restarts the DisplayLink loop to recover gameplay automatically</strong>.</p>
+<hr />
+<h2 id="appendix-a-core-opcode-inline-token-quick-reference">Appendix A: Core Opcode &amp; Inline Token Quick Reference</h2>
+<h3 id="1-outer-event-opcodes">1. Outer Event Opcodes</h3>
+<table>
+<thead>
+<tr>
+<th>Opcode</th>
+<th>Length</th>
+<th>Operands</th>
+<th>Operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x00</code></td>
+<td>1B</td>
+<td>None</td>
+<td>Block end; reset local state</td>
+</tr>
+<tr>
+<td><code>0x01</code></td>
+<td>3B</td>
+<td><code>sub, arg</code></td>
+<td>Composite transition (sine shear / fade black / logo / text)</td>
+</tr>
+<tr>
+<td><code>0x04</code></td>
+<td>3B</td>
+<td><code>scn, blk</code></td>
+<td>JUMP: Transfer execution to scenario block</td>
+</tr>
+<tr>
+<td><code>0x05</code></td>
+<td>Var</td>
+<td><code>msg, cnt, ...</code></td>
+<td>SELECT: Present branching choice menu</td>
+</tr>
+<tr>
+<td><code>0x07</code></td>
+<td>1B</td>
+<td>None</td>
+<td>Previous choice anchor mark</td>
+</tr>
+<tr>
+<td><code>0x0a</code></td>
+<td>2B</td>
+<td><code>loc_no</code></td>
+<td>Set background (resolved via <code>bgmap</code>)</td>
+</tr>
+<tr>
+<td><code>0x14</code></td>
+<td>2B</td>
+<td><code>type</code></td>
+<td>Clear screen (images and text)</td>
+</tr>
+<tr>
+<td><code>0x16</code></td>
+<td>2B</td>
+<td><code>hvs_no</code></td>
+<td>Load H-CG background</td>
+</tr>
+<tr>
+<td><code>0x22</code></td>
+<td>3B</td>
+<td><code>chr, pos</code></td>
+<td>Load portrait into slot (<code>l/c/r</code>)</td>
+</tr>
+<tr>
+<td><code>0x24</code></td>
+<td>3B</td>
+<td><code>chr, pos</code></td>
+<td>Close-up portrait (forced to center slot <code>'c'</code>)</td>
+</tr>
+<tr>
+<td><code>0x28</code></td>
+<td>1B</td>
+<td>None</td>
+<td>Mark 2 anchor</td>
+</tr>
+<tr>
+<td><code>0x38</code></td>
+<td>2B</td>
+<td><code>effect</code></td>
+<td>Update screen (<code>LvnsDisp</code>) and flush queued BGM</td>
+</tr>
+<tr>
+<td><code>0x3d</code></td>
+<td>4B</td>
+<td><code>flag, val, off</code></td>
+<td>Conditional jump if <code>flag[id] == val</code></td>
+</tr>
+<tr>
+<td><code>0x3e</code></td>
+<td>4B</td>
+<td><code>flag, val, off</code></td>
+<td>Conditional jump if <code>flag[id] != val</code></td>
+</tr>
+<tr>
+<td><code>0x47</code></td>
+<td>3B</td>
+<td><code>flag, val</code></td>
+<td>Flag assignment</td>
+</tr>
+<tr>
+<td><code>0x48</code></td>
+<td>3B</td>
+<td><code>flag, delta</code></td>
+<td>Flag addition</td>
+</tr>
+<tr>
+<td><code>0x54</code></td>
+<td>2B</td>
+<td><code>msg_idx</code></td>
+<td>Invoke message dialogue</td>
+</tr>
+<tr>
+<td><code>0x6e</code></td>
+<td>2B</td>
+<td><code>bgm_no</code></td>
+<td>Loop play BGM (resolved via <code>bgmmap</code>)</td>
+</tr>
+<tr>
+<td><code>0x7d</code></td>
+<td>2B</td>
+<td><code>bgm_no</code></td>
+<td>Execute blocking Staff Roll</td>
+</tr>
+<tr>
+<td><code>0x7e</code></td>
+<td>2B</td>
+<td><code>ed_no</code></td>
+<td>Record ending index (0..12)</td>
+</tr>
+<tr>
+<td><code>0xff</code></td>
+<td>1B</td>
+<td>None</td>
+<td>Terminal boundary sentinel</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-inner-inline-tokens">2. Inner Inline Tokens</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Operand Length</th>
+<th>Example</th>
+<th>Staging Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$</code></td>
+<td>0B</td>
+<td>None</td>
+<td>End of message stream</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>0B</td>
+<td>None</td>
+<td>Page break (paper icon; click clears screen)</td>
+</tr>
+<tr>
+<td><code>k</code>/<code>K</code></td>
+<td>0B</td>
+<td>None</td>
+<td>Wait key (▶ icon; click appends on next line)</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>0B</td>
+<td>None</td>
+<td>Carriage return / line advance</td>
+</tr>
+<tr>
+<td><code>B</code>/<code>E</code></td>
+<td>6B</td>
+<td><code>B070808</code></td>
+<td>Load background (location 7, effect 8)</td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td>3B</td>
+<td><code>Cr51</code></td>
+<td>Load portrait (slot <code>r</code>, character 51)</td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>1B</td>
+<td><code>Da</code>, <code>Dl</code></td>
+<td>Clear portraits (<code>Da</code> all, <code>Dl</code> left slot)</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>9B</td>
+<td><code>S...</code></td>
+<td>Atomically swap background and portrait</td>
+</tr>
+<tr>
+<td><code>A</code>/<code>a</code></td>
+<td>Var</td>
+<td><code>A...</code></td>
+<td>Triple-portrait staging</td>
+</tr>
+<tr>
+<td><code>V</code></td>
+<td>Var</td>
+<td><code>V01...</code></td>
+<td>Load visual CG plate</td>
+</tr>
+<tr>
+<td><code>H</code></td>
+<td>Var</td>
+<td><code>H01...</code></td>
+<td>Load H-CG plate</td>
+</tr>
+<tr>
+<td><code>M</code></td>
+<td>Var</td>
+<td><code>Mf</code>, <code>Mn01</code></td>
+<td>BGM control (fade/queue/switch)</td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>Var</td>
+<td><code>P01-P13</code></td>
+<td>Mix and play PCM sound effect</td>
+</tr>
+<tr>
+<td><code>F</code></td>
+<td>0B</td>
+<td>None</td>
+<td>White screen flash</td>
+</tr>
+<tr>
+<td><code>Q</code></td>
+<td>0B</td>
+<td>None</td>
+<td>Screen shake / quake</td>
+</tr>
+<tr>
+<td><code>X</code></td>
+<td>2B</td>
+<td><code>X08</code></td>
+<td>Line horizontal pixel offset</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>1B</td>
+<td><code>s02</code></td>
+<td>Typewriter text speed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="appendix-b-register-of-known-deviations-and-enhancements">Appendix B: Register of Known Deviations and Enhancements</h2>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Feature</th>
+<th>1996 Original Behavior</th>
+<th>macOS Native Port Behavior (Ver. 1.0)</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Save Slot Capacity</strong></td>
+<td>3 manual bookmarks + 1 backup</td>
+<td>6 visual bookmarks + 1 quicksave</td>
+<td>Expanded for modern large-screen playability</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Save Serialization</strong></td>
+<td>232-byte binary struct</td>
+<td>Structured JSON file</td>
+<td>Modernized for cross-version migration and debugging</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Music Room Access</strong></td>
+<td>Completely invisible; no feedback</td>
+<td>Hover outlines window; exposed in menu bar</td>
+<td>Preserves secret while improving discoverability</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Music Room Exit</strong></td>
+<td>Right-click only</td>
+<td>Right-click or <code>ESC</code> key, with subtle hint text</td>
+<td>Matches modern desktop input conventions</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Backlog Navigation</strong></td>
+<td>Click on-screen ▲ / ▼ cells</td>
+<td>Click cells, mouse wheel, or trackpad gestures</td>
+<td>Takes advantage of modern macOS trackpad hardware</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Fast-Forward Semantics</strong></td>
+<td>Menu command only; holding Enter ignored</td>
+<td>Native menu item (Tab/Z); key repeat filtered</td>
+<td>Faithful to original behavior; prevents input flooding</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Transition Toggle</strong></td>
+<td>CLI flag <code>-n e</code> (Linux/MGL)</td>
+<td>Menu bar: "View $\to$ Skip Screen Transitions"</td>
+<td>Exposes engine capability directly in native UI</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Waiting Cursor Glyphs</strong></td>
+<td>Font lacks ▼; original drew custom</td>
+<td>Uses Leaf code 102 (▶) and 103 (paper icon)</td>
+<td>Strictly distinguishes wait-key from page-break states</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Notice: All decryption, disassembly, and reverse engineering described herein was performed on legally acquired physical media. All copyrights to the game, artwork, and audio belong to Leaf / AQUAPLUS. This document is intended solely for academic research, digital preservation, and software engineering education.</em></p>
+        </article>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p class="footer-title">Shizuku_macos_restore_study · Leaf LVNS Engine Reverse Engineering & Native macOS Restoration</p>
+            <p class="footer-author">
+                jill 推特<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> 微博<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
