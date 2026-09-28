@@ -1,0 +1,26 @@
+# GitHub Pages Configuration
+# Documentation: https://docs.github.com/en/pages/quickstart
+
+title: Shizuku macOS Restore Study
+description: Leaf LVNS 视觉小说引擎逆向与 macOS 原生重构研究工程资料库
+theme: jekyll-theme-primer
+
+# Markdown renderer settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Apply default layout with navigation and footer to all markdown files
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Exclude large code & reference assets from web build
+exclude:
+  - references/
+  - runtime_reference/
+  - tools/shizuku_cli/
+  - disasm/

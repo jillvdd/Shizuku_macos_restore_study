@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 仓库简介 / Overview
+## 📖 仓库简介
 
 本仓库是针对 Leaf（现 AQUAPLUS）于 1996 年发布的经典视觉小说《雫～しずく～》（以及同架构的 LVNS 引擎家族）的**完整逆向工程、数据格式规范、历史研究文献、分析工具链与原生重构技术资料库**。
 
@@ -12,54 +12,54 @@
 
 ---
 
-## 🌐 在线技术文档门户 / Hosted via GitHub Pages
+## 📑 核心技术工程指南
 
-本仓库已内建专为 **GitHub Pages (`github.io`)** 打造的现代化交互式文档平台（基于客户端 Hash 路由的 SPA 架构），支持在网页端无刷新平滑浏览、跨文档跳转与实时全文检索：
+本项目历经完整逆向推导与实机排错，总结撰写了详尽的工程技术复盘长文。三篇文档内容互相锚定、结构严密对齐：
 
-- 🚀 **在线访问入口**：`https://<username>.github.io/Shizuku_macos_restore_study/`
-- 🖥 **本地预览方法**：在仓库根目录下执行任意静态服务器（例如 `python3 -m http.server 3000`），浏览器访问 `http://localhost:3000` 即可。
-
-### 门户核心交互特性
-1. **左侧全景树状导航（Sidebar Navigation）**：整合核心复盘长文、9 份格式规范、4 份研发日志、工具箱与视觉画廊，所有跳转完全基于网页原生路由，无需离开当前页面；
-2. **顶栏多语言一键切换（Top Navbar）**：`[🇨🇳 简中]` `[🇺🇸 EN]` `[🇯🇵 日本語]` 实时保持阅读状态，支持跨语种平滑对照；
-3. **右侧文章动态大纲（On This Page TOC）**：自动提取当前文档标题，集成视口滚动监听（Scrollspy）实现阅读位置高亮定位；
-4. **实时全文搜索（Live Search）**：本地毫秒级索引全部 20 份技术文献与汇编说明；
-5. **代码块增强**：集成 Prism.js 语法高亮，支持 Swift、C、Python、Bash 等语言着色及一键复制代码；
-6. **零外网依赖**：核心解析器与样式均本地打包在 `assets/vendor/` 中，网络受限环境下依然秒开。
+- 🇨🇳 **[中文工程技术指南](articles/leaf-galgame-port-zh.md)**：面向现代软件工程师的务实技术文档。深入二进制加法滚动解密、LZS3 截断守卫、24×24 点阵字库列优先解码、双层虚拟机（Event VM + Inline VM）、调色板暗化、13 种转场几何算法，以及钟楼 (448, 128) 隐藏音乐室反汇编实录。
+- 🇺🇸 **[English Technical Guide](articles/leaf-galgame-port-en.md)**：A rigorous, pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, CoreAudio exception swallowing, and Apple Silicon adaptations.
+- 🇯🇵 **[日本語技術仕様書](articles/leaf-galgame-port-jp.md)**：LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、タイトル画面 VA 0x430ebc の第 5 不可視ポインタから導く隠し音楽室の復元など、全工程を実務的に解説した技術仕様書。
 
 ---
 
-## 📑 核心技术工程指南与文章互引 / Flagship Articles & Cross-Indexing
+## 📐 逆向格式规范文档
 
-本项目历经完整逆向推导与实机排错，总结撰写了详尽的工程技术复盘长文。三篇文档内容互相锚定、结构严密对齐，文首均配有语言互引栏，在 Web 端亦可一键切换：
+对 Windows 95 原版所用专有二进制格式的字段级解析规范：
 
-| 语言版本 / Edition | Markdown 源文档 | 网页端路由 / Web Route (github.io) | 核心定位与特色 |
-|---|---|---|---|
-| 🇨🇳 **简体中文** | [`articles/leaf-galgame-port-zh.md`](articles/leaf-galgame-port-zh.md) | [**`#/articles/leaf-galgame-port-zh`**](index.html#/articles/leaf-galgame-port-zh) | 面向现代软件工程师的务实技术文档，系统阐释二进制解密、双层虚拟机、渲染管线、音频异常与向《痕》《To Heart》复用的 9 步工单。 |
-| 🇺🇸 **English** | [`articles/leaf-galgame-port-en.md`](articles/leaf-galgame-port-en.md) | [**`#/articles/leaf-galgame-port-en`**](index.html#/articles/leaf-galgame-port-en) | A pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, CoreAudio exception swallowing, and Apple Silicon adaptations. |
-| 🇯🇵 **日本語** | [`articles/leaf-galgame-port-jp.md`](articles/leaf-galgame-port-jp.md) | [**`#/articles/leaf-galgame-port-jp`**](index.html#/articles/leaf-galgame-port-jp) | LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、タイトル画面 VA 0x430ebc の第 5 不可視ポインタから導く隠し音楽室の復元など、全工程を実務的に解説した技術仕様書。 |
+1. [**LEAFPACK 容器格式与 11 字节异或解密规范**](docs/containers.md)：8 字节头部、uint16 文件数、累加滚动异或流与目录区差分盲破算法。
+2. [**LFG 图像格式与解码规范**](docs/lfg.md)：16 色 4 位调色板半字节翻倍展开（`(c << 4) | c`）、垂直列优先位交织与立绘 400px 视口排版。
+3. [**SCN 脚本结构与双层虚拟机**](docs/scripts.md)：外层 Block 跳转模型、13 个 Skip 占位指令与内联 ASCII 宏（B/E, C, S, D, M, P, F, Q）调度。
+4. [**LAC 音频容器与 BGM 编号映射**](docs/audio.md)：`bgmmap` 转换公式、CD-DA 偏移校正与原声 OST 声纹比对。
+5. [**LVNS 引擎家族演进历史**](docs/history.md)：PC-98 到 Windows 95 版本变迁与技术演变。
+6. [**Windows 95 原版文件清单**](docs/original-files.md)：原版盘内各文件职能与格式归类。
+7. [**未知指令与 13 个 Skip Opcode 分析**](docs/unknown-opcodes.md)：未公开指令的操作数宽度测量与安全跳步。
+8. [**GBALVNS 开源架构参考**](docs/gbalvns.md)：GBA 移植版状态机与参考实现分析。
+9. [**GBA 移植对比分析**](docs/sizuku-gba.md)：PC 原版与掌机版数据结构异同。
 
 ---
 
-## 🗂 目录结构与内容说明 / Directory Structure
+## 📋 研发报告与工程交接日志
+
+完整的项目研发历程记录与实机排错笔记：
+
+- [**Phase 0/1 初始研究报告**](reports/SHIZUKU_PORT_RESEARCH_REPORT.md)：立项初期的格式识别、工具链验证与数据可行性评估报告。
+- [**完整研发交接日志 (HANDOVER)**](reports/HANDOVER.md)：长达 340KB 的详尽技术手记，完整收录了 M4.10 视觉保真度排错、M4.11 转场与隐藏音乐室反汇编、单声道 11025Hz CoreAudio 异常排查、macOS App Nap 锁频攻坚等所有关键提交细节。
+- [**里程碑计划与验收标准**](reports/MILESTONES.md)：分阶段敏捷迭代工单与验证清单。
+- [**上下文恢复基线**](reports/RESUME_PROMPT.md)：开发环境与状态机提示词基线。
+
+---
+
+## 🗂 仓库完整目录结构
 
 ```text
 Shizuku_macos_restore_study/
-├── README.md                      # 本文档：仓库索引、文章互引与导航
-├── .gitignore                     # Git 忽略规则（排除编译缓存与系统元数据）
-├── .nojekyll                      # 禁用 GitHub Pages 默认 Jekyll 构建，保障静态资源原样发布
-├── index.html                     # 交互式文档门户主页（github.io 托管入口）
-├── article-zh.html                # 中文版路由重定向存根（平滑跳转至 index.html#/articles/...）
-├── article-en.html                # 英文版路由重定向存根
-├── article-jp.html                # 日文版路由重定向存根
-│
-├── assets/                        # 网页端核心资产（100% 本地化，零外部 CDN 依赖）
-│   ├── css/
-│   │   └── docs.css               # 响应式排版样式表（浅色/深色主题、三栏式布局）
-│   ├── js/
-│   │   ├── app.js                 # 核心 SPA 路由驱动、目录生成、滚动监听与交互逻辑
-│   │   └── docs_data.js           # 全量 Markdown 文档轻量级预编译数据库（秒级加载）
-│   └── vendor/                    # 本地化第三方库（Marked.js, Prism.js 语法高亮组件）
+├── README.md                      # 本文档：资料库索引与主控导航
+├── _config.yml                    # GitHub Pages (Jekyll) 配置文件
+├── _layouts/                      # GitHub Pages 页面母版（包含顶栏导航与页脚）
+│   └── default.html
+├── assets/                        # 站点样式与静态资源
+│   └── css/
+│       └── style.css
 │
 ├── articles/                      # 核心工程技术复盘长文（中／英／日三语对齐）
 │   ├── leaf-galgame-port-zh.md    # 中文工程技术指南
@@ -67,28 +67,28 @@ Shizuku_macos_restore_study/
 │   └── leaf-galgame-port-jp.md    # 日本語技術仕様書
 │
 ├── docs/                          # 基础格式字段级规范与逆向分析文档（9 份）
-│   ├── containers.md              # LEAFPACK 容器格式与 11 字节异或解密规范
-│   ├── lfg.md                     # LFG 图像格式、4 位调色板高低位复制与垂直列交织
-│   ├── scripts.md                 # SCN 脚本结构、Block 执行模型与行内宏指令
-│   ├── audio.md                   # LAC 音频容器、CD-DA 偏移与 BGM 编号映射
-│   ├── history.md                 # LVNS 引擎家族演进历史（PC-98 到 Win95）
-│   ├── original-files.md          # Windows 95 原版文件清单与职能说明
-│   ├── unknown-opcodes.md         # 未知指令与 13 个带操作数 Skip Opcode 分析
-│   ├── gbalvns.md                 # GBALVNS 开源架构与指令集参考
-│   └── sizuku-gba.md              # GBA 移植版实现对比分析
+│   ├── containers.md              # LEAFPACK 容器格式与解密规范
+│   ├── lfg.md                     # LFG 图像格式与解码规范
+│   ├── scripts.md                 # SCN 脚本结构与双层虚拟机
+│   ├── audio.md                   # LAC 音频容器与 BGM 编号映射
+│   ├── history.md                 # LVNS 引擎家族演进历史
+│   ├── original-files.md          # Windows 95 原版文件清单
+│   ├── unknown-opcodes.md         # 未知指令与 Skip Opcode 分析
+│   ├── gbalvns.md                 # GBALVNS 开源架构参考
+│   └── sizuku-gba.md              # GBA 移植对比分析
 │
 ├── reports/                       # 全量研究报告与工程交接研发日志（4 份）
-│   ├── SHIZUKU_PORT_RESEARCH_REPORT.md  # Phase 0/1 初始研究报告（数据验证与可行性）
-│   ├── HANDOVER.md                # 完整研发交接日志（340KB，包含 M4.10/M4.11 所有攻坚细节）
-│   ├── MILESTONES.md              # 里程碑计划与验收标准记录
-│   └── RESUME_PROMPT.md           # 上下文恢复与研发提示词基线
+│   ├── SHIZUKU_PORT_RESEARCH_REPORT.md  # Phase 0/1 初始研究报告
+│   ├── HANDOVER.md                # 完整研发交接日志（340KB）
+│   ├── MILESTONES.md              # 里程碑计划与验收标准
+│   └── RESUME_PROMPT.md           # 上下文恢复基线
 │
 ├── tools/                         # 逆向分析工具链与解包/反汇编脚本
 │   ├── shizuku_cli/               # 模块化 Python 逆向命令行工具包
-│   └── scripts/                   # 独立功能验证脚本（unpack, font, image, disasm, pack_docs 等）
+│   └── scripts/                   # 独立功能验证脚本（unpack, font, image, disasm 等）
 │
 ├── disasm/                        # 全量剧情脚本反汇编基准文本
-│   └── SCN000.txt ... SCN196.txt  # 197 个 SCN 脚本的反汇编明文（作为虚拟机实现基准）
+│   └── SCN000.txt ... SCN196.txt  # 197 个 SCN 脚本的反汇编明文
 │
 ├── preview/                       # 逆向与渲染验证图像产物
 │   ├── knj_atlas.png              # 1,852 字完整点阵字库渲染全图
@@ -98,7 +98,7 @@ Shizuku_macos_restore_study/
 │   └── preview_leaf.png           # 调色板与像素测试帧
 │
 ├── references/                    # 历史开源资产与参考实现
-│   ├── thirdparty/                # 早期开源 LVNS 引擎项目代码与归档
+│   ├── thirdparty/                # 早期开源 LVNS 引擎项目代码（mglvns, lfview, leafpak, akkera）
 │   ├── pages/                     # 历史技术网页存档（1999-2002 年早期逆向资料）
 │   └── gbalvns/                   # Game Boy Advance 平台 LVNS 引擎实现参考
 │
@@ -107,15 +107,15 @@ Shizuku_macos_restore_study/
     ├── Sources/
     │   ├── ShizukuCore/           # 二进制读取、解密、字库与格式解码器
     │   ├── ShizukuEngine/         # 外层事件虚拟机（Event VM）与内层行内演出虚拟机
-    │   ├── ShizukuRender/         # Metal 渲染管线、调色板暗化、13 种转场与背景正弦扭曲
-    │   └── ShizukuApp/            # macOS 原生窗口、全屏回想系统与标题画面视图控制器
+    │   ├── ShizukuRender/         # Metal 渲染管线、调色板暗化与 13 种转场
+    │   └── ShizukuApp/            # macOS 原生窗口、全屏回想系统与标题画面控制器
     └── Tests/
-        └── ShizukuCoreTests/      # 单元测试集（字库物理排布、转场几何、宏解析等）
+        └── ShizukuCoreTests/      # 单元测试集
 ```
 
 ---
 
-## 🛠 关键逆向工程成果概览 / Key Reverse Engineering Breakthroughs
+## 🛠 关键逆向工程成果概览
 
 1. **LEAFPACK 归档与 11 字节滚动异或密钥**：
    - 密钥序列：`71 48 6a 55 9f 13 58 f7 d1 7c 3e`
@@ -142,7 +142,7 @@ Shizuku_macos_restore_study/
 
 ---
 
-## 🚀 逆向工具使用示例 / Tooling Usage
+## 🚀 逆向工具使用示例
 
 ```bash
 # 批量反编译全量脚本为可读汇编
@@ -161,12 +161,8 @@ python3 -m tools.shizuku_cli extract /path/to/MAX_DATA.PAK -o output_dir/
 
 ---
 
-## 📜 版权与免责声明 / Copyright & Disclaimer
+## 📜 版权与免责声明
 
 - 本仓库所载的研究文档、逆向分析工具、反汇编说明与现代架构代码仅供计算机软件工程、老旧系统兼容性研究与数字化文化资产保护参考学习之用。
 - 《雫～しずく～》及其角色、剧本、音乐与美术资产版权归 Leaf / AQUAPLUS 所有。
 - 本仓库不分发任何原版商业游戏的受版权保护的原始资源文件（如原始 CD 镜像、PAK 归档）。
-
----
-
-jill 推特[@jill05617147](https://x.com/jill05617147) 微博[@jill_mk3](https://weibo.com/n/jill_mk3)

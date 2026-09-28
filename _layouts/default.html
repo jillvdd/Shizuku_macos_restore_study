@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <!-- Global Navigation Header -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a class="site-brand" href="{{ '/' | relative_url }}">🍃 Shizuku Study</a>
+      
+      <nav class="nav-menu">
+        <a class="nav-item" href="{{ '/' | relative_url }}">首页</a>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger">核心技术指南 ▾</button>
+          <div class="dropdown-menu">
+            <a href="{{ '/articles/leaf-galgame-port-zh.html' | relative_url }}">🇨🇳 简体中文工程指南</a>
+            <a href="{{ '/articles/leaf-galgame-port-en.html' | relative_url }}">🇺🇸 English Technical Guide</a>
+            <a href="{{ '/articles/leaf-galgame-port-jp.html' | relative_url }}">🇯🇵 日本語技術仕様書</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger">逆向格式规范 ▾</button>
+          <div class="dropdown-menu">
+            <a href="{{ '/docs/containers.html' | relative_url }}">📦 LEAFPACK 容器与解密</a>
+            <a href="{{ '/docs/lfg.html' | relative_url }}">🖼 LFG 图像与位交织</a>
+            <a href="{{ '/docs/scripts.html' | relative_url }}">📜 SCN 脚本与双层 VM</a>
+            <a href="{{ '/docs/audio.html' | relative_url }}">🎵 LAC 音频与 BGM 映射</a>
+            <a href="{{ '/docs/history.html' | relative_url }}">⏳ LVNS 引擎版本历史</a>
+            <a href="{{ '/docs/original-files.html' | relative_url }}">📁 Win95 原版文件清单</a>
+            <a href="{{ '/docs/unknown-opcodes.html' | relative_url }}">⚙️ 未知指令与 Skip Opcode</a>
+            <a href="{{ '/docs/gbalvns.html' | relative_url }}">🎮 GBALVNS 架构参考</a>
+            <a href="{{ '/docs/sizuku-gba.html' | relative_url }}">🕹 GBA 移植对比分析</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger">研发报告与日志 ▾</button>
+          <div class="dropdown-menu">
+            <a href="{{ '/reports/SHIZUKU_PORT_RESEARCH_REPORT.html' | relative_url }}">🔬 Phase 0/1 初始研究报告</a>
+            <a href="{{ '/reports/HANDOVER.html' | relative_url }}">📝 完整研发交接日志 (HANDOVER)</a>
+            <a href="{{ '/reports/MILESTONES.html' | relative_url }}">🎯 里程碑计划与验收标准</a>
+            <a href="{{ '/reports/RESUME_PROMPT.html' | relative_url }}">📋 上下文恢复基线</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Article Body -->
+  <main class="main-wrapper">
+    <div class="content-container">
+      {{ content }}
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p class="footer-title">Shizuku_macos_restore_study · Leaf LVNS Engine Reverse Engineering & Native macOS Restoration</p>
+      <p class="footer-author">
+        jill 推特<a href="https://x.com/jill05617147" target="_blank" rel="noopener noreferrer">@jill05617147</a> 微博<a href="https://weibo.com/n/jill_mk3" target="_blank" rel="noopener noreferrer">@jill_mk3</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Automatically map internal relative .md links to .html on GitHub Pages
+    document.querySelectorAll('.content-container a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && !href.startsWith('http') && !href.startsWith('#') && href.endsWith('.md')) {
+        a.setAttribute('href', href.replace(/\.md$/, '.html'));
+      }
+    });
+  </script>
+</body>
+</html>
