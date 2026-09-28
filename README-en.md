@@ -40,14 +40,14 @@ Field-level parsing specifications for legacy Windows 95 proprietary binary form
 
 ---
 
-## 📋 Research Reports & Engineering Logs
+## 📋 Research Reports & Systems Engineering Postmortems
 
-Historical project research records and real-device debugging logs:
+Authoritative engineering postmortems, low-level debugging logs, and verification standards:
 
-- [**Phase 0/1 Feasibility Report**](reports/SHIZUKU_PORT_RESEARCH_REPORT.md): Initial format verification, toolchain evaluation, and data pipeline assessment.
-- [**Complete Handover Log (HANDOVER)**](reports/HANDOVER.md): Detailed 340KB engineering diary covering M4.10 visual fidelity debugging, M4.11 transition algorithms, disassembly of the hidden music room, 11025Hz CoreAudio crash root causes, and macOS App Nap mitigation.
-- [**Milestones & Acceptance Criteria**](reports/MILESTONES.md): Phased agile milestones and verification checklists.
-- [**Context Resume Baseline**](reports/RESUME_PROMPT.md): Development environment and state machine recovery prompt baseline.
+- [**Phase 0/1 Architecture & Feasibility Report**](reports/SHIZUKU_PORT_RESEARCH_REPORT.md): Initial format reverse engineering, toolchain evaluation, and data pipeline assessment.
+- [**Engineering Handover Log & Postmortem (HANDOVER)**](reports/HANDOVER.md): Deep-dive postmortem covering 13 transition algorithms, disassembly of the hidden music room, mono 11,025Hz CoreAudio crash root causes, and macOS App Nap mitigation.
+- [**Milestones & Acceptance Criteria**](reports/MILESTONES.md): Phased agile engineering milestones and multi-dimensional acceptance specifications.
+- [**System Engineering Baseline & Reference**](reports/RESUME_PROMPT.md): Low-level hex offsets, memory map diagrams, and core architectural interface reference manual.
 
 ---
 

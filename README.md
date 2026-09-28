@@ -40,14 +40,14 @@
 
 ---
 
-## 📋 研发报告与工程交接日志
+## 📋 研发报告与工程技术复盘
 
-完整的项目研发历程记录与实机排错笔记：
+完整的系统工程历程、底层排错手记与验证规范：
 
-- [**Phase 0/1 初始研究报告**](reports/SHIZUKU_PORT_RESEARCH_REPORT.md)：立项初期的格式识别、工具链验证与数据可行性评估报告。
-- [**完整研发交接日志 (HANDOVER)**](reports/HANDOVER.md)：长达 340KB 的详尽技术手记，完整收录了 M4.10 视觉保真度排错、M4.11 转场与隐藏音乐室反汇编、单声道 11025Hz CoreAudio 异常排查、macOS App Nap 锁频攻坚等所有关键提交细节。
-- [**里程碑计划与验收标准**](reports/MILESTONES.md)：分阶段敏捷迭代工单与验证清单。
-- [**上下文恢复基线**](reports/RESUME_PROMPT.md)：开发环境与状态机提示词基线。
+- [**Phase 0/1 架构逆向与可行性报告**](reports/SHIZUKU_PORT_RESEARCH_REPORT.md)：立项初期的格式识别、工具链验证与数据可行性评估报告。
+- [**研发工程日志与技术复盘 (HANDOVER)**](reports/HANDOVER.md)：详尽的系统工程手记，深度复盘了视觉保真度排错、13 种转场与钟楼隐藏音乐室反汇编、单声道 11025Hz CoreAudio 异常排查、macOS App Nap 锁频攻坚等所有关键技术突破。
+- [**里程碑计划与交付验收规范**](reports/MILESTONES.md)：分阶段敏捷迭代工单与多维度技术验收标准。
+- [**系统工程基线与技术速查**](reports/RESUME_PROMPT.md)：底层十六进制偏移、内存映射图解与核心架构接口速查手册。
 
 ---
 
