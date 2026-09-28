@@ -11,9 +11,29 @@
   <!-- Global Navigation Header -->
   <header class="site-header">
     <div class="nav-container">
-      <a class="site-brand" href="{{ '/' | relative_url }}">🍃 Shizuku 96 study blog</a>
+      <div class="nav-brand-bar">
+        <a class="site-brand" href="{{ '/' | relative_url }}">🍃 Shizuku 96 study blog</a>
+        
+        <div class="nav-actions">
+          <!-- Trilingual Language Switcher -->
+          <div class="lang-switcher" aria-label="Language Selector">
+            <button type="button" class="lang-btn" data-lang-btn="zh"><span class="lang-flag">🇨🇳</span> <span class="lang-text">中文</span></button>
+            <button type="button" class="lang-btn" data-lang-btn="en"><span class="lang-flag">🇺🇸</span> <span class="lang-text">EN</span></button>
+            <button type="button" class="lang-btn" data-lang-btn="ja"><span class="lang-flag">🇯🇵</span> <span class="lang-text">日本語</span></button>
+          </div>
+
+          <!-- Mobile Navigation Hamburger Toggle -->
+          <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span class="hamburger-icon">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </span>
+          </button>
+        </div>
+      </div>
       
-      <nav class="nav-menu">
+      <nav class="nav-menu" id="nav-menu">
         <a class="nav-item" id="nav-home" href="{{ '/' | relative_url }}" data-zh="首页" data-en="Home" data-ja="ホーム">首页</a>
 
         <div class="nav-dropdown">
@@ -48,13 +68,6 @@
             <a href="{{ '/reports/MILESTONES.html' | relative_url }}" data-zh="🎯 里程碑计划与交付验收规范" data-en="🎯 Milestones & Acceptance Criteria" data-ja="🎯 マイルストーンと受入基準">🎯 里程碑计划与交付验收规范</a>
             <a href="{{ '/reports/RESUME_PROMPT.html' | relative_url }}" data-zh="📋 系统工程基线与技术速查" data-en="📋 System Baseline & Quick Reference" data-ja="📋 システム技術基準・クイックリファレンス">📋 系统工程基线与技术速查</a>
           </div>
-        </div>
-
-        <!-- Trilingual Language Switcher -->
-        <div class="lang-switcher" aria-label="Language Selector">
-          <button type="button" class="lang-btn" data-lang-btn="zh">🇨🇳 中文</button>
-          <button type="button" class="lang-btn" data-lang-btn="en">🇺🇸 EN</button>
-          <button type="button" class="lang-btn" data-lang-btn="ja">🇯🇵 日本語</button>
         </div>
       </nav>
     </div>
@@ -201,7 +214,47 @@
       });
     });
 
-    // Dropdown click-to-toggle support
+    // Mobile navigation drawer toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    function toggleMobileMenu() {
+      if (!navMenu || !navToggle) return;
+      const isOpen = navMenu.classList.toggle('mobile-open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+    }
+
+    function closeMobileMenu() {
+      if (!navMenu || !navToggle) return;
+      navMenu.classList.remove('mobile-open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    }
+
+    if (navToggle) {
+      navToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileMenu();
+      });
+    }
+
+    // Close mobile menu when clicking any navigation link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileMenu();
+      });
+    });
+
+    // Reset mobile menu on viewport resize back to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 860) {
+        closeMobileMenu();
+      }
+    });
+
+    // Dropdown click-to-toggle support (works on desktop hover-lock and mobile accordion)
     document.querySelectorAll('.dropdown-trigger').forEach(trigger => {
       trigger.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -214,9 +267,13 @@
       });
     });
 
-    // Close dropdowns on outside click
-    document.addEventListener('click', () => {
-      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    // Close dropdowns and mobile menu on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.site-header')) {
+        closeMobileMenu();
+      } else if (!e.target.closest('.nav-dropdown') && !e.target.closest('.nav-toggle')) {
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+      }
     });
 
     // Automatically map internal relative .md links to .html on GitHub Pages
