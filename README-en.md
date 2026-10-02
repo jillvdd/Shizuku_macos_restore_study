@@ -18,9 +18,9 @@ It documents the end-to-end process of deconstructing legacy Windows 95 binary a
 
 A rigorous, three-language synchronized technical deep-dive into binary reverse engineering, state machine design, and modern OS migration:
 
-- 🇨🇳 **[Chinese Engineering Guide](articles/leaf-galgame-port-zh.md)**: Comprehensive deep dive into rolling additive decryption, LZS3 truncation guards, 24x24 1bpp vertical font decoding, dual-layer VM coroutine design, palette darkening, 13 transition algorithms, and the clock tower (448, 128) hidden music room.
-- 🇺🇸 **[English Technical Guide](articles/leaf-galgame-port-en.md)**: A rigorous, pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, CoreAudio exception swallowing, and Apple Silicon adaptations.
-- 🇯🇵 **[Japanese Technical Specification](articles/leaf-galgame-port-jp.md)**: LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、タイトル画面 VA 0x430ebc の第 5 不可視ポインタから導く隠し音楽室の復元など、全工程を実務的に解説した技術仕様書。
+- 🇨🇳 **[Chinese Engineering Guide](articles/leaf-galgame-port-zh.md)**: Comprehensive deep dive into rolling additive decryption, LZS3 truncation guards, 24x24 1bpp vertical font decoding, dual-layer VM coroutine design, palette darkening, 13 transition algorithms, clock tower hidden music room, 2014 Chinese patch reverse engineering, and PC-9801 OPNA FM dual-audio engine.
+- 🇺🇸 **[English Technical Guide](articles/leaf-galgame-port-en.md)**: A rigorous, pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, CoreAudio exception swallowing, 2014 Chinese patch reverse engineering, PC-9801 OPNA FM audio bit-perfect recording, and headless deterministic regression.
+- 🇯🇵 **[Japanese Technical Specification](articles/leaf-galgame-port-jp.md)**: LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、隠し音楽室の復元、2014 年有志中国語パッチの暗号解読とフォント再構築、PC-9801 OPNA FM 実機音源二重アーキテクチャまでを実務的に解説した技術仕様書。
 
 ---
 
@@ -45,9 +45,9 @@ Field-level parsing specifications for legacy Windows 95 proprietary binary form
 Authoritative engineering postmortems, low-level debugging logs, and verification standards:
 
 - [**Phase 0/1 Architecture & Feasibility Report**](reports/SHIZUKU_PORT_RESEARCH_REPORT.md): Initial format reverse engineering, toolchain evaluation, and data pipeline assessment.
-- [**Engineering Handover Log & Postmortem (HANDOVER)**](reports/HANDOVER.md): Deep-dive postmortem covering 13 transition algorithms, disassembly of the hidden music room, mono 11,025Hz CoreAudio crash root causes, and macOS App Nap mitigation.
-- [**Milestones & Acceptance Criteria**](reports/MILESTONES.md): Phased agile engineering milestones and multi-dimensional acceptance specifications.
-- [**System Engineering Baseline & Reference**](reports/RESUME_PROMPT.md): Low-level hex offsets, memory map diagrams, and core architectural interface reference manual.
+- [**Engineering Handover Log & Postmortem (HANDOVER)**](reports/HANDOVER.md): Deep-dive postmortem covering 13 transition algorithms, disassembly of the hidden music room, mono 11,025Hz CoreAudio crash root causes, macOS App Nap mitigation, 2014 Chinese patch reverse engineering, PC-9801 OPNA FM hardware recording, and Ver.1.5 dual release.
+- [**Milestones & Acceptance Criteria**](reports/MILESTONES.md): Phased agile engineering milestones and multi-dimensional acceptance specifications across Phases 1 through 6.
+- [**System Engineering Baseline & Reference**](reports/RESUME_PROMPT.md): Low-level hex offsets, memory map diagrams, OPNA FM loop points, Meta-Save architecture, and core architectural interface reference manual.
 
 ---
 

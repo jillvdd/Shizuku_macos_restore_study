@@ -18,9 +18,9 @@ Windows 95 時代のレガシーバイナリ資産を構造レベルで解体し
 
 徹底したリバースエンジニアリングと実機検証に基づき、3言語で完全同期された技術文書を提供しています：
 
-- 🇨🇳 **[中国語技術解説（中文）](articles/leaf-galgame-port-zh.md)**：加算ローリング暗号の解析、LZS3 境界ガード、24×24 縦列優先フォント展開、二層仮想マシン（Event VM + Inline VM）、パレット暗転処理、13 種トランジションの幾何アルゴリズム、時計塔 (448, 128) の隠し音楽室の逆アセンブルを詳解。
-- 🇺🇸 **[英語技術仕様書 (English)](articles/leaf-galgame-port-en.md)**：A rigorous, pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, CoreAudio exception swallowing, and Apple Silicon adaptations.
-- 🇯🇵 **[日本語技術仕様書](articles/leaf-galgame-port-jp.md)**：LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、タイトル画面 VA 0x430ebc の第 5 不可視ポインタから導く隠し音楽室の復元など、全工程を実務的に解説した技術仕様書。
+- 🇨🇳 **[中国語技術解説（中文）](articles/leaf-galgame-port-zh.md)**：加算ローリング暗号の解析、LZS3 境界ガード、24×24 縦列優先フォント展開、二層仮想マシン（Event VM + Inline VM）、13 種トランジション、隠し音楽室、2014 中国語パッチ解析とフォント再構築、PC-9801 OPNA FM 原生音源二重アーキテクチャおよび全終結自動回帰を詳解。
+- 🇺🇸 **[英語技術仕様書 (English)](articles/leaf-galgame-port-en.md)**：A rigorous, pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, 2014 Chinese patch reverse engineering, PC-9801 OPNA FM audio bit-perfect recording, and headless deterministic regression.
+- 🇯🇵 **[日本語技術仕様書](articles/leaf-galgame-port-jp.md)**：LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、隠し音楽室の復元、2014 年有志中国語パッチの暗号解読とフォント再構築、PC-9801 OPNA FM 実機音源二重アーキテクチャまでを実務的に解説した技術仕様書。
 
 ---
 
@@ -45,9 +45,9 @@ Windows 95 原版で使用されている各種バイナリフォーマットの
 体系化されたシステム開発日誌、低レイヤー障害追究、および受入検証基準：
 
 - [**Phase 0/1 初期検証レポート**](reports/SHIZUKU_PORT_RESEARCH_REPORT.md)：立案時のフォーマット特定、ツールチェーン検証、実現可能性評価。
-- [**開発日誌およびポストモータム (HANDOVER)**](reports/HANDOVER.md)：描画再現、13 種トランジション、時計塔隠し音楽室の逆アセンブル、CoreAudio 例外クラッシュ根治、macOS App Nap 対策を包括する完全技術記録。
-- [**マイルストーン計画および受入仕様書**](reports/MILESTONES.md)：アジャイル開発マイルストーンと多面的受入検証基準。
-- [**システム技術基準・クイックリファレンス**](reports/RESUME_PROMPT.md)：主要 16 進オフセット、メモリ配置図、およびコアモジュール定義早見表。
+- [**開発日誌およびポストモータム (HANDOVER)**](reports/HANDOVER.md)：描画再現、13 種トランジション、隠し音楽室、macOS App Nap 対策、2014 中国語フォント再構築、PC-9801 OPNA FM 実機録音および Ver.1.5 配布までを網羅した詳細な開発記録。
+- [**マイルストーン計画および受入仕様書**](reports/MILESTONES.md)：全 6 段階のアジャイル反復工数と多角的な技術受入仕様書（M1〜M6 完全受入）。
+- [**システム技術基準・クイックリファレンス**](reports/RESUME_PROMPT.md)：主要 16 進オフセット、メモリ配置図、OPNA FM ループポイント、Meta-Save 構造などの技術速査ハンドブック。
 
 ---
 
@@ -133,6 +133,22 @@ Shizuku_macos_restore_study/
 7. **macOS 低レイヤー障害の解消**：
    - 11025Hz モノラル音源が CoreAudio ステレオノードでクラッシュする問題を `AVAudioConverter` のリサンプリングで解決。
    - macOS App Nap による 60Hz タイマーの 5 FPS への極端なクロックダウンを `ProcessInfo.beginActivity` で抑止。
+8. **2014 中国語パッチ解析・4,726 スロット 24×24 フォントと単調 DP 写像 (Ver.1.2)**：
+   - 2014 年有志翻訳パッチの `data.bin` 4 バイト循環 XOR 暗号を解読し、199 本の SCN 劇本ストリームを抽出；
+   - パッチ DLL より 4,726 スロットの 24×24 二値化フォント `cnfont_4726.bin`（340,272 バイト）をダンプ抽出；
+   - 単調増加最小編集距離 DP アルゴリズムにより 2,872 字の写像表 `cn_code2char.json` を構築。
+9. **劇本ビートスライス（Beat Slices）動的進行と 15 頁あとがき復元**：
+   - 訳文長差による演出ズレを解消する `cnSlices` 動的等比分割および記号吸着処理を実装；
+   - 翻訳チームによる 15 ページに及ぶあとがきシナリオ（`SCN233` -> `SCN234`）を復元し、`SaveError.missingScenario` クロスセーブ防護を構築。
+10. **PC-9801/9821 OPNA (YM2608) FM 実機ビットパーフェクト録音と二重音響 (Ver.1.5)**：
+    - 1996 年 PC-9801 実機環境から 24 曲の OPNA FM 音源（43.3MB）を純ハードウェア録音；
+    - Win95 CD-DA と PC-9801 FM の並列二重音源ホット切替および高精度ループポイント調律を実装。
+11. **決定論的回帰検証体系 (113/113) と全 13 エンディング自動到達**：
+    - `SaveClock` により物理時計と乱数シードを固定し、113 個のスナップショットセーブで 100% の状態再現性を検証；
+    - `EndingPathTests.swift` 自動テストにより全 13 種のエンディング到達パスを完全網羅。
+12. **Meta-Save 周回横断大域永続化と Ver.1.5 二重 DMG 配布**：
+    - GBA SRAM `0x10` 構造に着想を得て、4 個の周回横断フラグを `meta_save.dat` へ独立分離；
+    - 日本語原版（`Shizuku_Restored_Ver.1.5.dmg`）および簡体中国語版（`Shizuku_Restored_CHS_Ver.1.5.dmg`）を自動生成。
 
 ---
 

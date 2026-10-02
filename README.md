@@ -18,9 +18,9 @@
 
 本项目历经完整逆向推导与实机排错，总结撰写了详尽的工程技术复盘长文。三篇文档内容互相锚定、结构严密对齐：
 
-- 🇨🇳 **[中文工程技术指南](articles/leaf-galgame-port-zh.md)**：面向现代软件工程师的务实技术文档。深入二进制加法滚动解密、LZS3 截断守卫、24×24 点阵字库列优先解码、双层虚拟机（Event VM + Inline VM）、调色板暗化、13 种转场几何算法，以及钟楼 (448, 128) 隐藏音乐室反汇编实录。
-- 🇺🇸 **[English Technical Guide](articles/leaf-galgame-port-en.md)**：A rigorous, pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, CoreAudio exception swallowing, and Apple Silicon adaptations.
-- 🇯🇵 **[日本語技術仕様書](articles/leaf-galgame-port-jp.md)**：LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、タイトル画面 VA 0x430ebc の第 5 不可視ポインタから導く隠し音楽室の復元など、全工程を実務的に解説した技術仕様書。
+- 🇨🇳 **[中文工程技术指南](articles/leaf-galgame-port-zh.md)**：面向现代软件工程师的务实技术文档。深入二进制加法滚动解密、LZS3 截断守卫、24×24 点阵字库列优先解码、双层虚拟机（Event VM + Inline VM）、13 种转场几何算法、钟楼隐藏音乐室反汇编、2014 汉化包逆向与字库重构、PC-9801 OPNA FM 原生音源双架构及全结局确定性回归实录。
+- 🇺🇸 **[English Technical Guide](articles/leaf-galgame-port-en.md)**：A rigorous, pragmatic systems engineering postmortem covering proprietary PAK cryptanalysis, dual-layer VM coroutine design, 24x24 1bpp vertical font decoding, 2014 Chinese patch reverse engineering, PC-9801 OPNA FM audio bit-perfect recording, and headless deterministic regression.
+- 🇯🇵 **[日本語技術仕様書](articles/leaf-galgame-port-jp.md)**：LVNS エンジンのバイナリ解析、2 層仮想マシン設計、描画および CoreAudio 障害追究、隠し音楽室の復元、2014 年有志中国語パッチの暗号解読とフォント再構築、PC-9801 OPNA FM 実機音源二重アーキテクチャまでを実務的に解説した技術仕様書。
 
 ---
 
@@ -45,9 +45,9 @@
 完整的系统工程历程、底层排错手记与验证规范：
 
 - [**Phase 0/1 架构逆向与可行性报告**](reports/SHIZUKU_PORT_RESEARCH_REPORT.md)：立项初期的格式识别、工具链验证与数据可行性评估报告。
-- [**研发工程日志与技术复盘 (HANDOVER)**](reports/HANDOVER.md)：详尽的系统工程手记，深度复盘了视觉保真度排错、13 种转场与钟楼隐藏音乐室反汇编、单声道 11025Hz CoreAudio 异常排查、macOS App Nap 锁频攻坚等所有关键技术突破。
-- [**里程碑计划与交付验收规范**](reports/MILESTONES.md)：分阶段敏捷迭代工单与多维度技术验收标准。
-- [**系统工程基线与技术速查**](reports/RESUME_PROMPT.md)：底层十六进制偏移、内存映射图解与核心架构接口速查手册。
+- [**研发工程日志与技术复盘 (HANDOVER)**](reports/HANDOVER.md)：详尽的系统工程手记，深度复盘了视觉保真度排错、13 种转场与钟楼隐藏音乐室反汇编、单声道 11025Hz CoreAudio 异常排查、macOS App Nap 锁频攻坚、2014 汉化字模重构、PC-9801 OPNA FM 硬件内录及 Ver.1.5 双版本交付等关键技术突破。
+- [**里程碑计划与交付验收规范**](reports/MILESTONES.md)：六大阶段敏捷迭代工单与多维度技术验收标准（M1~M6 全量验收）。
+- [**系统工程基线与技术速查**](reports/RESUME_PROMPT.md)：底层十六进制偏移、内存映射图解、OPNA FM 循环点、Meta-Save 结构及核心架构接口速查手册。
 
 ---
 
@@ -141,6 +141,22 @@ Shizuku_macos_restore_study/
 7. **macOS 底层系统排错**：
    - 排查单声道 11025Hz WAV 在 CoreAudio 立体声节点上抛出 `NSException` 被 AppKit 静默吞噬的致命崩溃，使用 `AVAudioConverter` 重采样解决。
    - 引入 `ProcessInfo.beginActivity([.userInitiated, .latencyCritical])` 彻底根治 macOS App Nap 对 60Hz 刷新循环降频至 5 FPS 的性能问题。
+8. **2014 汉化逆向、4,726 槽 24×24 点阵字模与单调 DP 映射 (Ver.1.2)**：
+   - 逆向分析 2014 年汉化补丁 `data.bin` 4 字节 XOR 加密，解出包含 199 个 SCN 的汉化剧本流；
+   - 从补丁 DLL 资源区转储提取 4,726 槽位 24×24 二值化中文字模库 `cnfont_4726.bin`（340,272 字节）；
+   - 设计单调递增最小编辑距离 DP 算法，重构出包含 2,872 字的叶码-GBK 单调映射表 `cn_code2char.json`。
+9. **剧本节拍切片 (Beat Slices) 动态推进与 15 页后记还原**：
+   - 解决汉化字数不对称导致的音画失步，引入 `cnSlices` 与 `cnCommitted` 动态切片算法，实现中文等比节拍展开与标点吸附；
+   - 完整复原汉化组追加的 15 页感言剧本（`SCN233` -> `SCN234`），并设计 `SaveError.missingScenario` 跨版本存档崩溃防御。
+10. **PC-9801/9821 OPNA (YM2608) FM 原生音源内录与双音频架构 (Ver.1.5)**：
+    - 采用专业录音设备对 1996 年 PC-9801 原版硬件进行 bit-perfect 纯内录，采集全量 24 首 OPNA FM 音轨（43.3MB）；
+    - 实现 Win95 CD-DA 与 PC-9801 FM 双音频后端热切换，标定微秒级精确循环点，对 6 首单次曲目施加生命周期保护。
+11. **确定性快照回归体系 (113/113) 与 13 大全结局自动化回归**：
+    - 引入 `SaveClock` 冻结物理时钟与伪随机数种子，对 `/tmp/shizuku_shot_saves/` 全量 113 个快照存档实现 100% 确定性回放；
+    - 编写 `EndingPathTests.swift` 自动化遍历测试套件，实现全 13 种结局路径无死锁自动化全覆盖。
+12. **Meta-Save 跨周目全局持久化与 Ver.1.5 双版本 DMG 交付**：
+    - 参照 GBA SRAM `0x10` 架构设计，将 4 个跨周目全局标志位持久化至 `meta_save.dat`；
+    - 全自动打包日文原版（`Shizuku_Restored_Ver.1.5.dmg`）与简中完全汉化版（`Shizuku_Restored_CHS_Ver.1.5.dmg`）双独立镜像。
 
 ---
 
